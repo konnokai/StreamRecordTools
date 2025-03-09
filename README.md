@@ -1,12 +1,15 @@
 # 錄影小幫手
 
-需配置 Google Api Key 使用
+需配置 Google Api Key 以及 YouTube Cookie 使用
 
 若要搭配直播小幫手使用，需要另外安裝 Redis Server 並使用 Subscribe 模式
 
 ## 製作 `cookies.txt`
 
-1. 開啟常用瀏覽器並登入 Youtube (本說明以 Chrome 為例)
+> [!IMPORTANT]
+> 優先參考 [yt-dlp 官方說明](https://github.com/yt-dlp/yt-dlp/wiki/Extractors) 來製作
+
+1. 開啟 `不會用到的瀏覽器或無痕模式` 並登入 Youtube (一定要是不常用的，不然 Cookie 會被刷新，本說明以 Chrome 為例)
 2. 下載 `ChromeCookiesView` ([官網](https://www.nirsoft.net/utils/chrome_cookies_view.html), [直接下載](https://www.nirsoft.net/utils/chromecookiesview.zip))
 3. 解壓縮並開啟 `ChromeCookiesView.exe`
 4. 搜尋 `.youtube.com` 域名相關 Cookie 
