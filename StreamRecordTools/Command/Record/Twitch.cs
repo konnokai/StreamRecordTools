@@ -19,19 +19,22 @@ namespace StreamRecordTools.Command.Record
 
         public static ResultType StartRecord(TwitchOnceOptions options)
         {
-            try
-            {
-                RedisConnection.Init(Utility.BotConfig.RedisOption);
-                Utility.Redis = RedisConnection.Instance.ConnectionMultiplexer;
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Redis連線錯誤，請確認伺服器是否已開啟");
-                Log.Error(ex.ToString());
-                return ResultType.Error;
-            }
-
             isDisableRedis = options.DisableRedis;
+
+            if (!isDisableRedis)
+            {
+                try
+                {
+                    RedisConnection.Init(Utility.BotConfig.RedisOption);
+                    Utility.Redis = RedisConnection.Instance.ConnectionMultiplexer;
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("Redis連線錯誤，請確認伺服器是否已開啟");
+                    Log.Error(ex.ToString());
+                    return ResultType.Error;
+                }
+            }            
 
             if (!options.OutputPath.EndsWith(Utility.GetEnvSlash()))
                 options.OutputPath += Utility.GetEnvSlash();

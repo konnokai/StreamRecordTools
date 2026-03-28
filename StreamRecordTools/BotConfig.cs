@@ -32,7 +32,7 @@ public class BotConfig
             try { File.WriteAllText("bot_config_example.json", JsonConvert.SerializeObject(new BotConfig(), Formatting.Indented)); } catch { }
             if (!File.Exists("bot_config.json"))
             {
-                Log.Error($"bot_config.json遺失，請依照 {Path.GetFullPath("bot_config_example.json")} 內的格式填入正確的數值");
+                Log.Error($"bot_config.json 遺失，請依照 {Path.GetFullPath("bot_config_example.json")} 內的格式填入正確的數值");
                 if (!Console.IsInputRedirected)
                     Console.ReadKey();
                 Environment.Exit(3);
@@ -44,7 +44,7 @@ public class BotConfig
             {
                 if (string.IsNullOrWhiteSpace(config.GoogleApiKey))
                 {
-                    Log.Error("GoogleApiKey遺失，請輸入至bot_config.json後重開程式");
+                    Log.Error("GoogleApiKey 遺失，請輸入至 bot_config.json 後重開程式");
                     if (!Console.IsInputRedirected)
                         Console.ReadKey();
                     Environment.Exit(3);

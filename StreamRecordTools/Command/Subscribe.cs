@@ -468,13 +468,13 @@ namespace StreamRecordTools.Command
                     }
                 },
 
-                Cmd = new List<string>
-                {
+                Cmd =
+                [
                     "yt_once_on_docker",
                     videoId,
                     "--disable-live-from-start",
                     dontSendStartMessage ? "--dont-send-start-message" : ""
-                },
+                ],
 
                 // 不要讓程式自己 Attach 以免 Log 混亂
                 AttachStdout = false,
@@ -582,13 +582,13 @@ namespace StreamRecordTools.Command
                     }
                 },
 
-                Cmd = new List<string>
-                {
+                Cmd =
+                [
                     "twitch_once",
                     userLogin,
                     "-o /output",
                     "-t /temp_path"
-                },
+                ],
 
                 // 不要讓程式自己 Attach 以免 Log 混亂
                 AttachStdout = false,

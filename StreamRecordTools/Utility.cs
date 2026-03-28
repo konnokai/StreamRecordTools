@@ -106,7 +106,7 @@ namespace StreamRecordTools
             {
                 if (exitIfNoVar)
                 {
-                    Log.Error($"{varName}遺失，請輸入至環境變數後重新運行");
+                    Log.Error($"{varName} 遺失，請輸入至環境變數後重新運行");
                     if (!Console.IsInputRedirected)
                         Console.ReadKey();
                     Environment.Exit(3);
