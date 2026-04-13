@@ -127,6 +127,12 @@ namespace StreamRecordTools.Command.Record
             tempPath = argTempPath.Replace("\"", "");
             unarchivedOutputPath = argUnArchivedOutputPath.Replace("\"", "");
             memberOnlyOutputPath = argMemberOnlyOutputPath.Replace("\"", "");
+
+            tempPath += $"{DateTime.Now:yyyyMMdd}{Utility.GetEnvSlash()}";
+            if (!Directory.Exists(tempPath)) Directory.CreateDirectory(tempPath);
+            outputPath += $"{DateTime.Now:yyyyMMdd}{Utility.GetEnvSlash()}";
+            if (!Directory.Exists(outputPath)) Directory.CreateDirectory(outputPath);
+
             Log.Info($"輸出路徑: {outputPath}");
             Log.Info($"暫存路徑: {tempPath}");
             Log.Info($"私人存檔路徑: {unarchivedOutputPath}");
@@ -135,11 +141,6 @@ namespace StreamRecordTools.Command.Record
             if (isDisableLiveFromStart)
                 Log.Info("不自動從頭開始錄影");
             #endregion
-
-            tempPath += $"{DateTime.Now:yyyyMMdd}{Utility.GetEnvSlash()}";
-            if (!Directory.Exists(tempPath)) Directory.CreateDirectory(tempPath);
-            outputPath += $"{DateTime.Now:yyyyMMdd}{Utility.GetEnvSlash()}";
-            if (!Directory.Exists(outputPath)) Directory.CreateDirectory(outputPath);
 
             bool isCanNotRecordStream = false, isReceiveDownload = false, isNeedRestart = false;
             #region 開始錄製直播
@@ -154,7 +155,7 @@ namespace StreamRecordTools.Command.Record
                 CancellationTokenSource cancellationToken = new();
                 CancellationToken token = cancellationToken.Token;
 
-                // 如果關閉從開頭錄影的話，每六小時需要重新開一次錄影，才能避免掉長時間錄影導致HTTP 503錯誤
+                // 如果關閉從開頭錄影的話，每六小時需要重新開一次錄影，才能避免掉長時間錄影導致 HTTP 503 錯誤
                 // 但從頭開始錄影好像只能錄兩小時 :thinking:
                 string arguments = "--live-from-start -f bestvideo+bestaudio ";
                 if (isDisableLiveFromStart)
@@ -220,7 +221,7 @@ namespace StreamRecordTools.Command.Record
                 // --mark-watched 疑似會導致 Cookie 出現問題，暫時移除
                 process.StartInfo.Arguments = $"https://www.youtube.com/watch?v={videoId} -o \"{tempPath}{fileName}.%(ext)s\" --wait-for-video 15 {arguments}";
 
-                // 印象中之前用ErrorDataReceived的時候能正常觸發會限訊息檢測
+                // 印象中之前用 ErrorDataReceived 的時候能正常觸發會限訊息檢測
                 process.StartInfo.RedirectStandardError = true;
                 process.StartInfo.RedirectStandardOutput = true;
                 process.ErrorDataReceived += (sender, e) =>
@@ -230,7 +231,7 @@ namespace StreamRecordTools.Command.Record
                         if (string.IsNullOrEmpty(e.Data))
                             return;
 
-                        // 不顯示wait開頭的訊息避免吃爆Portainer的log
+                        // 不顯示 wait 開頭的訊息避免吃爆 Portainer 的 log
                         if (e.Data.ToLower().StartsWith("[wait]"))
                             return;
 
@@ -266,7 +267,7 @@ namespace StreamRecordTools.Command.Record
                         if (string.IsNullOrEmpty(e.Data))
                             return;
 
-                        // 不顯示wait開頭的訊息避免吃爆Portainer的log
+                        // 不顯示 wait 開頭的訊息避免吃爆 Portainer 的 log
                         if (e.Data.ToLower().StartsWith("[wait]"))
                             return;
 
@@ -340,17 +341,17 @@ namespace StreamRecordTools.Command.Record
             #region 直播結束後的保存處理
             if (!isCanNotRecordStream) // 如果該直播沒被判定成不能錄影的會限直播的話
             {
-                if (!string.IsNullOrEmpty(fileName) && Utility.IsMemberOnly(videoId)) // 如果是會限直播保存到memberOnlyOutputPath
+                if (!string.IsNullOrEmpty(fileName) && Utility.IsMemberOnly(videoId)) // 如果是會限直播保存到 memberOnlyOutputPath
                 {
                     Log.Info($"已轉會限影片，移動資料");
                     MoveVideo(memberOnlyOutputPath, "youtube.memberonly");
                 }
-                else if (!string.IsNullOrEmpty(fileName) && Utility.IsDelLive) // 如果被刪檔就保存到unarchivedOutputPath
+                else if (!string.IsNullOrEmpty(fileName) && Utility.IsDelLive) // 如果被刪檔就保存到 unarchivedOutputPath
                 {
                     Log.Info($"已刪檔直播，移動資料");
                     MoveVideo(unarchivedOutputPath, "youtube.unarchived");
                 }
-                else if (Path.GetDirectoryName(outputPath) != Path.GetDirectoryName(tempPath)) // 否則就保存到outputPath
+                else if (Path.GetDirectoryName(outputPath) != Path.GetDirectoryName(tempPath)) // 否則就保存到 outputPath
                 {
                     Log.Info("將直播轉移至保存點");
                     MoveVideo(outputPath, "youtube.endstream");

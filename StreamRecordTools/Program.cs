@@ -37,7 +37,7 @@ namespace StreamRecordTools
 
             var result = Parser.Default.ParseArguments<YTOnceOptions, YTOnceOnDockerOptions, TwitchOnceOptions, SubOptions>(args)
                 .MapResult(
-                (YTOnceOptions options) => YouTube.StartRecord(options.VideolId, options.OutputPath, options.TempPath, options.UnarchivedOutputPath, options.MemberOnlyOutputPath, options.DisableRedis, options.DisableLiveFromStart, options.DontSendStartMessage).Result,
+                (YTOnceOptions options) => YouTube.StartRecord(options.VideolId, options.OutputPath, options.TempPath, options.YouTubeUnarchivedOutputPath, options.MemberOnlyOutputPath, options.DisableRedis, options.DisableLiveFromStart, options.DontSendStartMessage).Result,
                 (YTOnceOnDockerOptions options) => YouTube.StartRecord(options.VideolId, "/output", "/temp_path", "/unarchived", "/member_only", options.DisableRedis, options.DisableLiveFromStart, options.DontSendStartMessage).Result,
                 (TwitchOnceOptions options) => Twitch.StartRecord(options),
                 (SubOptions options) => Subscribe.SubRecord(options).Result,
@@ -89,8 +89,8 @@ namespace StreamRecordTools
 
         public class YouTubeRequiredOptions : RequiredOptions
         {
-            [Option('u', "unarchived-output", Required = true, HelpText = "刪檔直播輸出路徑")]
-            public string UnarchivedOutputPath { get; set; } = AppDomain.CurrentDomain.BaseDirectory;
+            [Option('u', "youtube-unarchived-output", Required = true, HelpText = "YouTube 刪檔直播輸出路徑")]
+            public string YouTubeUnarchivedOutputPath { get; set; } = AppDomain.CurrentDomain.BaseDirectory;
 
             [Option('m', "member-only-output", Required = true, HelpText = "會限直播輸出路徑")]
             public string MemberOnlyOutputPath { get; set; } = AppDomain.CurrentDomain.BaseDirectory;
@@ -104,6 +104,9 @@ namespace StreamRecordTools
         {
             [Option("audo-delete", Required = false, HelpText = "自動刪除超過 14 天的存檔", Default = false)]
             public bool AutoDeleteArchived { get; set; }
+
+            [Option("twitch-unarchived-output", Required = true, HelpText = "Twitch 刪檔直播輸出路徑")]
+            public string TwitchUnarchivedOutputPath { get; set; } = AppDomain.CurrentDomain.BaseDirectory;
         }
 
         [Verb("yt_once", HelpText = "單次錄影 YouTube")]
@@ -137,6 +140,12 @@ namespace StreamRecordTools
         {
             [Value(0, Required = true, HelpText = "圖奇實況主頻道網址或登入帳號")]
             public string UserLogin { get; set; }
+
+            [Option('u', "twitch-unarchived-output", Required = true, HelpText = "Twitch 刪檔直播輸出路徑")]
+            public string TwitchUnarchivedOutputPath { get; set; } = AppDomain.CurrentDomain.BaseDirectory;
+
+            [Option('s', "save-to-unarchived", Required = false, HelpText = "將本次錄影保存至永久保存資料夾")]
+            public bool IsSaveToUnarchived { get; set; } = false;
         }
     }
 }

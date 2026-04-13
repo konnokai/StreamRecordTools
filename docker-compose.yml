@@ -8,7 +8,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ${RecordPath:-./record}:/output
       - ${TempPath:-./record}:/temp_path
-      - ${UnarchivedPath:-./unarchived}:/unarchived_stream
+      - ${YouTubeUnarchivedPath:-./youtube_unarchived}:/youtube_unarchived
+      - ${TwitchUnarchivedPath:-./twitch_unarchived}:/twitch_unarchived
       - ${MemberOnlyPath:-./member_only}:/member_only_stream
       - ${CookiesFilePath:-./cookies.txt}:/app/cookies.txt
     env_file:

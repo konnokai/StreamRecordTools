@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using static StreamRecordTools.Program;
 using ResultType = StreamRecordTools.Program.ResultType;
 
@@ -21,7 +22,8 @@ namespace StreamRecordTools.Command
         static string NetworkId { get; set; } = "";
         static string OutputPath { get; set; } = "";
         static string TempPath { get; set; } = "";
-        static string UnarchivedOutputPath { get; set; } = "";
+        static string YouTubeUnarchivedOutputPath { get; set; } = "";
+        static string TwitchUnarchivedOutputPath { get; set; } = "";
         static string MemberOnlyOutputPath { get; set; } = "";
         static bool IsDisableLiveFromStart { get; set; } = false;
 
@@ -43,16 +45,19 @@ namespace StreamRecordTools.Command
             }
 
             if (!subOptions.OutputPath.EndsWith(Utility.GetEnvSlash())) subOptions.OutputPath += Utility.GetEnvSlash();
-            if (!subOptions.UnarchivedOutputPath.EndsWith(Utility.GetEnvSlash())) subOptions.UnarchivedOutputPath += Utility.GetEnvSlash();
+            if (!subOptions.YouTubeUnarchivedOutputPath.EndsWith(Utility.GetEnvSlash())) subOptions.YouTubeUnarchivedOutputPath += Utility.GetEnvSlash();
+            if (!subOptions.TwitchUnarchivedOutputPath.EndsWith(Utility.GetEnvSlash())) subOptions.TwitchUnarchivedOutputPath += Utility.GetEnvSlash();
             if (!subOptions.MemberOnlyOutputPath.EndsWith(Utility.GetEnvSlash())) subOptions.MemberOnlyOutputPath += Utility.GetEnvSlash();
 
             Log.Info($"訂閱模式，保存路徑: {subOptions.OutputPath}");
-            Log.Info($"刪檔直播保存路徑: {subOptions.UnarchivedOutputPath}");
+            Log.Info($"YouTube 刪檔直播保存路徑: {subOptions.YouTubeUnarchivedOutputPath}");
+            Log.Info($"Twitch 刪檔直播保存路徑: {subOptions.TwitchUnarchivedOutputPath}");
             Log.Info($"會限直播保存路徑: {subOptions.MemberOnlyOutputPath}");
 
             OutputPath = subOptions.OutputPath;
             TempPath = subOptions.TempPath;
-            UnarchivedOutputPath = subOptions.UnarchivedOutputPath;
+            YouTubeUnarchivedOutputPath = subOptions.YouTubeUnarchivedOutputPath;
+            TwitchUnarchivedOutputPath = subOptions.TwitchUnarchivedOutputPath;
             MemberOnlyOutputPath = subOptions.MemberOnlyOutputPath;
             IsDisableLiveFromStart = subOptions.DisableLiveFromStart;
 
@@ -189,11 +194,16 @@ namespace StreamRecordTools.Command
                 Log.Warn($"YouTube 已轉會限直播: {videoId}");
             });
 
+            var twitchUnarchivedUserLogins = JsonConvert.DeserializeObject<List<string>>(Utility.BotConfig.TwitchUnarchivedUserLogins) ?? [];
+            if (twitchUnarchivedUserLogins.Count > 0)
+                Log.Info($"Twitch 自動保存至刪檔直播資料夾的 UserLogin 清單: {string.Join(", ", twitchUnarchivedUserLogins)}");
+
             sub.Subscribe(new("twitch.record", RedisChannel.PatternMode.Literal), async (redisChannel, userLogin) =>
             {
-                Log.Info($"已接收 Twitch 錄影請求: {userLogin}");
+                bool isSaveToUnarchived = twitchUnarchivedUserLogins.Contains(userLogin.ToString(), StringComparer.OrdinalIgnoreCase);
+                Log.Info($"已接收 Twitch 錄影請求: {userLogin}{(isSaveToUnarchived ? " (自動保存至刪檔直播資料夾)" : "")}");
 
-                await StartRecordTwitch(userLogin);
+                await StartRecordTwitch(userLogin, isSaveToUnarchived);
             });
 
             sub.Subscribe(new("streamTools.removeById", RedisChannel.PatternMode.Literal), async (channel, containerId) =>
@@ -323,8 +333,8 @@ namespace StreamRecordTools.Command
                                 {
                                     try
                                     {
-                                        Log.Info($"移動 \"{videoFile}\" 至 \"{UnarchivedOutputPath}{Path.GetFileName(videoFile)}\"");
-                                        File.Move($"{videoFile}", $"{UnarchivedOutputPath}{Path.GetFileName(videoFile)}");
+                                        Log.Info($"移動 \"{videoFile}\" 至 \"{YouTubeUnarchivedOutputPath}{Path.GetFileName(videoFile)}\"");
+                                        File.Move($"{videoFile}", $"{YouTubeUnarchivedOutputPath}{Path.GetFileName(videoFile)}");
                                     }
                                     catch (Exception ex)
                                     {
@@ -395,7 +405,7 @@ namespace StreamRecordTools.Command
                         $" yt_once {videoId}" +
                         $" -o \"{OutputPath}\"" +
                         $" -t \"{TempPath}\"" +
-                        $" -u \"{UnarchivedOutputPath}\"" +
+                        $" -u \"{YouTubeUnarchivedOutputPath}\"" +
                         $" -m \"{MemberOnlyOutputPath}\"" +
                         (IsDisableLiveFromStart ? " --disable-live-from-start" : "") +
                         (dontSendStartMessage ? " --dont-send-start-message" : "");
@@ -412,7 +422,7 @@ namespace StreamRecordTools.Command
                     $" yt_once {videoId}" +
                     $" -o \"{OutputPath.TrimEnd(Utility.GetEnvSlash()[0])}\"" +
                     $" -t \"{TempPath.TrimEnd(Utility.GetEnvSlash()[0])}\"" +
-                    $" -u \"{UnarchivedOutputPath.TrimEnd(Utility.GetEnvSlash()[0])}\"" +
+                    $" -u \"{YouTubeUnarchivedOutputPath.TrimEnd(Utility.GetEnvSlash()[0])}\"" +
                     $" -m \"{MemberOnlyOutputPath.TrimEnd(Utility.GetEnvSlash()[0])}\"" +
                     (IsDisableLiveFromStart ? " --disable-live-from-start" : "" +
                     (dontSendStartMessage ? " --dont-send-start-message" : ""));
@@ -446,7 +456,7 @@ namespace StreamRecordTools.Command
                     {
                         $"{Utility.GetEnvironmentVariable("RecordPath", typeof(string), true)}:/output",
                         $"{Utility.GetEnvironmentVariable("TempPath", typeof(string), true)}:/temp_path",
-                        $"{Utility.GetEnvironmentVariable("UnarchivedPath", typeof(string), true)}:/unarchived",
+                        $"{Utility.GetEnvironmentVariable("YouTubeUnarchivedPath", typeof(string), true)}:/unarchived",
                         $"{Utility.GetEnvironmentVariable("MemberOnlyPath", typeof(string), true)}:/member_only",
                         $"{Utility.GetEnvironmentVariable("CookiesFilePath", typeof(string), true)}:/app/cookies.txt"
                     }
@@ -508,20 +518,25 @@ namespace StreamRecordTools.Command
             }
         }
 
-        private static async Task StartRecordTwitch(string userLogin)
+        private static async Task StartRecordTwitch(string userLogin, bool isSaveToUnarchived = false)
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
                 if (Utility.InDocker && dockerClient != null)
                 {
-                    await StartRecordTwitchContainer(userLogin);
+                    await StartRecordTwitchContainer(userLogin, isSaveToUnarchived);
                 }
                 else if (!Utility.InDocker)
                 {
                     string procArgs = $"dotnet StreamRecordTools.dll" +
                         $" twitch_once {userLogin}" +
                         $" -o \"{OutputPath}\"" +
-                        $" -t \"{TempPath}\"";
+                        $" -t \"{TempPath}\"" +
+                        $" -u \"{TwitchUnarchivedOutputPath}\"";
+
+                    if (isSaveToUnarchived)
+                        procArgs += " -s";
+
                     Process.Start("tmux", $"new-window -d -n \"Twitch {userLogin}\" {procArgs}");
                 }
                 else
@@ -534,7 +549,8 @@ namespace StreamRecordTools.Command
                 string procArgs = $"dotnet StreamRecordTools.dll" +
                     $" twitch_once {userLogin}" +
                     $" -o \"{OutputPath.TrimEnd(Utility.GetEnvSlash()[0])}\"" +
-                    $" -t \"{TempPath.TrimEnd(Utility.GetEnvSlash()[0])}\"";
+                    $" -t \"{TempPath.TrimEnd(Utility.GetEnvSlash()[0])}\"" +
+                    $" -u \"{TwitchUnarchivedOutputPath.TrimEnd(Utility.GetEnvSlash()[0])}\"";
 
                 Process.Start(new ProcessStartInfo()
                 {
@@ -546,7 +562,7 @@ namespace StreamRecordTools.Command
             }
         }
 
-        private static async Task StartRecordTwitchContainer(string userLogin)
+        private static async Task StartRecordTwitchContainer(string userLogin, bool isSaveToUnarchived = false)
         {
             var parms = new CreateContainerParameters
             {
@@ -565,7 +581,8 @@ namespace StreamRecordTools.Command
                     Binds = new List<string>()
                     {
                         $"{Utility.GetEnvironmentVariable("RecordPath", typeof(string), true)}:/output",
-                        $"{Utility.GetEnvironmentVariable("TempPath", typeof(string), true)}:/temp_path"
+                        $"{Utility.GetEnvironmentVariable("TempPath", typeof(string), true)}:/temp_path",
+                        $"{Utility.GetEnvironmentVariable("TwitchUnarchivedPath", typeof(string), true)}:/twitch_unarchived",
                     }
                 },
 
@@ -587,7 +604,9 @@ namespace StreamRecordTools.Command
                     "twitch_once",
                     userLogin,
                     "-o /output",
-                    "-t /temp_path"
+                    "-t /temp_path",
+                    "-u /twitch_unarchived",
+                    isSaveToUnarchived ? "-s" : ""
                 ],
 
                 // 不要讓程式自己 Attach 以免 Log 混亂

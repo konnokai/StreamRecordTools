@@ -12,6 +12,7 @@ namespace StreamRecordTools.Command.Record
         static string userLogin;
         static string fileName;
         static string tempPath;
+        static string unarchivedOutputPath;
         static string outputPath;
         static bool isDisableRedis;
 
@@ -34,27 +35,32 @@ namespace StreamRecordTools.Command.Record
                     Log.Error(ex.ToString());
                     return ResultType.Error;
                 }
-            }            
+            }
+
+            userLogin = options.UserLogin;
+            fileName = $"[{userLogin}] - {DateTime.Now:yyyyMMdd_HHmmss}.ts";
 
             if (!options.OutputPath.EndsWith(Utility.GetEnvSlash()))
                 options.OutputPath += Utility.GetEnvSlash();
             if (!options.TempPath.EndsWith(Utility.GetEnvSlash()))
                 options.TempPath += Utility.GetEnvSlash();
+            if (!options.TwitchUnarchivedOutputPath.EndsWith(Utility.GetEnvSlash()))
+                options.TwitchUnarchivedOutputPath += Utility.GetEnvSlash();
 
             outputPath = options.OutputPath.Replace("\"", "").Trim();
             tempPath = options.TempPath.Replace("\"", "").Trim();
+            unarchivedOutputPath = options.TwitchUnarchivedOutputPath.Replace("\"", "").Trim();
 
             tempPath += $"{DateTime.Now:yyyyMMdd}{Utility.GetEnvSlash()}";
             if (!Directory.Exists(tempPath)) Directory.CreateDirectory(tempPath);
             outputPath += $"{DateTime.Now:yyyyMMdd}{Utility.GetEnvSlash()}";
             if (!Directory.Exists(outputPath)) Directory.CreateDirectory(outputPath);
-
+            unarchivedOutputPath += $"{userLogin}{Utility.GetEnvSlash()}";
+            if (!Directory.Exists(unarchivedOutputPath) && options.IsSaveToUnarchived) Directory.CreateDirectory(unarchivedOutputPath);
 
             Log.Info($"輸出路徑: {outputPath}");
             Log.Info($"暫存路徑: {tempPath}");
-
-            userLogin = options.UserLogin;
-            fileName = $"[{userLogin}] - {DateTime.Now:yyyyMMdd_HHmmss}.ts";
+            Log.Info($"私人存檔路徑: {unarchivedOutputPath}");
 
             string procArgs = $"--progress no --output \"{tempPath}{fileName}\"";
             if (!string.IsNullOrEmpty(_twitchOAuthToken) && _twitchOAuthToken.Length == 30)
@@ -102,26 +108,36 @@ namespace StreamRecordTools.Command.Record
             process.CancelErrorRead();
             process.CancelOutputRead();
 
-            if (Path.GetDirectoryName(outputPath) != Path.GetDirectoryName(tempPath))
+            if (options.IsSaveToUnarchived)
+            {
+                Log.Info("將直播轉移至私人存檔");
+                MoveVideo(unarchivedOutputPath);
+            }
+            else if (Path.GetDirectoryName(outputPath) != Path.GetDirectoryName(tempPath))
             {
                 Log.Info("將直播轉移至保存點");
-                try
-                {
-                    Log.Info($"移動 \"{tempPath}{fileName}\" 至 \"{outputPath}{fileName}\"");
-                    File.Move($"{tempPath}{fileName}", $"{outputPath}{fileName}");
-                }
-                catch (Exception ex)
-                {
-                    if (Utility.InDocker) Log.Error(ex.ToString());
-                    else File.AppendAllText($"{tempPath}{fileName}_err.txt", ex.ToString());
-                }
-
-                // https://social.msdn.microsoft.com/Forums/en-US/c2c12a9f-dc4c-4c9a-b652-65374ef999d8/get-docker-container-id-in-code?forum=aspdotnetcore
-                if (Utility.InDocker && !isDisableRedis)
-                    Utility.Redis.GetSubscriber().Publish(new("streamTools.removeById", RedisChannel.PatternMode.Literal), Environment.MachineName);
+                MoveVideo(outputPath);
             }
 
+            // https://social.msdn.microsoft.com/Forums/en-US/c2c12a9f-dc4c-4c9a-b652-65374ef999d8/get-docker-container-id-in-code?forum=aspdotnetcore
+            if (Utility.InDocker && !isDisableRedis)
+                Utility.Redis.GetSubscriber().Publish(new("streamTools.removeById", RedisChannel.PatternMode.Literal), Environment.MachineName);
+
             return ResultType.Once;
+        }
+
+        private static void MoveVideo(string outputPath)
+        {
+            try
+            {
+                Log.Info($"移動 \"{tempPath}{fileName}\" 至 \"{outputPath}{fileName}\"");
+                File.Move($"{tempPath}{fileName}", $"{outputPath}{fileName}");
+            }
+            catch (Exception ex)
+            {
+                if (Utility.InDocker) Log.Error(ex.ToString());
+                else File.AppendAllText($"{tempPath}{fileName}_err.txt", ex.ToString());
+            }
         }
     }
 }
