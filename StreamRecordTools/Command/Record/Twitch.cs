@@ -69,9 +69,9 @@ namespace StreamRecordTools.Command.Record
                     if (stream != null)
                     {
                         Log.Info($"Twitch 分類: {stream.GameName}");
-                        Log.Info($"Twitch 標題: {Utility.ToSafeFilename(stream.Title)}");
+                        Log.Info($"Twitch 標題: {stream.Title}");
                         var title = Utility.ToSafeFilename(stream.Title);
-                        fileName = $"[{DateTime.Now:yyyyMMdd-HHmmss}] ({stream.GameName}) - {title.Substring(0, Math.Min(title.Length, 150))} - {stream.Id}.ts";
+                        fileName = $"[{DateTime.Now:yyyyMMdd-HHmmss}] ({Utility.ToSafeFilename(stream.GameName)}) - {title.Substring(0, Math.Min(title.Length, 150))} - {stream.Id}.ts";
                     }
                 }
             }
