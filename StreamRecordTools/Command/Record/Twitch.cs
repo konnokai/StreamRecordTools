@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using TwitchLib.Api;
 using static StreamRecordTools.Program;
 using ResultType = StreamRecordTools.Program.ResultType;
 
@@ -15,6 +16,7 @@ namespace StreamRecordTools.Command.Record
         static string unarchivedOutputPath;
         static string outputPath;
         static bool isDisableRedis;
+        static TwitchAPI twitchApi;
 
         static readonly string _twitchOAuthToken = Utility.ToolConfig.TwitchCookieAuthToken;
 
@@ -39,6 +41,40 @@ namespace StreamRecordTools.Command.Record
 
             userLogin = options.UserLogin;
             fileName = $"[{userLogin}] - {DateTime.Now:yyyyMMdd_HHmmss}.ts";
+
+            if (options.IsSaveToUnarchived)
+            {
+                if (string.IsNullOrEmpty(Utility.ToolConfig.TwitchClientId) || string.IsNullOrEmpty(Utility.ToolConfig.TwitchClientSecret))
+                {
+                    Log.Warn($"{nameof(Utility.ToolConfig.TwitchClientId)} 或 {nameof(Utility.ToolConfig.TwitchClientSecret)} 遺失，無法獲取標題");
+                    return ResultType.Error;
+                }
+
+                twitchApi = new()
+                {
+                    Helix =
+                    {
+                        Settings =
+                        {
+                            ClientId = Utility.ToolConfig.TwitchClientId,
+                            Secret = Utility.ToolConfig.TwitchClientSecret
+                        }
+                    }
+                };
+
+                var streamsResponse = twitchApi.Helix.Streams.GetStreamsAsync(first: 3, userLogins: [userLogin]).GetAwaiter().GetResult();
+                if (streamsResponse != null)
+                {
+                    var stream = streamsResponse.Streams[0] ?? null;
+                    if (stream != null)
+                    {
+                        Log.Info($"Twitch 分類: {stream.GameName}");
+                        Log.Info($"Twitch 標題: {Utility.ToSafeFilename(stream.Title)}");
+                        var title = Utility.ToSafeFilename(stream.Title);
+                        fileName = $"[{DateTime.Now:yyyyMMdd-HHmmss}] ({stream.GameName}) - {title.Substring(0, Math.Min(title.Length, 150))} - {stream.Id}.ts";
+                    }
+                }
+            }
 
             if (!options.OutputPath.EndsWith(Utility.GetEnvSlash()))
                 options.OutputPath += Utility.GetEnvSlash();

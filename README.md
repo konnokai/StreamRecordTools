@@ -51,6 +51,8 @@
 | `TwitchUnarchivedPath` | ✅ | Twitch 刪檔直播保存路徑（絕對路徑） |
 | `MemberOnlyPath` | ✅ | YouTube 會限直播保存路徑（絕對路徑） |
 | `TwitchUnarchivedUserLogins` | ❌ | 需自動保存至刪檔直播資料夾的 Twitch UserLogin 清單，JSON Array 格式，例如：`["user1","user2"]` |
+| `TwitchClientId` | ❌ | Twitch API Client ID (若使用 `TwitchUnarchivedUserLogins` 則需要填，否則會導致無法獲取實況資訊) |
+| `TwitchClientSecret` | ❌ | Twitch API Client Secret (若使用 `TwitchUnarchivedUserLogins` 則需要填，否則會導致無法獲取實況資訊) |
 | `TwitchCookieAuthToken` | ❌ | Twitch Cookie Auth Token，請參考 [Streamlink 說明](https://streamlink.github.io/cli/plugins/twitch.html#authentication) |
 | `CookiesFilePath` | ✅ | YouTube Cookie 檔案路徑（絕對路徑，Netscape 格式） |
 
@@ -59,7 +61,7 @@
 1. 複製專案 `git clone https://github.com/konnokai/StreamRecordTools.git` (或是單獨下載 `.env_sample` 並放到新資料夾)
 2. `cd StreamRecordTools`
 3. 根據上方說明製作 `cookies.txt` 並將文件放置專案目錄
-4. 開啟 `.env_sample` 並編輯 `GoogleApiKey` 成正確的 ApiKey 後存檔為 `.env` 到專案目錄內
+4. 開啟 `.env_sample` 並編輯所需的環境變數後存檔為 `.env` 到專案目錄內
 
 ### YouTube
 
@@ -94,3 +96,6 @@ docker run -it -d --env-file .env \
 
 > [!WARNING]
 > 從頭開始直播僅可從頭錄影兩小時，無法超過兩小時，尚不確定是 yt-dlp 問題還是 YouTube 限制，非特殊情況建議不要從頭開始錄影
+
+> [!WARNING]
+> 屎山代碼，有其他方案可以替代就別用我這套了

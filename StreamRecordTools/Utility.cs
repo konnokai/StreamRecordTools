@@ -28,6 +28,30 @@ namespace StreamRecordTools
         public static string GetEnvSlash()
             => (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "\\" : "/");
 
+        public static string ToSafeFilename(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return input;
+
+            var invalidChars = new HashSet<char>(Path.GetInvalidFileNameChars());
+
+            // Additional characters unsafe on Windows or Linux
+            foreach (var c in new[] { '/', '\\', ':', '*', '?', '"', '<', '>', '|', '\0' })
+                invalidChars.Add(c);
+
+            var result = new System.Text.StringBuilder(input.Length);
+            foreach (var c in input)
+            {
+                if (invalidChars.Contains(c) || c < 32)
+                    result.Append('_');
+                else
+                    result.Append(c);
+            }
+
+            // Trim trailing dots and spaces (Windows restriction)
+            return result.ToString().TrimEnd('.', ' ');
+        }
+
         public static async Task<(VideoSnippet VideoSnippet, VideoLiveStreamingDetails VideoLiveStreamingDetails)> GetSnippetDataAndLiveStreamingDetailsByVideoIdAsync(string videoId)
         {
             try

@@ -14,6 +14,8 @@ public class ToolConfig
     public string YouTubeUnarchivedPath { get; set; } = "./youtube_unarchived";
     public string TwitchUnarchivedPath { get; set; } = "./twitch_unarchived";
     public string TwitchUnarchivedUserLogins { get; set; } = "[]";
+    public string TwitchClientId { get; set; } = "";
+    public string TwitchClientSecret { get; set; } = "";
     public string TwitchCookieAuthToken { get; set; } = "";
     public string CookiesFilePath { get; set; } = "./cookies.txt";
 
@@ -67,6 +69,8 @@ public class ToolConfig
                 YouTubeUnarchivedPath = config.YouTubeUnarchivedPath;
                 TwitchUnarchivedPath = config.TwitchUnarchivedPath;
                 TwitchUnarchivedUserLogins = config.TwitchUnarchivedUserLogins;
+                TwitchClientId = config.TwitchClientId;
+                TwitchClientSecret = config.TwitchClientSecret;
                 TwitchCookieAuthToken = config.TwitchCookieAuthToken;
                 CookiesFilePath = config.CookiesFilePath;
             }
