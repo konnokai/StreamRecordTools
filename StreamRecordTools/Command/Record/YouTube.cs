@@ -1,4 +1,6 @@
-﻿using StackExchange.Redis;
+﻿using Google.Apis.Services;
+using Google.Apis.YouTube.v3;
+using StackExchange.Redis;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -29,6 +31,18 @@ namespace StreamRecordTools.Command.Record
             bool isDisableLiveFromStart = false,
             bool dontSendStartMessage = false)
         {
+            if (string.IsNullOrEmpty(Utility.ToolConfig.GoogleApiKey))
+            {
+                Log.Error("Google API Key 遺失");
+                return ResultType.Error;
+            }
+
+            Utility.YouTube = new YouTubeService(new BaseClientService.Initializer
+            {
+                ApplicationName = "StreamRecordTools",
+                ApiKey = Utility.ToolConfig.GoogleApiKey,
+            });
+
             string channelId = "", channelTitle = "";
             id = id.Replace("@", "-");
             isDisableRedis = argIsDisableRedis;
@@ -38,13 +52,13 @@ namespace StreamRecordTools.Command.Record
             {
                 try
                 {
-                    RedisConnection.Init(Utility.BotConfig.RedisOption);
+                    RedisConnection.Init(Utility.ToolConfig.RedisOption);
                     Utility.Redis = RedisConnection.Instance.ConnectionMultiplexer;
                 }
                 catch (Exception ex)
                 {
                     Log.Error("Redis連線錯誤，請確認伺服器是否已開啟");
-                    Log.Error(ex.Message);
+                    Log.Error(ex.ToString());
                     return ResultType.Error;
                 }
             }

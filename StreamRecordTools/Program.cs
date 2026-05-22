@@ -1,6 +1,4 @@
 ﻿using CommandLine;
-using Google.Apis.Services;
-using Google.Apis.YouTube.v3;
 using StreamRecordTools.Command;
 using StreamRecordTools.Command.Record;
 using System;
@@ -18,7 +16,7 @@ namespace StreamRecordTools
         {
             Log.Info($"建置版本: {VERSION}");
             Log.Info($"執行參數: {string.Join(' ', args)}");
-            Utility.BotConfig.InitBotConfig();
+            Utility.ToolConfig.InitBotConfig();
 
             // https://stackoverflow.com/a/52029759
             Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -28,12 +26,6 @@ namespace StreamRecordTools
                 Utility.IsClose = true;
                 e.Cancel = true;
             };
-
-            Utility.YouTube = new YouTubeService(new BaseClientService.Initializer
-            {
-                ApplicationName = "Bot",
-                ApiKey = Utility.BotConfig.GoogleApiKey,
-            });
 
             var result = Parser.Default.ParseArguments<YTOnceOptions, YTOnceOnDockerOptions, TwitchOnceOptions, SubOptions>(args)
                 .MapResult(

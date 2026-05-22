@@ -16,7 +16,7 @@ namespace StreamRecordTools.Command.Record
         static string outputPath;
         static bool isDisableRedis;
 
-        static readonly string _twitchOAuthToken = Utility.GetEnvironmentVariable("TwitchCookieAuthToken", typeof(string), true).ToString();
+        static readonly string _twitchOAuthToken = Utility.ToolConfig.TwitchCookieAuthToken;
 
         public static ResultType StartRecord(TwitchOnceOptions options)
         {
@@ -26,7 +26,7 @@ namespace StreamRecordTools.Command.Record
             {
                 try
                 {
-                    RedisConnection.Init(Utility.BotConfig.RedisOption);
+                    RedisConnection.Init(Utility.ToolConfig.RedisOption);
                     Utility.Redis = RedisConnection.Instance.ConnectionMultiplexer;
                 }
                 catch (Exception ex)

@@ -19,7 +19,7 @@ namespace StreamRecordTools
     {
         public static YouTubeService YouTube { get; set; }
         public static ConnectionMultiplexer Redis { get; set; }
-        public static BotConfig BotConfig { get; set; } = new();
+        public static ToolConfig ToolConfig { get; set; } = new();
 
         public static bool IsClose { get; set; } = false;
         public static bool IsDelLive { get; set; } = false;

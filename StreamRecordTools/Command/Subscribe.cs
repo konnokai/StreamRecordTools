@@ -1,6 +1,9 @@
 ﻿using Docker.DotNet;
 using Docker.DotNet.Models;
+using Google.Apis.Services;
+using Google.Apis.YouTube.v3;
 using Google.Apis.YouTube.v3.Data;
+using Newtonsoft.Json;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
@@ -11,7 +14,6 @@ using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using static StreamRecordTools.Program;
 using ResultType = StreamRecordTools.Program.ResultType;
 
@@ -32,9 +34,21 @@ namespace StreamRecordTools.Command
 
         public static async Task<ResultType> SubRecord(SubOptions subOptions)
         {
+            if (string.IsNullOrEmpty(Utility.ToolConfig.GoogleApiKey))
+            {
+                Log.Error("Google API Key 遺失");
+                return ResultType.Error;
+            }
+
+            Utility.YouTube = new YouTubeService(new BaseClientService.Initializer
+            {
+                ApplicationName = "StreamRecordTools",
+                ApiKey = Utility.ToolConfig.GoogleApiKey,
+            });
+
             try
             {
-                RedisConnection.Init(Utility.BotConfig.RedisOption);
+                RedisConnection.Init(Utility.ToolConfig.RedisOption);
                 Utility.Redis = RedisConnection.Instance.ConnectionMultiplexer;
             }
             catch (Exception ex)
@@ -69,7 +83,7 @@ namespace StreamRecordTools.Command
 
                 if (attr.HasFlag(FileAttributes.Directory))
                 {
-                    Log.Error($"Cookies 路徑為資料夾，請確認路徑設定是否正確，已設定的路徑為: {Utility.GetEnvironmentVariable("CookiesFilePath", typeof(string), true)}");
+                    Log.Error($"Cookies 路徑為資料夾，請確認路徑設定是否正確，已設定的路徑為: {Utility.ToolConfig.CookiesFilePath}");
                     return ResultType.Error;
                 }
 
@@ -194,7 +208,7 @@ namespace StreamRecordTools.Command
                 Log.Warn($"YouTube 已轉會限直播: {videoId}");
             });
 
-            var twitchUnarchivedUserLogins = JsonConvert.DeserializeObject<List<string>>(Utility.BotConfig.TwitchUnarchivedUserLogins) ?? [];
+            var twitchUnarchivedUserLogins = JsonConvert.DeserializeObject<List<string>>(Utility.ToolConfig.TwitchUnarchivedUserLogins) ?? [];
             if (twitchUnarchivedUserLogins.Count > 0)
                 Log.Info($"Twitch 自動保存至刪檔直播資料夾的 UserLogin 清單: {string.Join(", ", twitchUnarchivedUserLogins)}");
 
@@ -227,7 +241,7 @@ namespace StreamRecordTools.Command
             Log.Info("已訂閱 Redis 頻道");
 
 
-            UptimeKumaClient.Init(Utility.BotConfig.UptimeKumaPushUrl);
+            UptimeKumaClient.Init(Utility.ToolConfig.UptimeKumaPushUrl);
 
             Regex regex = new(@"(\d{4})(\d{2})(\d{2})");
             Regex fileNameRegex = new(@"youtube_(?'ChannelId'[\w\-\\_]{24})_(?'Date'\d{8})_(?'Time'\d{6})_(?'VideoId'[\w\-\\_]{11})\.(?'Ext'[\w]{2,4})");
@@ -444,22 +458,22 @@ namespace StreamRecordTools.Command
                 Image = "jun112561/stream-record-tools:master",
                 Name = $"record-{videoId.Replace("@", "-")}-{DateTime.Now:yyyyMMdd-HHmmss}",
 
-                Env = new List<string>
-                {
-                    $"GoogleApiKey={Utility.GetEnvironmentVariable("GoogleApiKey", typeof(string), true)}",
-                    $"RedisOption={Utility.GetEnvironmentVariable("RedisOption", typeof(string), true)}"
-                },
+                Env =
+                [
+                    $"GoogleApiKey={Utility.ToolConfig.GoogleApiKey}",
+                    $"RedisOption={Utility.ToolConfig.RedisOption}"
+                ],
 
                 HostConfig = new HostConfig()
                 {
-                    Binds = new List<string>()
-                    {
-                        $"{Utility.GetEnvironmentVariable("RecordPath", typeof(string), true)}:/output",
-                        $"{Utility.GetEnvironmentVariable("TempPath", typeof(string), true)}:/temp_path",
-                        $"{Utility.GetEnvironmentVariable("YouTubeUnarchivedPath", typeof(string), true)}:/unarchived",
-                        $"{Utility.GetEnvironmentVariable("MemberOnlyPath", typeof(string), true)}:/member_only",
-                        $"{Utility.GetEnvironmentVariable("CookiesFilePath", typeof(string), true)}:/app/cookies.txt"
-                    }
+                    Binds =
+                    [
+                        $"{Utility.ToolConfig.RecordPath}:/output",
+                        $"{Utility.ToolConfig.TempPath}:/temp_path",
+                        $"{Utility.ToolConfig.YouTubeUnarchivedPath}:/unarchived",
+                        $"{Utility.ToolConfig.MemberOnlyPath}:/member_only",
+                        $"{Utility.ToolConfig.CookiesFilePath}:/app/cookies.txt"
+                    ]
                 },
 
                 Labels = new Dictionary<string, string>
@@ -508,7 +522,7 @@ namespace StreamRecordTools.Command
                 else
                     Log.Warn($"容器已建立但無法啟動: {containerResponse.ID}");
             }
-            catch (DockerApiException dockerEx) when (dockerEx.Message.ToLower().Contains("already in use by container"))
+            catch (DockerApiException dockerEx) when (dockerEx.Message.Contains("already in use by container", StringComparison.CurrentCultureIgnoreCase))
             {
                 Log.Warn($"已建立 {parms.Name} 的容器，略過建立");
             }
@@ -571,18 +585,17 @@ namespace StreamRecordTools.Command
 
                 Env = new List<string>
                 {
-                    $"GoogleApiKey={Utility.GetEnvironmentVariable("GoogleApiKey", typeof(string), true)}", // 之後要移掉，目前 Program.cs 裡面有強制綁這個環境變數
-                    $"TwitchCookieAuthToken={Utility.GetEnvironmentVariable("TwitchCookieAuthToken", typeof(string), true)}",
-                    $"RedisOption={Utility.GetEnvironmentVariable("RedisOption", typeof(string), true)}"
+                    $"TwitchCookieAuthToken={Utility.ToolConfig.TwitchCookieAuthToken}",
+                    $"RedisOption={Utility.ToolConfig.RedisOption}"
                 },
 
                 HostConfig = new HostConfig()
                 {
                     Binds = new List<string>()
                     {
-                        $"{Utility.GetEnvironmentVariable("RecordPath", typeof(string), true)}:/output",
-                        $"{Utility.GetEnvironmentVariable("TempPath", typeof(string), true)}:/temp_path",
-                        $"{Utility.GetEnvironmentVariable("TwitchUnarchivedPath", typeof(string), true)}:/twitch_unarchived",
+                        $"{Utility.ToolConfig.RecordPath}:/output",
+                        $"{Utility.ToolConfig.TempPath}:/temp_path",
+                        $"{Utility.ToolConfig.TwitchUnarchivedPath}:/twitch_unarchived",
                     }
                 },
 
@@ -631,7 +644,7 @@ namespace StreamRecordTools.Command
                 else
                     Log.Warn($"容器已建立但無法啟動: {containerResponse.ID}");
             }
-            catch (DockerApiException dockerEx) when (dockerEx.Message.ToLower().Contains("already in use by container"))
+            catch (DockerApiException dockerEx) when (dockerEx.Message.Contains("already in use by container", StringComparison.CurrentCultureIgnoreCase))
             {
                 Log.Warn($"已建立 {parms.Name} 的容器，略過建立");
             }
