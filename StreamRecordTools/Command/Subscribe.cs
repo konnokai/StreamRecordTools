@@ -583,20 +583,22 @@ namespace StreamRecordTools.Command
                 Image = "jun112561/stream-record-tools:master",
                 Name = $"record-twitch-{userLogin}-{DateTime.Now:yyyyMMdd-HHmmss}",
 
-                Env = new List<string>
-                {
+                Env =
+                [
+                    $"RedisOption={Utility.ToolConfig.RedisOption}",
                     $"TwitchCookieAuthToken={Utility.ToolConfig.TwitchCookieAuthToken}",
-                    $"RedisOption={Utility.ToolConfig.RedisOption}"
-                },
+                    $"TwitchClientId={Utility.ToolConfig.TwitchClientId}",
+                    $"TwitchClientSecret={Utility.ToolConfig.TwitchClientSecret}"
+                ],
 
                 HostConfig = new HostConfig()
                 {
-                    Binds = new List<string>()
-                    {
+                    Binds =
+                    [
                         $"{Utility.ToolConfig.RecordPath}:/output",
                         $"{Utility.ToolConfig.TempPath}:/temp_path",
                         $"{Utility.ToolConfig.TwitchUnarchivedPath}:/twitch_unarchived",
-                    }
+                    ]
                 },
 
                 Labels = new Dictionary<string, string>
