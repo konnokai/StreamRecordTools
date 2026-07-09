@@ -7,6 +7,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ${RecordPath:-./record}:/output
+      - ${TwitcastingRecordPath:-./twitcasting_record}:/twitcasting_record
       - ${TempPath:-./record}:/temp_path
       - ${YouTubeUnarchivedPath:-./youtube_unarchived}:/youtube_unarchived
       - ${TwitchUnarchivedPath:-./twitch_unarchived}:/twitch_unarchived

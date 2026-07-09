@@ -27,11 +27,12 @@ namespace StreamRecordTools
                 e.Cancel = true;
             };
 
-            var result = Parser.Default.ParseArguments<YTOnceOptions, YTOnceOnDockerOptions, TwitchOnceOptions, SubOptions>(args)
+            var result = Parser.Default.ParseArguments<YTOnceOptions, YTOnceOnDockerOptions, TwitchOnceOptions, TwitcastingOnceOptions, SubOptions>(args)
                 .MapResult(
                 (YTOnceOptions options) => YouTube.StartRecord(options.VideolId, options.OutputPath, options.TempPath, options.YouTubeUnarchivedOutputPath, options.MemberOnlyOutputPath, options.DisableRedis, options.DisableLiveFromStart, options.DontSendStartMessage).Result,
                 (YTOnceOnDockerOptions options) => YouTube.StartRecord(options.VideolId, "/output", "/temp_path", "/unarchived", "/member_only", options.DisableRedis, options.DisableLiveFromStart, options.DontSendStartMessage).Result,
                 (TwitchOnceOptions options) => Twitch.StartRecord(options),
+                (TwitcastingOnceOptions options) => Twitcasting.StartRecord(options),
                 (SubOptions options) => Subscribe.SubRecord(options).Result,
                 Error => ResultType.None);
 
@@ -138,6 +139,13 @@ namespace StreamRecordTools
 
             [Option('s', "save-to-unarchived", Required = false, HelpText = "將本次錄影保存至永久保存資料夾")]
             public bool IsSaveToUnarchived { get; set; } = false;
+        }
+
+        [Verb("twitcasting_once", HelpText = "單次錄影 TwitCasting")]
+        public class TwitcastingOnceOptions : RequiredOptions
+        {
+            [Value(0, Required = true, HelpText = "TwitCasting 頻道 Id（screen id）")]
+            public string ChannelId { get; set; }
         }
     }
 }

@@ -46,6 +46,7 @@
 | `RedisOption` | ✅ | Redis 連線設定 |
 | `UptimeKumaPushUrl` | ❌ | Uptime Kuma Push 監視器網址 |
 | `RecordPath` | ✅ | YouTube & Twitch 直播存檔路徑（絕對路徑） |
+| `TwitcastingRecordPath` | ✅ | TwitCasting 直播存檔路徑（絕對路徑） |
 | `TempPath` | ✅ | 錄影暫存路徑（絕對路徑） |
 | `YouTubeUnarchivedPath` | ✅ | YouTube 刪檔直播保存路徑（絕對路徑） |
 | `TwitchUnarchivedPath` | ✅ | Twitch 刪檔直播保存路徑（絕對路徑） |

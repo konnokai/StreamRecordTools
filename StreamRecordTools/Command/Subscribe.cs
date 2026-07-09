@@ -220,6 +220,13 @@ namespace StreamRecordTools.Command
                 await StartRecordTwitch(userLogin, isSaveToUnarchived);
             });
 
+            sub.Subscribe(new("twitcasting.record", RedisChannel.PatternMode.Literal), async (redisChannel, channelId) =>
+            {
+                Log.Info($"已接收 TwitCasting 錄影請求: {channelId}");
+
+                await StartRecordTwitcasting(channelId);
+            });
+
             sub.Subscribe(new("streamTools.removeById", RedisChannel.PatternMode.Literal), async (channel, containerId) =>
             {
                 if (Utility.InDocker && dockerClient != null)
@@ -622,6 +629,119 @@ namespace StreamRecordTools.Command
                     "-t /temp_path",
                     "-u /twitch_unarchived",
                     isSaveToUnarchived ? "-s" : ""
+                ],
+
+                // 不要讓程式自己 Attach 以免 Log 混亂
+                AttachStdout = false,
+                AttachStdin = false,
+                AttachStderr = false,
+
+                // 允許另外透過其他方法 Attach 進去交互
+                OpenStdin = true,
+                Tty = true
+            };
+
+            try
+            {
+                var containerResponse = await dockerClient.Containers.CreateContainerAsync(parms, CancellationToken.None);
+                Log.Info($"已建立容器: {containerResponse.ID}");
+
+                if (containerResponse.Warnings.Any())
+                    Log.Warn($"容器警告: {string.Join('\n', containerResponse.Warnings)}");
+                else if (await dockerClient.Containers.StartContainerAsync(containerResponse.ID, new ContainerStartParameters(), CancellationToken.None))
+                    Log.Info($"容器啟動成功: {containerResponse.ID}");
+                else
+                    Log.Warn($"容器已建立但無法啟動: {containerResponse.ID}");
+            }
+            catch (DockerApiException dockerEx) when (dockerEx.Message.Contains("already in use by container", StringComparison.CurrentCultureIgnoreCase))
+            {
+                Log.Warn($"已建立 {parms.Name} 的容器，略過建立");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, $"建立容器 {parms.Name} 錯誤");
+            }
+        }
+
+        private static async Task StartRecordTwitcasting(string channelId)
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                if (Utility.InDocker && dockerClient != null)
+                {
+                    await StartRecordTwitcastingContainer(channelId);
+                }
+                else if (!Utility.InDocker)
+                {
+                    string procArgs = $"dotnet StreamRecordTools.dll" +
+                        $" twitcasting_once {channelId}" +
+                        $" -o \"{Utility.ToolConfig.TwitcastingRecordPath}\"" +
+                        $" -t \"{TempPath}\"";
+
+                    Process.Start("tmux", $"new-window -d -n \"TwitCasting {channelId}\" {procArgs}");
+                }
+                else
+                {
+                    Log.Error("在 Docker 環境內但無法建立新的容器來錄影，請確認環境是否正常");
+                }
+            }
+            else
+            {
+                string procArgs = $"dotnet StreamRecordTools.dll" +
+                    $" twitcasting_once {channelId}" +
+                    $" -o \"{Utility.ToolConfig.TwitcastingRecordPath.TrimEnd(Utility.GetEnvSlash()[0])}\"" +
+                    $" -t \"{TempPath.TrimEnd(Utility.GetEnvSlash()[0])}\"";
+
+                Process.Start(new ProcessStartInfo()
+                {
+                    FileName = "dotnet",
+                    Arguments = procArgs.Replace("dotnet ", ""),
+                    CreateNoWindow = false,
+                    UseShellExecute = true
+                });
+            }
+        }
+
+        private static async Task StartRecordTwitcastingContainer(string channelId)
+        {
+            var parms = new CreateContainerParameters
+            {
+                Image = "jun112561/stream-record-tools:master",
+                Name = $"record-twitcasting-{channelId}-{DateTime.Now:yyyyMMdd-HHmmss}",
+
+                Env =
+                [
+                    $"RedisOption={Utility.ToolConfig.RedisOption}"
+                ],
+
+                HostConfig = new HostConfig()
+                {
+                    Binds =
+                    [
+                        $"{Utility.ToolConfig.TwitcastingRecordPath}:/output",
+                        $"{Utility.ToolConfig.TempPath}:/temp_path",
+                    ]
+                },
+
+                Labels = new Dictionary<string, string>
+                {
+                    { "me.konnokai.record.twitcasting.channelId", channelId }
+                },
+
+                NetworkingConfig = new NetworkingConfig()
+                {
+                    EndpointsConfig = new Dictionary<string, EndpointSettings>()
+                    {
+                        { "" , new EndpointSettings() { NetworkID = NetworkId } }
+                    }
+                },
+
+                Cmd =
+                [
+                    "twitcasting_once",
+                    channelId,
+                    "-o /output",
+                    "-t /temp_path"
                 ],
 
                 // 不要讓程式自己 Attach 以免 Log 混亂

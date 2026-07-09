@@ -9,6 +9,7 @@ public class ToolConfig
     public string RedisOption { get; set; } = "127.0.0.1,syncTimeout=3000";
     public string UptimeKumaPushUrl { get; set; } = "";
     public string RecordPath { get; set; } = "./record";
+    public string TwitcastingRecordPath { get; set; } = "./twitcasting_record";
     public string TempPath { get; set; } = "/tmp";
     public string MemberOnlyPath { get; set; } = "./member_only";
     public string YouTubeUnarchivedPath { get; set; } = "./youtube_unarchived";
@@ -64,6 +65,7 @@ public class ToolConfig
                 RedisOption = config.RedisOption;
                 UptimeKumaPushUrl = config.UptimeKumaPushUrl;
                 RecordPath = config.RecordPath;
+                TwitcastingRecordPath = config.TwitcastingRecordPath;
                 TempPath = config.TempPath;
                 MemberOnlyPath = config.MemberOnlyPath;
                 YouTubeUnarchivedPath = config.YouTubeUnarchivedPath;
