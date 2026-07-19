@@ -168,6 +168,8 @@ namespace StreamRecordTools.Command.Record
 
                 CancellationTokenSource cancellationToken = new();
                 CancellationToken token = cancellationToken.Token;
+                long lastOutputTimestamp = Stopwatch.GetTimestamp();
+                int isRecordingWatchdogArmed = 0;
 
                 // 如果關閉從開頭錄影的話，每六小時需要重新開一次錄影，才能避免掉長時間錄影導致 HTTP 503 錯誤
                 // 但從頭開始錄影好像只能錄兩小時 :thinking:
@@ -249,6 +251,9 @@ namespace StreamRecordTools.Command.Record
                         if (e.Data.ToLower().StartsWith("[wait]"))
                             return;
 
+                        if (Volatile.Read(ref isRecordingWatchdogArmed) == 1)
+                            Interlocked.Exchange(ref lastOutputTimestamp, Stopwatch.GetTimestamp());
+
                         Log.Error(e.Data);
 
                         if (e.Data.Contains("members-only content") || e.Data.Contains("channel's members"))
@@ -285,10 +290,21 @@ namespace StreamRecordTools.Command.Record
                         if (e.Data.ToLower().StartsWith("[wait]"))
                             return;
 
+                        // 應該能用這個來判定開始直播
+                        bool isDownloadOutput = e.Data.StartsWith("[download]", StringComparison.OrdinalIgnoreCase);
+                        if (isDownloadOutput)
+                        {
+                            Interlocked.Exchange(ref lastOutputTimestamp, Stopwatch.GetTimestamp());
+                            Volatile.Write(ref isRecordingWatchdogArmed, 1);
+                        }
+                        else if (Volatile.Read(ref isRecordingWatchdogArmed) == 1)
+                        {
+                            Interlocked.Exchange(ref lastOutputTimestamp, Stopwatch.GetTimestamp());
+                        }
+
                         Log.YouTubeInfo(e.Data);
 
-                        // 應該能用這個來判定開始直播
-                        if (e.Data.ToLower().StartsWith("[download]"))
+                        if (isDownloadOutput)
                         {
                             if (isReceiveDownload)
                                 return;
@@ -331,13 +347,55 @@ namespace StreamRecordTools.Command.Record
                 process.BeginErrorReadLine();
                 process.BeginOutputReadLine();
 
+                var recordingWatchdogTask = Task.Run(async () =>
+                {
+                    try
+                    {
+                        while (true)
+                        {
+                            await Task.Delay(TimeSpan.FromSeconds(10), token);
+
+                            if (Volatile.Read(ref isRecordingWatchdogArmed) == 0)
+                                continue;
+
+                            long lastOutput = Interlocked.Read(ref lastOutputTimestamp);
+                            if (Stopwatch.GetElapsedTime(lastOutput) < TimeSpan.FromMinutes(5))
+                                continue;
+
+                            try
+                            {
+                                if (process.HasExited)
+                                    return;
+
+                                process.Kill(entireProcessTree: true);
+                            }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
+                            catch (Exception ex)
+                            {
+                                Log.Error(ex, "YouTube 錄影逾時，但無法中斷 yt-dlp/ffmpeg");
+                                return;
+                            }
+
+                            Log.Warn("YouTube 錄影超過五分鐘沒有新的 yt-dlp/ffmpeg 訊息，已中斷錄影");
+                            return;
+                        }
+                    }
+                    catch (OperationCanceledException) when (token.IsCancellationRequested)
+                    {
+                    }
+                });
+
                 process.WaitForExit();
+                cancellationToken.Cancel();
+                await recordingWatchdogTask;
                 process.CancelErrorRead();
                 process.CancelOutputRead();
 
                 Utility.IsClose = true;
                 Log.Info($"錄影結束");
-                cancellationToken.Cancel();
 
                 if (isNeedRestart)
                 {
