@@ -1,102 +1,144 @@
 # 錄影小幫手
 
-支援 YouTube 及 Twitch 直播錄影，需配置 Google Api Key 以及 YouTube Cookie 使用
+錄影小幫手可錄製 YouTube、Twitch 與 TwitCasting 直播。它可以單次執行，也可以訂閱 Redis 頻道，接收其他服務送出的錄影工作。
 
-若要搭配直播小幫手使用，需要另外安裝 Redis Server 並使用 Subscribe 模式
+## 建議使用方式
 
-## 製作 `cookies.txt`
+- 只錄一場直播：使用單次 Docker 指令，不需要 Redis。
+- 搭配直播小幫手自動錄影：使用 Docker Compose 的訂閱模式，需要 Redis。
+- 修改或除錯程式：安裝 .NET 10 SDK 後直接執行。
 
-> [!IMPORTANT]
-> 優先參考 [yt-dlp 官方說明](https://github.com/yt-dlp/yt-dlp/wiki/Extractors) 來製作
+## 系統需求
 
-1. 開啟 `不會用到的瀏覽器或無痕模式` 並登入 Youtube (一定要是不常用的，不然 Cookie 會被刷新，本說明以 Chrome 為例)
-2. 下載 `ChromeCookiesView` ([官網](https://www.nirsoft.net/utils/chrome_cookies_view.html), [直接下載](https://www.nirsoft.net/utils/chromecookiesview.zip))
-3. 解壓縮並開啟 `ChromeCookiesView.exe`
-4. 搜尋 `.youtube.com` 域名相關 Cookie
-5. 將所有搜尋到的 Cookie 複製成 `Netscape Cookie` 格式 (Copy As Cookies.txt Format)
-6. 建立 `cookies.txt` 並將 Cookie 貼上
+- Docker，或 [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
+- 已啟用 YouTube Data API v3 的 Google API Key
+- YouTube 錄影需要 `cookies.txt`
+- 訂閱模式需要 Redis
+- 不使用 Docker 時，需自行安裝 `yt-dlp`、`ffmpeg` 與 `streamlink`，並確認可從 `PATH` 執行
 
-## 直接執行程式
+## 準備 YouTube Cookie
 
-需要從頭將專案編譯，我相信你可以自己搞定參數設定及如何開始錄影的
+請依 [yt-dlp 官方說明](https://github.com/yt-dlp/yt-dlp/wiki/Extractors) 匯出 Netscape 格式的 `cookies.txt`。建議使用專門給錄影工具的瀏覽器設定檔或帳號，避免日常登入登出讓 Cookie 提前失效。
 
-## Docker 環境，Sub 模式
+`cookies.txt` 等同登入憑證：
 
-本模式是設計給直播小幫手串接使用，一般無需使用
+- 不要提交到 Git。
+- 不要傳給其他人。
+- 檔案權限只開放給執行錄影工具的帳號。
 
-1. 複製專案 `git clone https://github.com/konnokai/StreamRecordTools.git`
-2. 開啟 `.env_sample` 編輯為正確設定值後存檔為 `.env` 到專案目錄內
- **\*請務必確定所有路徑皆為絕對路徑\***
-3. 部屬 Docker Image `docker compose up -d`
+## Docker Compose 訂閱模式
 
-### Redis 頻道
+1. 複製環境變數範例：
 
-使用 Redis Publish 指令觸發錄影：
+```powershell
+Copy-Item .env_sample .env
+```
 
-| 頻道 | 參數 | 說明 |
-|------|------|------|
-| `youtube.record` | 11 碼 VideoId | 觸發 YouTube 直播錄影 |
-| `twitch.record` | Twitch UserLogin | 觸發 Twitch 直播錄影 |
+Linux 或 macOS：
 
-### 環境變數說明
+```sh
+cp .env_sample .env
+```
 
-| 變數名稱 | 必填 | 說明 |
-|----------|------|------|
-| `GoogleApiKey` | ✅ | Google API 金鑰 |
-| `RedisOption` | ✅ | Redis 連線設定 |
-| `UptimeKumaPushUrl` | ❌ | Uptime Kuma Push 監視器網址 |
-| `RecordPath` | ✅ | YouTube & Twitch 直播存檔路徑（絕對路徑） |
-| `TwitcastingRecordPath` | ✅ | TwitCasting 直播存檔路徑（絕對路徑） |
-| `TempPath` | ✅ | 錄影暫存路徑（絕對路徑） |
-| `YouTubeUnarchivedPath` | ✅ | YouTube 刪檔直播保存路徑（絕對路徑） |
-| `TwitchUnarchivedPath` | ✅ | Twitch 刪檔直播保存路徑（絕對路徑） |
-| `MemberOnlyPath` | ✅ | YouTube 會限直播保存路徑（絕對路徑） |
-| `TwitchUnarchivedUserLogins` | ❌ | 需自動保存至刪檔直播資料夾的 Twitch UserLogin 清單，JSON Array 格式，例如：`["user1","user2"]` |
-| `TwitchClientId` | ❌ | Twitch API Client ID (若使用 `TwitchUnarchivedUserLogins` 則需要填，否則會導致無法獲取實況資訊) |
-| `TwitchClientSecret` | ❌ | Twitch API Client Secret (若使用 `TwitchUnarchivedUserLogins` 則需要填，否則會導致無法獲取實況資訊) |
-| `TwitchCookieAuthToken` | ❌ | Twitch Cookie Auth Token，請參考 [Streamlink 說明](https://streamlink.github.io/cli/plugins/twitch.html#authentication) |
-| `CookiesFilePath` | ✅ | YouTube Cookie 檔案路徑（絕對路徑，Netscape 格式） |
+2. 編輯 `.env`，填入 Google API Key、Redis 與錄影路徑。
+3. 將 `CookiesFilePath` 設為主機上 `cookies.txt` 的絕對路徑。
+4. 啟動服務：
 
-## Docker 環境，單一直播錄影模式
+```sh
+docker compose up -d
+docker compose logs -f stream-record-master
+```
 
-1. 複製專案 `git clone https://github.com/konnokai/StreamRecordTools.git` (或是單獨下載 `.env_sample` 並放到新資料夾)
-2. `cd StreamRecordTools`
-3. 根據上方說明製作 `cookies.txt` 並將文件放置專案目錄
-4. 開啟 `.env_sample` 並編輯所需的環境變數後存檔為 `.env` 到專案目錄內
+Compose 會掛載 Docker socket，讓主服務建立單次錄影容器。只有信任的程式與使用者可以存取這個服務，因為 Docker socket 等同主機管理權限。
+
+### Redis 錄影頻道
+
+| 頻道 | 訊息內容 | 用途 |
+|---|---|---|
+| `youtube.record` | 11 碼 YouTube Video ID | 開始錄製 YouTube 直播 |
+| `twitch.record` | Twitch UserLogin | 開始錄製 Twitch 直播 |
+| `twitcasting.record` | TwitCasting screen ID | 開始錄製 TwitCasting 直播 |
+
+例如：
+
+```sh
+redis-cli PUBLISH youtube.record dQw4w9WgXcQ
+```
+
+## Docker 單次錄影
+
+下列路徑都要換成主機上的絕對路徑。
 
 ### YouTube
 
-取得 11 碼的 VideoId 並替換下方指令中的 `(VideoId)` 區塊
-
-```bash
-docker run -it -d --env-file .env \
+```sh
+docker run --rm --env-file .env \
   -v "/record/output:/output" \
   -v "/record/temp:/temp_path" \
   -v "/record/youtube_unarchived:/unarchived" \
   -v "/record/member_only:/member_only" \
-  -v "/cookies.txt:/app/cookies.txt" \
-  jun112561/stream-record-tools:master yt_once_on_docker (VideoId) -d -s
+  -v "/record/cookies.txt:/app/cookies.txt:ro" \
+  jun112561/stream-record-tools:master \
+  yt_once_on_docker VIDEO_ID -d -s
 ```
+
+`-d` 表示不使用 Redis。`-s` 表示從目前時間開始錄影；移除 `-s` 會嘗試從直播開頭錄製，但平台不保證能取得完整內容。
 
 ### Twitch
 
-取得 Twitch 實況主的 UserLogin 並替換下方指令中的 `(UserLogin)` 區塊
-
-```bash
-docker run -it -d --env-file .env \
+```sh
+docker run --rm --env-file .env \
   -v "/record/output:/output" \
   -v "/record/temp:/temp_path" \
   -v "/record/twitch_unarchived:/twitch_unarchived" \
-  jun112561/stream-record-tools:master twitch_once (UserLogin) -o /output -t /temp_path -u /twitch_unarchived
+  jun112561/stream-record-tools:master \
+  twitch_once USER_LOGIN -o /output -t /temp_path -u /twitch_unarchived -d
 ```
 
-> [!NOTE]
-> Docker `-v` 參數請自行替換成實體主機中要保存的絕對路徑，唯獨 Container 掛載路徑不可變更
+## 直接使用 .NET 執行
 
-若需要從頭開始錄影請將指令最後面的 `-s` 移除
+第一次執行時，程式會產生 `tool_config_example.json` 後退出。將它複製成 `tool_config.json`，填入 `GoogleApiKey` 與需要的設定，再重新執行。
 
-> [!WARNING]
-> 從頭開始直播僅可從頭錄影兩小時，無法超過兩小時，尚不確定是 yt-dlp 問題還是 YouTube 限制，非特殊情況建議不要從頭開始錄影
+建置：
 
-> [!WARNING]
-> 屎山代碼，有其他方案可以替代就別用我這套了
+```powershell
+dotnet build StreamRecordTools.sln -c Release
+```
+
+錄製 YouTube：
+
+```powershell
+dotnet run -c Release --project StreamRecordTools -- yt_once VIDEO_ID -o D:\record -t D:\temp -u D:\unarchived -m D:\member-only -d -s
+```
+
+錄製 Twitch：
+
+```powershell
+dotnet run -c Release --project StreamRecordTools -- twitch_once USER_LOGIN -o D:\record -t D:\temp -u D:\twitch-unarchived -d
+```
+
+查看所有參數：
+
+```powershell
+dotnet run --project StreamRecordTools -- --help
+```
+
+## 環境變數
+
+| 變數 | 用途 |
+|---|---|
+| `GoogleApiKey` | YouTube Data API v3 金鑰 |
+| `RedisOption` | Redis 連線設定 |
+| `UptimeKumaPushUrl` | 選用的 Uptime Kuma Push URL |
+| `RecordPath` | 一般錄影輸出路徑 |
+| `TwitcastingRecordPath` | TwitCasting 輸出路徑 |
+| `TempPath` | 暫存路徑 |
+| `YouTubeUnarchivedPath` | YouTube 刪檔或私人直播保存路徑 |
+| `TwitchUnarchivedPath` | Twitch 永久保存路徑 |
+| `MemberOnlyPath` | YouTube 會員限定直播保存路徑 |
+| `TwitchUnarchivedUserLogins` | 永久保存的 Twitch UserLogin JSON 陣列 |
+| `TwitchClientId`、`TwitchClientSecret` | 查詢 Twitch 實況資訊時使用 |
+| `TwitchCookieAuthToken` | Streamlink 的 Twitch Cookie Auth Token |
+| `CookiesFilePath` | Netscape 格式 `cookies.txt` 的絕對路徑 |
+
+路徑不存在、空間不足、Cookie 失效或平台限制都可能讓錄影中斷。重要直播請先用測試頻道確認設定與磁碟空間。
