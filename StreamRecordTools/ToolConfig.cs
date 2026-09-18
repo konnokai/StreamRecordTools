@@ -10,6 +10,7 @@ public class ToolConfig
     public string UptimeKumaPushUrl { get; set; } = "";
     public string RecordPath { get; set; } = "./record";
     public string TwitcastingRecordPath { get; set; } = "./twitcasting_record";
+    public string ChzzkRecordPath { get; set; } = "./chzzk_record";
     public string TempPath { get; set; } = "/tmp";
     public string MemberOnlyPath { get; set; } = "./member_only";
     public string YouTubeUnarchivedPath { get; set; } = "./youtube_unarchived";
@@ -66,6 +67,7 @@ public class ToolConfig
                 UptimeKumaPushUrl = config.UptimeKumaPushUrl;
                 RecordPath = config.RecordPath;
                 TwitcastingRecordPath = config.TwitcastingRecordPath;
+                ChzzkRecordPath = config.ChzzkRecordPath;
                 TempPath = config.TempPath;
                 MemberOnlyPath = config.MemberOnlyPath;
                 YouTubeUnarchivedPath = config.YouTubeUnarchivedPath;

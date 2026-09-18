@@ -5,6 +5,7 @@ using Google.Apis.YouTube.v3;
 using Google.Apis.YouTube.v3.Data;
 using Newtonsoft.Json;
 using StackExchange.Redis;
+using StreamRecordTools.Command.Record;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -225,6 +226,19 @@ namespace StreamRecordTools.Command
                 Log.Info($"已接收 TwitCasting 錄影請求: {channelId}");
 
                 await StartRecordTwitcasting(channelId);
+            });
+
+            sub.Subscribe(new("chzzk.record", RedisChannel.PatternMode.Literal), async (redisChannel, payload) =>
+            {
+                Log.Info($"已接收 CHZZK 錄影請求: {payload}");
+
+                if (!Chzzk.TryParseRequest(payload.ToString(), out string channelId, out string streamKey))
+                {
+                    Log.Error($"CHZZK 錄影請求格式錯誤，已忽略: {payload}");
+                    return;
+                }
+
+                await StartRecordChzzk(channelId, streamKey);
             });
 
             sub.Subscribe(new("streamTools.removeById", RedisChannel.PatternMode.Literal), async (channel, containerId) =>
@@ -742,6 +756,130 @@ namespace StreamRecordTools.Command
                     channelId,
                     "-o /output",
                     "-t /temp_path"
+                ],
+
+                // 不要讓程式自己 Attach 以免 Log 混亂
+                AttachStdout = false,
+                AttachStdin = false,
+                AttachStderr = false,
+
+                // 允許另外透過其他方法 Attach 進去交互
+                OpenStdin = true,
+                Tty = true
+            };
+
+            try
+            {
+                var containerResponse = await dockerClient.Containers.CreateContainerAsync(parms, CancellationToken.None);
+                Log.Info($"已建立容器: {containerResponse.ID}");
+
+                if (containerResponse.Warnings.Any())
+                    Log.Warn($"容器警告: {string.Join('\n', containerResponse.Warnings)}");
+                else if (await dockerClient.Containers.StartContainerAsync(containerResponse.ID, new ContainerStartParameters(), CancellationToken.None))
+                    Log.Info($"容器啟動成功: {containerResponse.ID}");
+                else
+                    Log.Warn($"容器已建立但無法啟動: {containerResponse.ID}");
+            }
+            catch (DockerApiException dockerEx) when (dockerEx.Message.Contains("already in use by container", StringComparison.CurrentCultureIgnoreCase))
+            {
+                Log.Warn($"已建立 {parms.Name} 的容器，略過建立");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, $"建立容器 {parms.Name} 錯誤");
+            }
+        }
+
+        private static async Task StartRecordChzzk(string channelId, string streamKey)
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                if (Utility.InDocker && dockerClient != null)
+                {
+                    await StartRecordChzzkContainer(channelId, streamKey);
+                }
+                else if (!Utility.InDocker)
+                {
+                    string procArgs = string.Join(' ',
+                        QuoteForShell("dotnet"), QuoteForShell("StreamRecordTools.dll"),
+                        QuoteForShell("chzzk_once"), QuoteForShell(channelId), QuoteForShell(streamKey),
+                        QuoteForShell("-o"), QuoteForShell(Utility.ToolConfig.ChzzkRecordPath),
+                        QuoteForShell("-t"), QuoteForShell(TempPath));
+
+                    Process.Start("tmux", $"new-window -d -n \"CHZZK {channelId}\" {procArgs}");
+                }
+                else
+                {
+                    Log.Error("在 Docker 環境內但無法建立新的容器來錄影，請確認環境是否正常");
+                }
+            }
+            else
+            {
+                var startInfo = new ProcessStartInfo()
+                {
+                    FileName = "dotnet",
+                    CreateNoWindow = false,
+                    UseShellExecute = false
+                };
+                foreach (string argument in new[]
+                {
+                    "StreamRecordTools.dll", "chzzk_once", channelId, streamKey,
+                    "-o", Utility.ToolConfig.ChzzkRecordPath.TrimEnd(Utility.GetEnvSlash()[0]),
+                    "-t", TempPath.TrimEnd(Utility.GetEnvSlash()[0])
+                })
+                {
+                    startInfo.ArgumentList.Add(argument);
+                }
+
+                Process.Start(startInfo);
+            }
+        }
+
+        /// <summary>POSIX shell 單引號轉義；tmux new-window 的指令會經 shell 執行，參數不可直接插值。</summary>
+        private static string QuoteForShell(string value) => "'" + value.Replace("'", "'\\''") + "'";
+
+        private static async Task StartRecordChzzkContainer(string channelId, string streamKey)
+        {
+            var parms = new CreateContainerParameters
+            {
+                Image = "jun112561/stream-record-tools:master",
+                Name = $"record-chzzk-{channelId}-{DateTime.Now:yyyyMMdd-HHmmss}",
+
+                Env =
+                [
+                    $"RedisOption={Utility.ToolConfig.RedisOption}"
+                ],
+
+                HostConfig = new HostConfig()
+                {
+                    Binds =
+                    [
+                        $"{Utility.ToolConfig.ChzzkRecordPath}:/output",
+                        $"{Utility.ToolConfig.TempPath}:/temp_path",
+                    ]
+                },
+
+                Labels = new Dictionary<string, string>
+                {
+                    { "me.konnokai.record.chzzk.channelId", channelId },
+                    { "me.konnokai.record.chzzk.streamKey", streamKey }
+                },
+
+                NetworkingConfig = new NetworkingConfig()
+                {
+                    EndpointsConfig = new Dictionary<string, EndpointSettings>()
+                    {
+                        { "" , new EndpointSettings() { NetworkID = NetworkId } }
+                    }
+                },
+
+                Cmd =
+                [
+                    "chzzk_once",
+                    channelId,
+                    streamKey,
+                    "-o", "/output",
+                    "-t", "/temp_path"
                 ],
 
                 // 不要讓程式自己 Attach 以免 Log 混亂

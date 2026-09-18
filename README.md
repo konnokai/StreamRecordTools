@@ -1,6 +1,6 @@
 # 錄影小幫手
 
-錄影小幫手可錄製 YouTube、Twitch 與 TwitCasting 直播。它可以單次執行，也可以訂閱 Redis 頻道，接收其他服務送出的錄影工作。
+錄影小幫手可錄製 YouTube、Twitch、TwitCasting 與 CHZZK 直播。它可以單次執行，也可以訂閱 Redis 頻道，接收其他服務送出的錄影工作。
 
 ## 建議使用方式
 
@@ -58,12 +58,24 @@ Compose 會掛載 Docker socket，讓主服務建立單次錄影容器。只有�
 | `youtube.record` | 11 碼 YouTube Video ID | 開始錄製 YouTube 直播 |
 | `twitch.record` | Twitch UserLogin | 開始錄製 Twitch 直播 |
 | `twitcasting.record` | TwitCasting screen ID | 開始錄製 TwitCasting 直播 |
+| `chzzk.record` | JSON，含 `channelId` 與 `streamKey` | 開始錄製 CHZZK 直播 |
 
 例如：
 
 ```sh
 redis-cli PUBLISH youtube.record dQw4w9WgXcQ
 ```
+
+CHZZK 的訊息格式如下。`streamKey` 為 `channelId:yyyyMMdd_HHmmss`，只作為檔名與日誌追蹤；實際錄影使用頻道直播網址。
+
+```json
+{
+  "channelId": "4de764d9dad3b25602284be6db3ac647",
+  "streamKey": "4de764d9dad3b25602284be6db3ac647:20260918_120000"
+}
+```
+
+同一個頻道的錄影工作以 Redis 鎖互斥，手動與自動請求同時抵達時只會執行一份 Streamlink。鎖有到期時間，程序意外結束後會自動恢復，不會永久卡住。使用單次 CLI 的 `--disable-redis` 時不提供這項互斥。
 
 ## Docker 單次錄影
 
@@ -93,6 +105,16 @@ docker run --rm --env-file .env \
   -v "/record/twitch_unarchived:/twitch_unarchived" \
   jun112561/stream-record-tools:master \
   twitch_once USER_LOGIN -o /output -t /temp_path -u /twitch_unarchived -d
+```
+
+### CHZZK
+
+```sh
+docker run --rm --env-file .env \
+  -v "/record/chzzk:/output" \
+  -v "/record/temp:/temp_path" \
+  jun112561/stream-record-tools:master \
+  chzzk_once CHANNEL_ID "CHANNEL_ID:20260918_120000" -o /output -t /temp_path -d
 ```
 
 ## 直接使用 .NET 執行
@@ -132,6 +154,7 @@ dotnet run --project StreamRecordTools -- --help
 | `UptimeKumaPushUrl` | 選用的 Uptime Kuma Push URL |
 | `RecordPath` | 一般錄影輸出路徑 |
 | `TwitcastingRecordPath` | TwitCasting 輸出路徑 |
+| `ChzzkRecordPath` | CHZZK 輸出路徑 |
 | `TempPath` | 暫存路徑 |
 | `YouTubeUnarchivedPath` | YouTube 刪檔或私人直播保存路徑 |
 | `TwitchUnarchivedPath` | Twitch 永久保存路徑 |

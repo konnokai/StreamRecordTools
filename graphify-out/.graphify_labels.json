@@ -1,15 +1,14 @@
 {
-  "0": ".StartRecord",
-  "1": ".SubRecord",
+  "0": ".Main",
+  "1": "Subscribe",
   "2": "Utility",
   "3": "StreamRecordTools.csproj",
   "4": "Program",
-  "5": "RedisConnection",
+  "5": "StreamRecordTools",
   "6": "Log",
   "7": "ToolConfig",
   "8": "錄影小幫手",
-  "9": ".Init",
+  "9": ".StartRecord",
   "10": "Signum",
-  "11": ".StartRecord",
-  "12": "CheckResult"
+  "11": "Program.cs"
 }

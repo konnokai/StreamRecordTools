@@ -27,12 +27,13 @@ namespace StreamRecordTools
                 e.Cancel = true;
             };
 
-            var result = Parser.Default.ParseArguments<YTOnceOptions, YTOnceOnDockerOptions, TwitchOnceOptions, TwitcastingOnceOptions, SubOptions>(args)
+            var result = Parser.Default.ParseArguments<YTOnceOptions, YTOnceOnDockerOptions, TwitchOnceOptions, TwitcastingOnceOptions, ChzzkOnceOptions, SubOptions>(args)
                 .MapResult(
                 (YTOnceOptions options) => YouTube.StartRecord(options.VideolId, options.OutputPath, options.TempPath, options.YouTubeUnarchivedOutputPath, options.MemberOnlyOutputPath, options.DisableRedis, options.DisableLiveFromStart, options.DontSendStartMessage).Result,
                 (YTOnceOnDockerOptions options) => YouTube.StartRecord(options.VideolId, "/output", "/temp_path", "/unarchived", "/member_only", options.DisableRedis, options.DisableLiveFromStart, options.DontSendStartMessage).Result,
                 (TwitchOnceOptions options) => Twitch.StartRecord(options),
                 (TwitcastingOnceOptions options) => Twitcasting.StartRecord(options),
+                (ChzzkOnceOptions options) => Chzzk.StartRecord(options),
                 (SubOptions options) => Subscribe.SubRecord(options).Result,
                 Error => ResultType.None);
 
@@ -146,6 +147,16 @@ namespace StreamRecordTools
         {
             [Value(0, Required = true, HelpText = "TwitCasting 頻道 Id（screen id）")]
             public string ChannelId { get; set; }
+        }
+
+        [Verb("chzzk_once", HelpText = "單次錄影 CHZZK")]
+        public class ChzzkOnceOptions : RequiredOptions
+        {
+            [Value(0, Required = true, HelpText = "CHZZK 頻道 Id（32 位十六進位）")]
+            public string ChannelId { get; set; }
+
+            [Value(1, Required = true, HelpText = "場次鍵（channelId:yyyyMMdd_HHmmss）")]
+            public string StreamKey { get; set; }
         }
     }
 }

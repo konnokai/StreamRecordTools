@@ -4,13 +4,32 @@
   "graph": {},
   "nodes": [
     {
+      "id": "streamrecordtools_command_record_twitcasting_streamrecordtools_command_record_twitcasting",
+      "label": "Twitcasting",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": ".Main",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s189"
+        ]
+      },
+      "norm_label": "twitcasting",
+      "source_file": "StreamRecordTools/Command/Record/Twitcasting.cs",
+      "source_location": "L10"
+    },
+    {
       "id": "streamrecordtools_command_record_twitch_streamrecordtools_command_record_twitch",
       "label": "Twitch",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": ".StartRecord",
+      "community_name": ".Main",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools.Command.Record",
@@ -23,23 +42,55 @@
       "source_location": "L11"
     },
     {
+      "id": "streamrecordtools_redisconnection_streamrecordtools_redisconnection",
+      "label": "RedisConnection",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": ".Main",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools",
+        "scope_chain": [
+          "s48"
+        ]
+      },
+      "norm_label": "redisconnection",
+      "source_file": "StreamRecordTools/RedisConnection.cs",
+      "source_location": "L6"
+    },
+    {
       "id": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe",
       "label": "Subscribe",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools.Command",
         "scope_chain": [
-          "s552"
+          "s593"
         ]
       },
       "norm_label": "subscribe",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L22"
+      "source_location": "L23"
+    },
+    {
+      "id": "streamrecordtools_uptimekumaclient_uptimekumaclient",
+      "label": "UptimeKumaClient",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Subscribe",
+      "file_type": "code",
+      "norm_label": "uptimekumaclient",
+      "source_file": "StreamRecordTools/UptimeKumaClient.cs",
+      "source_location": "L6"
     },
     {
       "id": "streamrecordtools_utility_streamrecordtools_signum",
@@ -61,45 +112,6 @@
       "source_location": "L278"
     },
     {
-      "id": "streamrecordtools_command_record_twitcasting_streamrecordtools_command_record_twitcasting",
-      "label": "Twitcasting",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 11,
-      "community_name": ".StartRecord",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "StreamRecordTools.Command.Record",
-        "scope_chain": [
-          "s189"
-        ]
-      },
-      "norm_label": "twitcasting",
-      "source_file": "StreamRecordTools/Command/Record/Twitcasting.cs",
-      "source_location": "L10"
-    },
-    {
-      "id": "streamrecordtools_utility_streamrecordtools_checkresult",
-      "label": "CheckResult",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "CheckResult",
-      "file_type": "code",
-      "metadata": {
-        "is_nested_type": true,
-        "namespace": "StreamRecordTools",
-        "scope_chain": [
-          "s368"
-        ]
-      },
-      "norm_label": "checkresult",
-      "source_file": "StreamRecordTools/Utility.cs",
-      "source_location": "L203"
-    },
-    {
       "id": "streamrecordtools_command_record_youtube_streamrecordtools_command_record_youtube",
       "label": "YouTube",
       "_callable": true,
@@ -119,6 +131,26 @@
       "source_location": "L14"
     },
     {
+      "id": "streamrecordtools_utility_streamrecordtools_checkresult",
+      "label": "CheckResult",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Utility",
+      "file_type": "code",
+      "metadata": {
+        "is_nested_type": true,
+        "namespace": "StreamRecordTools",
+        "scope_chain": [
+          "s368"
+        ]
+      },
+      "norm_label": "checkresult",
+      "source_file": "StreamRecordTools/Utility.cs",
+      "source_location": "L203"
+    },
+    {
       "id": "streamrecordtools_utility_streamrecordtools_utility",
       "label": "Utility",
       "_callable": true,
@@ -136,6 +168,26 @@
       "norm_label": "utility",
       "source_file": "StreamRecordTools/Utility.cs",
       "source_location": "L18"
+    },
+    {
+      "id": "streamrecordtools_program_streamrecordtools_chzzkonceoptions",
+      "label": "ChzzkOnceOptions",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Program",
+      "file_type": "code",
+      "metadata": {
+        "is_nested_type": true,
+        "namespace": "StreamRecordTools",
+        "scope_chain": [
+          "s141"
+        ]
+      },
+      "norm_label": "chzzkonceoptions",
+      "source_file": "StreamRecordTools/Program.cs",
+      "source_location": "L152"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_program",
@@ -174,7 +226,7 @@
       },
       "norm_label": "requiredoptions",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L71"
+      "source_location": "L72"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_resulttype",
@@ -234,7 +286,7 @@
       },
       "norm_label": "suboptions",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L95"
+      "source_location": "L96"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_twitcastingonceoptions",
@@ -254,7 +306,7 @@
       },
       "norm_label": "twitcastingonceoptions",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L144"
+      "source_location": "L145"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_twitchonceoptions",
@@ -274,7 +326,7 @@
       },
       "norm_label": "twitchonceoptions",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L131"
+      "source_location": "L132"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_youtuberequiredoptions",
@@ -294,7 +346,7 @@
       },
       "norm_label": "youtuberequiredoptions",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L83"
+      "source_location": "L84"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_ytonceondockeroptions",
@@ -314,7 +366,7 @@
       },
       "norm_label": "ytonceondockeroptions",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L115"
+      "source_location": "L116"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_ytonceoptions",
@@ -334,26 +386,7 @@
       },
       "norm_label": "ytonceoptions",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L105"
-    },
-    {
-      "id": "streamrecordtools_redisconnection_streamrecordtools_redisconnection",
-      "label": "RedisConnection",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "RedisConnection",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "StreamRecordTools",
-        "scope_chain": [
-          "s48"
-        ]
-      },
-      "norm_label": "redisconnection",
-      "source_file": "StreamRecordTools/RedisConnection.cs",
-      "source_location": "L6"
+      "source_location": "L106"
     },
     {
       "id": "streamrecordtools_utility_streamrecordtools_processutils",
@@ -362,7 +395,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 5,
-      "community_name": "RedisConnection",
+      "community_name": "StreamRecordTools",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools",
@@ -417,17 +450,138 @@
       "source_location": "L6"
     },
     {
-      "id": "streamrecordtools_uptimekumaclient_uptimekumaclient",
-      "label": "UptimeKumaClient",
+      "id": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk",
+      "label": "Chzzk",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 9,
-      "community_name": ".Init",
+      "community_name": ".StartRecord",
       "file_type": "code",
-      "norm_label": "uptimekumaclient",
-      "source_file": "StreamRecordTools/UptimeKumaClient.cs",
-      "source_location": "L6"
+      "metadata": {
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s267"
+        ]
+      },
+      "norm_label": "chzzk",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L22"
+    },
+    {
+      "id": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzkrecordpayload",
+      "label": "ChzzkRecordPayload",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "is_nested_type": true,
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s267"
+        ]
+      },
+      "norm_label": "chzzkrecordpayload",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L53"
+    },
+    {
+      "id": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_lockstate",
+      "label": "LockState",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "is_nested_type": true,
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s267"
+        ]
+      },
+      "norm_label": "lockstate",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L62"
+    },
+    {
+      "id": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_recordoutcome",
+      "label": "RecordOutcome",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "is_nested_type": true,
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s267"
+        ]
+      },
+      "norm_label": "recordoutcome",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L41"
+    },
+    {
+      "id": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests",
+      "label": "ChzzkRecordTests",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Tests",
+        "scope_chain": [
+          "s41"
+        ]
+      },
+      "norm_label": "chzzkrecordtests",
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L9"
+    },
+    {
+      "id": "streamrecordtools_command_record_twitcasting_streamrecordtools_command_record_twitcasting_movevideo",
+      "label": ".MoveVideo()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": ".Main",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s189"
+        ]
+      },
+      "norm_label": ".movevideo()",
+      "source_file": "StreamRecordTools/Command/Record/Twitcasting.cs",
+      "source_location": "L112"
+    },
+    {
+      "id": "streamrecordtools_command_record_twitcasting_streamrecordtools_command_record_twitcasting_startrecord",
+      "label": ".StartRecord()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": ".Main",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s189"
+        ]
+      },
+      "norm_label": ".startrecord()",
+      "source_file": "StreamRecordTools/Command/Record/Twitcasting.cs",
+      "source_location": "L18"
     },
     {
       "id": "streamrecordtools_command_record_twitch_streamrecordtools_command_record_twitch_movevideo",
@@ -435,7 +589,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": ".StartRecord",
+      "community_name": ".Main",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools.Command.Record",
@@ -453,7 +607,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": ".StartRecord",
+      "community_name": ".Main",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools.Command.Record",
@@ -471,7 +625,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": ".StartRecord",
+      "community_name": ".Main",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools",
@@ -484,12 +638,30 @@
       "source_location": "L15"
     },
     {
+      "id": "streamrecordtools_redisconnection_streamrecordtools_redisconnection_init",
+      "label": ".Init()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": ".Main",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools",
+        "scope_chain": [
+          "s48"
+        ]
+      },
+      "norm_label": ".init()",
+      "source_file": "StreamRecordTools/RedisConnection.cs",
+      "source_location": "L31"
+    },
+    {
       "id": "streamrecordtools_utility_streamrecordtools_utility_tosafefilename",
       "label": ".ToSafeFilename()",
       "_callable": true,
       "_origin": "ast",
       "community": 0,
-      "community_name": ".StartRecord",
+      "community_name": ".Main",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools",
@@ -502,22 +674,76 @@
       "source_location": "L31"
     },
     {
+      "id": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_quoteforshell",
+      "label": ".QuoteForShell()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Subscribe",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Command",
+        "scope_chain": [
+          "s593"
+        ]
+      },
+      "norm_label": ".quoteforshell()",
+      "source_file": "StreamRecordTools/Command/Subscribe.cs",
+      "source_location": "L839"
+    },
+    {
+      "id": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_startrecordchzzk",
+      "label": ".StartRecordChzzk()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Subscribe",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Command",
+        "scope_chain": [
+          "s593"
+        ]
+      },
+      "norm_label": ".startrecordchzzk()",
+      "source_file": "StreamRecordTools/Command/Subscribe.cs",
+      "source_location": "L793"
+    },
+    {
+      "id": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_startrecordchzzkcontainer",
+      "label": ".StartRecordChzzkContainer()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Subscribe",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Command",
+        "scope_chain": [
+          "s593"
+        ]
+      },
+      "norm_label": ".startrecordchzzkcontainer()",
+      "source_file": "StreamRecordTools/Command/Subscribe.cs",
+      "source_location": "L841"
+    },
+    {
       "id": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_startrecordtwitcasting",
       "label": ".StartRecordTwitcasting()",
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools.Command",
         "scope_chain": [
-          "s552"
+          "s593"
         ]
       },
       "norm_label": ".startrecordtwitcasting()",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L666"
+      "source_location": "L680"
     },
     {
       "id": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_startrecordtwitcastingcontainer",
@@ -525,17 +751,17 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools.Command",
         "scope_chain": [
-          "s552"
+          "s593"
         ]
       },
       "norm_label": ".startrecordtwitcastingcontainer()",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L705"
+      "source_location": "L719"
     },
     {
       "id": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_startrecordtwitch",
@@ -543,17 +769,17 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools.Command",
         "scope_chain": [
-          "s552"
+          "s593"
         ]
       },
       "norm_label": ".startrecordtwitch()",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L542"
+      "source_location": "L556"
     },
     {
       "id": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_startrecordtwitchcontainer",
@@ -561,17 +787,17 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools.Command",
         "scope_chain": [
-          "s552"
+          "s593"
         ]
       },
       "norm_label": ".startrecordtwitchcontainer()",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L586"
+      "source_location": "L600"
     },
     {
       "id": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_startrecordyoutube",
@@ -579,17 +805,17 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools.Command",
         "scope_chain": [
-          "s552"
+          "s593"
         ]
       },
       "norm_label": ".startrecordyoutube()",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L390"
+      "source_location": "L404"
     },
     {
       "id": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_startrecordyoutubecontainer",
@@ -597,17 +823,17 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools.Command",
         "scope_chain": [
-          "s552"
+          "s593"
         ]
       },
       "norm_label": ".startrecordyoutubecontainer()",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L461"
+      "source_location": "L475"
     },
     {
       "id": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_subrecord",
@@ -615,17 +841,17 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools.Command",
         "scope_chain": [
-          "s552"
+          "s593"
         ]
       },
       "norm_label": ".subrecord()",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L35"
+      "source_location": "L36"
     },
     {
       "id": "streamrecordtools_log_log_info",
@@ -633,7 +859,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "norm_label": ".info()",
       "source_file": "StreamRecordTools/Log.cs",
@@ -645,11 +871,35 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "norm_label": ".warn()",
       "source_file": "StreamRecordTools/Log.cs",
       "source_location": "L26"
+    },
+    {
+      "id": "streamrecordtools_uptimekumaclient_uptimekumaclient_init",
+      "label": ".Init()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Subscribe",
+      "file_type": "code",
+      "norm_label": ".init()",
+      "source_file": "StreamRecordTools/UptimeKumaClient.cs",
+      "source_location": "L13"
+    },
+    {
+      "id": "streamrecordtools_uptimekumaclient_uptimekumaclient_uptimekumatimerhandler",
+      "label": ".UptimeKumaTimerHandler()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Subscribe",
+      "file_type": "code",
+      "norm_label": ".uptimekumatimerhandler()",
+      "source_file": "StreamRecordTools/UptimeKumaClient.cs",
+      "source_location": "L43"
     },
     {
       "id": "streamrecordtools_utility_streamrecordtools_utility_getenvslash",
@@ -657,7 +907,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools",
@@ -668,42 +918,6 @@
       "norm_label": ".getenvslash()",
       "source_file": "StreamRecordTools/Utility.cs",
       "source_location": "L28"
-    },
-    {
-      "id": "streamrecordtools_command_record_twitcasting_streamrecordtools_command_record_twitcasting_movevideo",
-      "label": ".MoveVideo()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 11,
-      "community_name": ".StartRecord",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "StreamRecordTools.Command.Record",
-        "scope_chain": [
-          "s189"
-        ]
-      },
-      "norm_label": ".movevideo()",
-      "source_file": "StreamRecordTools/Command/Record/Twitcasting.cs",
-      "source_location": "L112"
-    },
-    {
-      "id": "streamrecordtools_command_record_twitcasting_streamrecordtools_command_record_twitcasting_startrecord",
-      "label": ".StartRecord()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 11,
-      "community_name": ".StartRecord",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "StreamRecordTools.Command.Record",
-        "scope_chain": [
-          "s189"
-        ]
-      },
-      "norm_label": ".startrecord()",
-      "source_file": "StreamRecordTools/Command/Record/Twitcasting.cs",
-      "source_location": "L18"
     },
     {
       "id": "streamrecordtools_command_record_youtube_streamrecordtools_command_record_youtube_movevideo",
@@ -758,24 +972,6 @@
       "norm_label": ".checkytcookieasync()",
       "source_file": "StreamRecordTools/Utility.cs",
       "source_location": "L212"
-    },
-    {
-      "id": "streamrecordtools_utility_streamrecordtools_utility_getcommandline",
-      "label": ".GetCommandLine()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Utility",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "StreamRecordTools",
-        "scope_chain": [
-          "s368"
-        ]
-      },
-      "norm_label": ".getcommandline()",
-      "source_file": "StreamRecordTools/Utility.cs",
-      "source_location": "L108"
     },
     {
       "id": "streamrecordtools_utility_streamrecordtools_utility_getsnippetdataandlivestreamingdetailsbyvideoidasync",
@@ -865,25 +1061,7 @@
       },
       "norm_label": ".getlinkertime()",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L53"
-    },
-    {
-      "id": "streamrecordtools_redisconnection_streamrecordtools_redisconnection_init",
-      "label": ".Init()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "RedisConnection",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "StreamRecordTools",
-        "scope_chain": [
-          "s48"
-        ]
-      },
-      "norm_label": ".init()",
-      "source_file": "StreamRecordTools/RedisConnection.cs",
-      "source_location": "L31"
+      "source_location": "L54"
     },
     {
       "id": "streamrecordtools_utility_streamrecordtools_processutils_kill",
@@ -891,7 +1069,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 5,
-      "community_name": "RedisConnection",
+      "community_name": "StreamRecordTools",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools",
@@ -909,7 +1087,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 5,
-      "community_name": "RedisConnection",
+      "community_name": "StreamRecordTools",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools",
@@ -920,6 +1098,24 @@
       "norm_label": ".sys_kill()",
       "source_file": "StreamRecordTools/Utility.cs",
       "source_location": "L262"
+    },
+    {
+      "id": "streamrecordtools_utility_streamrecordtools_utility_getcommandline",
+      "label": ".GetCommandLine()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "StreamRecordTools",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools",
+        "scope_chain": [
+          "s368"
+        ]
+      },
+      "norm_label": ".getcommandline()",
+      "source_file": "StreamRecordTools/Utility.cs",
+      "source_location": "L108"
     },
     {
       "id": "streamrecordtools_log_log_debug",
@@ -979,7 +1175,7 @@
       "file_type": "code",
       "norm_label": ".initbotconfig()",
       "source_file": "StreamRecordTools/ToolConfig.cs",
-      "source_location": "L23"
+      "source_location": "L24"
     },
     {
       "id": "streamrecordtools_utility_streamrecordtools_utility_getenvironmentvariable",
@@ -1000,35 +1196,350 @@
       "source_location": "L126"
     },
     {
-      "id": "streamrecordtools_uptimekumaclient_uptimekumaclient_init",
-      "label": ".Init()",
+      "id": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_buildstreamlinkarguments",
+      "label": ".BuildStreamlinkArguments()",
       "_callable": true,
       "_origin": "ast",
       "community": 9,
-      "community_name": ".Init",
+      "community_name": ".StartRecord",
       "file_type": "code",
-      "norm_label": ".init()",
-      "source_file": "StreamRecordTools/UptimeKumaClient.cs",
-      "source_location": "L13"
+      "metadata": {
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s267"
+        ]
+      },
+      "norm_label": ".buildstreamlinkarguments()",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L307"
     },
     {
-      "id": "streamrecordtools_uptimekumaclient_uptimekumaclient_uptimekumatimerhandler",
-      "label": ".UptimeKumaTimerHandler()",
+      "id": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_createuniquefilepath",
+      "label": ".CreateUniqueFilePath()",
       "_callable": true,
       "_origin": "ast",
       "community": 9,
-      "community_name": ".Init",
+      "community_name": ".StartRecord",
       "file_type": "code",
-      "norm_label": ".uptimekumatimerhandler()",
-      "source_file": "StreamRecordTools/UptimeKumaClient.cs",
-      "source_location": "L43"
+      "metadata": {
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s267"
+        ]
+      },
+      "norm_label": ".createuniquefilepath()",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L311"
+    },
+    {
+      "id": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_decideoutcome",
+      "label": ".DecideOutcome()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s267"
+        ]
+      },
+      "norm_label": ".decideoutcome()",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L320"
+    },
+    {
+      "id": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_ensuretrailingslash",
+      "label": ".EnsureTrailingSlash()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s267"
+        ]
+      },
+      "norm_label": ".ensuretrailingslash()",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L329"
+    },
+    {
+      "id": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_getstreamkeytimestamp",
+      "label": ".GetStreamKeyTimestamp()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s267"
+        ]
+      },
+      "norm_label": ".getstreamkeytimestamp()",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L300"
+    },
+    {
+      "id": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_lockkey",
+      "label": ".LockKey()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s267"
+        ]
+      },
+      "norm_label": ".lockkey()",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L327"
+    },
+    {
+      "id": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_marklocklost",
+      "label": ".MarkLockLost()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s267"
+        ]
+      },
+      "norm_label": ".marklocklost()",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L250"
+    },
+    {
+      "id": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_movevideo",
+      "label": ".MoveVideo()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s267"
+        ]
+      },
+      "norm_label": ".movevideo()",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L336"
+    },
+    {
+      "id": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_startrecord",
+      "label": ".StartRecord()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s267"
+        ]
+      },
+      "norm_label": ".startrecord()",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L67"
+    },
+    {
+      "id": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_tryparserequest",
+      "label": ".TryParseRequest()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s267"
+        ]
+      },
+      "norm_label": ".tryparserequest()",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L268"
+    },
+    {
+      "id": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_tryvalidate",
+      "label": ".TryValidate()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s267"
+        ]
+      },
+      "norm_label": ".tryvalidate()",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L294"
+    },
+    {
+      "id": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_buildstreamlinkargumentsusebestandcontrolledoutput",
+      "label": ".BuildStreamlinkArgumentsUseBestAndControlledOutput()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Tests",
+        "scope_chain": [
+          "s41"
+        ]
+      },
+      "norm_label": ".buildstreamlinkargumentsusebestandcontrolledoutput()",
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L44"
+    },
+    {
+      "id": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_createuniquefilepathdoesnotoverwriteexistingrecording",
+      "label": ".CreateUniqueFilePathDoesNotOverwriteExistingRecording()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Tests",
+        "scope_chain": [
+          "s41"
+        ]
+      },
+      "norm_label": ".createuniquefilepathdoesnotoverwriteexistingrecording()",
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L53"
+    },
+    {
+      "id": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_decideoutcomedoesnottreateveryexitassuccess",
+      "label": ".DecideOutcomeDoesNotTreatEveryExitAsSuccess()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Tests",
+        "scope_chain": [
+          "s41"
+        ]
+      },
+      "norm_label": ".decideoutcomedoesnottreateveryexitassuccess()",
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L74"
+    },
+    {
+      "id": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_streamkeytimestamphasnocolonforwindowsfilename",
+      "label": ".StreamKeyTimestampHasNoColonForWindowsFileName()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Tests",
+        "scope_chain": [
+          "s41"
+        ]
+      },
+      "norm_label": ".streamkeytimestamphasnocolonforwindowsfilename()",
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L38"
+    },
+    {
+      "id": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_tryparserequestacceptssharedcontractpayload",
+      "label": ".TryParseRequestAcceptsSharedContractPayload()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Tests",
+        "scope_chain": [
+          "s41"
+        ]
+      },
+      "norm_label": ".tryparserequestacceptssharedcontractpayload()",
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L14"
+    },
+    {
+      "id": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_tryparserequestrejectsinvalidpayload",
+      "label": ".TryParseRequestRejectsInvalidPayload()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Tests",
+        "scope_chain": [
+          "s41"
+        ]
+      },
+      "norm_label": ".tryparserequestrejectsinvalidpayload()",
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L24"
+    },
+    {
+      "id": "lazy",
+      "label": "Lazy",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": ".Main",
+      "file_type": "code",
+      "norm_label": "lazy",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "streamrecordtools_command_record_twitcasting_cs_resulttype",
+      "label": "ResultType",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": ".Main",
+      "file_type": "code",
+      "norm_label": "resulttype",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "streamrecordtools_command_record_twitcasting_cs_twitcastingonceoptions",
+      "label": "TwitcastingOnceOptions",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": ".Main",
+      "file_type": "code",
+      "norm_label": "twitcastingonceoptions",
+      "source_file": "",
+      "source_location": ""
     },
     {
       "id": "streamrecordtools_command_record_twitch_cs_resulttype",
       "label": "ResultType",
       "_origin": "ast",
       "community": 0,
-      "community_name": ".StartRecord",
+      "community_name": ".Main",
       "file_type": "code",
       "norm_label": "resulttype",
       "source_file": "",
@@ -1039,9 +1550,20 @@
       "label": "TwitchOnceOptions",
       "_origin": "ast",
       "community": 0,
-      "community_name": ".StartRecord",
+      "community_name": ".Main",
       "file_type": "code",
       "norm_label": "twitchonceoptions",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "streamrecordtools_program_cs_chzzkonceoptions",
+      "label": "ChzzkOnceOptions",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": ".Main",
+      "file_type": "code",
+      "norm_label": "chzzkonceoptions",
       "source_file": "",
       "source_location": ""
     },
@@ -1050,7 +1572,7 @@
       "label": "SubOptions",
       "_origin": "ast",
       "community": 0,
-      "community_name": ".StartRecord",
+      "community_name": ".Main",
       "file_type": "code",
       "norm_label": "suboptions",
       "source_file": "",
@@ -1061,7 +1583,7 @@
       "label": "TwitcastingOnceOptions",
       "_origin": "ast",
       "community": 0,
-      "community_name": ".StartRecord",
+      "community_name": ".Main",
       "file_type": "code",
       "norm_label": "twitcastingonceoptions",
       "source_file": "",
@@ -1072,18 +1594,46 @@
       "label": "TwitchOnceOptions",
       "_origin": "ast",
       "community": 0,
-      "community_name": ".StartRecord",
+      "community_name": ".Main",
       "file_type": "code",
       "norm_label": "twitchonceoptions",
       "source_file": "",
       "source_location": ""
     },
     {
+      "id": "streamrecordtools_redisconnection_cs_connectionmultiplexer",
+      "label": "ConnectionMultiplexer",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": ".Main",
+      "file_type": "code",
+      "norm_label": "connectionmultiplexer",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "streamrecordtools_redisconnection_streamrecordtools_redisconnection_instance",
+      "label": "Instance",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": ".Main",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools",
+        "scope_chain": [
+          "s48"
+        ]
+      },
+      "norm_label": "instance",
+      "source_file": "StreamRecordTools/RedisConnection.cs",
+      "source_location": "L18"
+    },
+    {
       "id": "twitchapi",
       "label": "TwitchAPI",
       "_origin": "ast",
       "community": 0,
-      "community_name": ".StartRecord",
+      "community_name": ".Main",
       "file_type": "code",
       "norm_label": "twitchapi",
       "source_file": "",
@@ -1094,7 +1644,7 @@
       "label": "YTOnceOnDockerOptions",
       "_origin": "ast",
       "community": 0,
-      "community_name": ".StartRecord",
+      "community_name": ".Main",
       "file_type": "code",
       "norm_label": "ytonceondockeroptions",
       "source_file": "",
@@ -1105,7 +1655,7 @@
       "label": "YTOnceOptions",
       "_origin": "ast",
       "community": 0,
-      "community_name": ".StartRecord",
+      "community_name": ".Main",
       "file_type": "code",
       "norm_label": "ytonceoptions",
       "source_file": "",
@@ -1116,9 +1666,20 @@
       "label": "DockerClient",
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "norm_label": "dockerclient",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "httpclient",
+      "label": "HttpClient",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Subscribe",
+      "file_type": "code",
+      "norm_label": "httpclient",
       "source_file": "",
       "source_location": ""
     },
@@ -1127,7 +1688,7 @@
       "label": "ResultType",
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "norm_label": "resulttype",
       "source_file": "",
@@ -1138,7 +1699,7 @@
       "label": "SubOptions",
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "norm_label": "suboptions",
       "source_file": "",
@@ -1149,7 +1710,7 @@
       "label": "Task",
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "norm_label": "task",
       "source_file": "",
@@ -1160,7 +1721,7 @@
       "label": "Timer",
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "norm_label": "timer",
       "source_file": "",
@@ -1171,7 +1732,7 @@
       "label": "VideoSnippet",
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "norm_label": "videosnippet",
       "source_file": "",
@@ -1182,119 +1743,152 @@
       "label": "IsDisableLiveFromStart",
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools.Command",
         "scope_chain": [
-          "s552"
+          "s593"
         ]
       },
       "norm_label": "isdisablelivefromstart",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L30"
+      "source_location": "L31"
     },
     {
       "id": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_memberonlyoutputpath",
       "label": "MemberOnlyOutputPath",
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools.Command",
         "scope_chain": [
-          "s552"
+          "s593"
         ]
       },
       "norm_label": "memberonlyoutputpath",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L29"
+      "source_location": "L30"
     },
     {
       "id": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_networkid",
       "label": "NetworkId",
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools.Command",
         "scope_chain": [
-          "s552"
+          "s593"
         ]
       },
       "norm_label": "networkid",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L24"
+      "source_location": "L25"
     },
     {
       "id": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_outputpath",
       "label": "OutputPath",
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools.Command",
         "scope_chain": [
-          "s552"
+          "s593"
         ]
       },
       "norm_label": "outputpath",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L25"
+      "source_location": "L26"
     },
     {
       "id": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_temppath",
       "label": "TempPath",
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools.Command",
         "scope_chain": [
-          "s552"
+          "s593"
         ]
       },
       "norm_label": "temppath",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L26"
+      "source_location": "L27"
     },
     {
       "id": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_twitchunarchivedoutputpath",
       "label": "TwitchUnarchivedOutputPath",
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools.Command",
         "scope_chain": [
-          "s552"
+          "s593"
         ]
       },
       "norm_label": "twitchunarchivedoutputpath",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L28"
+      "source_location": "L29"
     },
     {
       "id": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_youtubeunarchivedoutputpath",
       "label": "YouTubeUnarchivedOutputPath",
       "_origin": "ast",
       "community": 1,
-      "community_name": ".SubRecord",
+      "community_name": "Subscribe",
       "file_type": "code",
       "metadata": {
         "namespace": "StreamRecordTools.Command",
         "scope_chain": [
-          "s552"
+          "s593"
         ]
       },
       "norm_label": "youtubeunarchivedoutputpath",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L27"
+      "source_location": "L28"
+    },
+    {
+      "id": "streamrecordtools_uptimekumaclient",
+      "label": "UptimeKumaClient.cs",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Subscribe",
+      "file_type": "code",
+      "norm_label": "uptimekumaclient.cs",
+      "source_file": "StreamRecordTools/UptimeKumaClient.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "streamrecordtools_uptimekumaclient_cs_task",
+      "label": "Task",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Subscribe",
+      "file_type": "code",
+      "norm_label": "task",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "streamrecordtools_uptimekumaclient_cs_timer",
+      "label": "Timer",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "Subscribe",
+      "file_type": "code",
+      "norm_label": "timer",
+      "source_file": "",
+      "source_location": ""
     },
     {
       "id": "streamrecordtools_utility_streamrecordtools_signum_sigabrt",
@@ -1896,15 +2490,31 @@
       "label": "StreamRecordTools.Command.Record",
       "_origin": "ast",
       "community": 11,
-      "community_name": ".StartRecord",
+      "community_name": "Program.cs",
       "file_type": "code",
       "metadata": {
         "kind": "csharp_namespace",
         "namespace": "StreamRecordTools.Command.Record"
       },
       "norm_label": "streamrecordtools.command.record",
-      "source_file": "StreamRecordTools/Command/Record/Twitcasting.cs",
-      "source_location": "L8",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L11",
+      "type": "namespace"
+    },
+    {
+      "id": "csharp_namespace:b6f8c49352ec2122",
+      "label": "StreamRecordTools.Tests",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "Program.cs",
+      "file_type": "code",
+      "metadata": {
+        "kind": "csharp_namespace",
+        "namespace": "StreamRecordTools.Tests"
+      },
+      "norm_label": "streamrecordtools.tests",
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L3",
       "type": "namespace"
     },
     {
@@ -1912,7 +2522,7 @@
       "label": "StreamRecordTools.Command",
       "_origin": "ast",
       "community": 11,
-      "community_name": ".StartRecord",
+      "community_name": "Program.cs",
       "file_type": "code",
       "metadata": {
         "kind": "csharp_namespace",
@@ -1920,62 +2530,40 @@
       },
       "norm_label": "streamrecordtools.command",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L20",
+      "source_location": "L21",
       "type": "namespace"
+    },
+    {
+      "id": "streamrecordtools_command_record_chzzk",
+      "label": "Chzzk.cs",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "Program.cs",
+      "file_type": "code",
+      "norm_label": "chzzk.cs",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L1"
     },
     {
       "id": "streamrecordtools_command_record_twitcasting",
       "label": "Twitcasting.cs",
       "_origin": "ast",
       "community": 11,
-      "community_name": ".StartRecord",
+      "community_name": "Program.cs",
       "file_type": "code",
       "norm_label": "twitcasting.cs",
       "source_file": "StreamRecordTools/Command/Record/Twitcasting.cs",
       "source_location": "L1"
     },
     {
-      "id": "streamrecordtools_command_record_twitcasting_cs_resulttype",
-      "label": "ResultType",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": ".StartRecord",
-      "file_type": "code",
-      "norm_label": "resulttype",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "streamrecordtools_command_record_twitcasting_cs_twitcastingonceoptions",
-      "label": "TwitcastingOnceOptions",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": ".StartRecord",
-      "file_type": "code",
-      "norm_label": "twitcastingonceoptions",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
       "id": "streamrecordtools_command_record_twitch",
       "label": "Twitch.cs",
       "_origin": "ast",
       "community": 11,
-      "community_name": ".StartRecord",
+      "community_name": "Program.cs",
       "file_type": "code",
       "norm_label": "twitch.cs",
       "source_file": "StreamRecordTools/Command/Record/Twitch.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "streamrecordtools_command_record_youtube",
-      "label": "YouTube.cs",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": ".StartRecord",
-      "file_type": "code",
-      "norm_label": "youtube.cs",
-      "source_file": "StreamRecordTools/Command/Record/YouTube.cs",
       "source_location": "L1"
     },
     {
@@ -1983,7 +2571,7 @@
       "label": "Subscribe.cs",
       "_origin": "ast",
       "community": 11,
-      "community_name": ".StartRecord",
+      "community_name": "Program.cs",
       "file_type": "code",
       "norm_label": "subscribe.cs",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
@@ -1994,96 +2582,22 @@
       "label": "Program.cs",
       "_origin": "ast",
       "community": 11,
-      "community_name": ".StartRecord",
+      "community_name": "Program.cs",
       "file_type": "code",
       "norm_label": "program.cs",
       "source_file": "StreamRecordTools/Program.cs",
       "source_location": "L1"
     },
     {
-      "id": "streamrecordtools_utility_streamrecordtools_checkresult_cookiefileerror",
-      "label": "CookieFileError",
+      "id": "tests_streamrecordtools_tests_chzzkrecordtests",
+      "label": "ChzzkRecordTests.cs",
       "_origin": "ast",
-      "community": 12,
-      "community_name": "CheckResult",
+      "community": 11,
+      "community_name": "Program.cs",
       "file_type": "code",
-      "metadata": {
-        "namespace": "StreamRecordTools",
-        "scope_chain": [
-          "s368"
-        ]
-      },
-      "norm_label": "cookiefileerror",
-      "source_file": "StreamRecordTools/Utility.cs",
-      "source_location": "L208"
-    },
-    {
-      "id": "streamrecordtools_utility_streamrecordtools_checkresult_cookiefilenotfound",
-      "label": "CookieFileNotFound",
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "CheckResult",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "StreamRecordTools",
-        "scope_chain": [
-          "s368"
-        ]
-      },
-      "norm_label": "cookiefilenotfound",
-      "source_file": "StreamRecordTools/Utility.cs",
-      "source_location": "L207"
-    },
-    {
-      "id": "streamrecordtools_utility_streamrecordtools_checkresult_ok",
-      "label": "Ok",
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "CheckResult",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "StreamRecordTools",
-        "scope_chain": [
-          "s368"
-        ]
-      },
-      "norm_label": "ok",
-      "source_file": "StreamRecordTools/Utility.cs",
-      "source_location": "L205"
-    },
-    {
-      "id": "streamrecordtools_utility_streamrecordtools_checkresult_othererror",
-      "label": "OtherError",
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "CheckResult",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "StreamRecordTools",
-        "scope_chain": [
-          "s368"
-        ]
-      },
-      "norm_label": "othererror",
-      "source_file": "StreamRecordTools/Utility.cs",
-      "source_location": "L209"
-    },
-    {
-      "id": "streamrecordtools_utility_streamrecordtools_checkresult_redirect",
-      "label": "Redirect",
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "CheckResult",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "StreamRecordTools",
-        "scope_chain": [
-          "s368"
-        ]
-      },
-      "norm_label": "redirect",
-      "source_file": "StreamRecordTools/Utility.cs",
-      "source_location": "L206"
+      "norm_label": "chzzkrecordtests.cs",
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L1"
     },
     {
       "id": "checkresult",
@@ -2141,26 +2655,15 @@
       "source_location": ""
     },
     {
-      "id": "managementbaseobject",
-      "label": "ManagementBaseObject",
+      "id": "streamrecordtools_command_record_youtube",
+      "label": "YouTube.cs",
       "_origin": "ast",
       "community": 2,
       "community_name": "Utility",
       "file_type": "code",
-      "norm_label": "managementbaseobject",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "process",
-      "label": "Process",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Utility",
-      "file_type": "code",
-      "norm_label": "process",
-      "source_file": "",
-      "source_location": ""
+      "norm_label": "youtube.cs",
+      "source_file": "StreamRecordTools/Command/Record/YouTube.cs",
+      "source_location": "L1"
     },
     {
       "id": "streamrecordtools_command_record_youtube_cs_resulttype",
@@ -2227,6 +2730,91 @@
       "norm_label": "videosnippet",
       "source_file": "",
       "source_location": ""
+    },
+    {
+      "id": "streamrecordtools_utility_streamrecordtools_checkresult_cookiefileerror",
+      "label": "CookieFileError",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Utility",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools",
+        "scope_chain": [
+          "s368"
+        ]
+      },
+      "norm_label": "cookiefileerror",
+      "source_file": "StreamRecordTools/Utility.cs",
+      "source_location": "L208"
+    },
+    {
+      "id": "streamrecordtools_utility_streamrecordtools_checkresult_cookiefilenotfound",
+      "label": "CookieFileNotFound",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Utility",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools",
+        "scope_chain": [
+          "s368"
+        ]
+      },
+      "norm_label": "cookiefilenotfound",
+      "source_file": "StreamRecordTools/Utility.cs",
+      "source_location": "L207"
+    },
+    {
+      "id": "streamrecordtools_utility_streamrecordtools_checkresult_ok",
+      "label": "Ok",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Utility",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools",
+        "scope_chain": [
+          "s368"
+        ]
+      },
+      "norm_label": "ok",
+      "source_file": "StreamRecordTools/Utility.cs",
+      "source_location": "L205"
+    },
+    {
+      "id": "streamrecordtools_utility_streamrecordtools_checkresult_othererror",
+      "label": "OtherError",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Utility",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools",
+        "scope_chain": [
+          "s368"
+        ]
+      },
+      "norm_label": "othererror",
+      "source_file": "StreamRecordTools/Utility.cs",
+      "source_location": "L209"
+    },
+    {
+      "id": "streamrecordtools_utility_streamrecordtools_checkresult_redirect",
+      "label": "Redirect",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Utility",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools",
+        "scope_chain": [
+          "s368"
+        ]
+      },
+      "norm_label": "redirect",
+      "source_file": "StreamRecordTools/Utility.cs",
+      "source_location": "L206"
     },
     {
       "id": "streamrecordtools_utility_streamrecordtools_utility_indocker",
@@ -2408,6 +2996,17 @@
       "source_location": null
     },
     {
+      "id": "nuget_microsoft_net_test_sdk",
+      "label": "Microsoft.NET.Test.Sdk (17.8.0)",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "StreamRecordTools.csproj",
+      "file_type": "code",
+      "norm_label": "microsoft.net.test.sdk (17.8.0)",
+      "source_file": "tests/StreamRecordTools.Tests/StreamRecordTools.Tests.csproj",
+      "source_location": null
+    },
+    {
       "id": "nuget_microsoft_visualstudio_azure_containers_tools_targets",
       "label": "Microsoft.VisualStudio.Azure.Containers.Tools.Targets (1.23.0)",
       "_origin": "ast",
@@ -2474,6 +3073,28 @@
       "source_location": null
     },
     {
+      "id": "nuget_xunit",
+      "label": "xunit (2.5.3)",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "StreamRecordTools.csproj",
+      "file_type": "code",
+      "norm_label": "xunit (2.5.3)",
+      "source_file": "tests/StreamRecordTools.Tests/StreamRecordTools.Tests.csproj",
+      "source_location": null
+    },
+    {
+      "id": "nuget_xunit_runner_visualstudio",
+      "label": "xunit.runner.visualstudio (2.5.3)",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "StreamRecordTools.csproj",
+      "file_type": "code",
+      "norm_label": "xunit.runner.visualstudio (2.5.3)",
+      "source_file": "tests/StreamRecordTools.Tests/StreamRecordTools.Tests.csproj",
+      "source_location": null
+    },
+    {
       "id": "solution_items",
       "label": "Solution Items",
       "_origin": "ast",
@@ -2507,7 +3128,29 @@
       "source_location": null
     },
     {
-      "id": "framework_net10_0",
+      "id": "tests",
+      "label": "tests",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "StreamRecordTools.csproj",
+      "file_type": "code",
+      "norm_label": "tests",
+      "source_file": "tests",
+      "source_location": null
+    },
+    {
+      "id": "tests_streamrecordtools_tests_streamrecordtools_tests",
+      "label": "StreamRecordTools.Tests.csproj",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "StreamRecordTools.csproj",
+      "file_type": "code",
+      "norm_label": "streamrecordtools.tests.csproj",
+      "source_file": "tests/StreamRecordTools.Tests/StreamRecordTools.Tests.csproj",
+      "source_location": null
+    },
+    {
+      "id": "streamrecordtools_streamrecordtools_csproj_framework_net10_0",
       "label": "net10.0",
       "_origin": "ast",
       "community": 3,
@@ -2518,7 +3161,7 @@
       "source_location": null
     },
     {
-      "id": "sdk_microsoft_net_sdk",
+      "id": "streamrecordtools_streamrecordtools_csproj_sdk_microsoft_net_sdk",
       "label": "Microsoft.NET.Sdk",
       "_origin": "ast",
       "community": 3,
@@ -2526,6 +3169,28 @@
       "file_type": "concept",
       "norm_label": "microsoft.net.sdk",
       "source_file": "StreamRecordTools/StreamRecordTools.csproj",
+      "source_location": null
+    },
+    {
+      "id": "tests_streamrecordtools_tests_streamrecordtools_tests_csproj_framework_net10_0",
+      "label": "net10.0",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "StreamRecordTools.csproj",
+      "file_type": "concept",
+      "norm_label": "net10.0",
+      "source_file": "tests/StreamRecordTools.Tests/StreamRecordTools.Tests.csproj",
+      "source_location": null
+    },
+    {
+      "id": "tests_streamrecordtools_tests_streamrecordtools_tests_csproj_sdk_microsoft_net_sdk",
+      "label": "Microsoft.NET.Sdk",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "StreamRecordTools.csproj",
+      "file_type": "concept",
+      "norm_label": "microsoft.net.sdk",
+      "source_file": "tests/StreamRecordTools.Tests/StreamRecordTools.Tests.csproj",
       "source_location": null
     },
     {
@@ -2562,6 +3227,40 @@
       "source_location": ""
     },
     {
+      "id": "streamrecordtools_program_streamrecordtools_chzzkonceoptions_channelid",
+      "label": "ChannelId",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Program",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools",
+        "scope_chain": [
+          "s141"
+        ]
+      },
+      "norm_label": "channelid",
+      "source_file": "StreamRecordTools/Program.cs",
+      "source_location": "L155"
+    },
+    {
+      "id": "streamrecordtools_program_streamrecordtools_chzzkonceoptions_streamkey",
+      "label": "StreamKey",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "Program",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools",
+        "scope_chain": [
+          "s141"
+        ]
+      },
+      "norm_label": "streamkey",
+      "source_file": "StreamRecordTools/Program.cs",
+      "source_location": "L158"
+    },
+    {
       "id": "streamrecordtools_program_streamrecordtools_program_version",
       "label": "VERSION",
       "_origin": "ast",
@@ -2593,7 +3292,7 @@
       },
       "norm_label": "disableredis",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L79"
+      "source_location": "L80"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_requiredoptions_outputpath",
@@ -2610,7 +3309,7 @@
       },
       "norm_label": "outputpath",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L73"
+      "source_location": "L74"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_requiredoptions_temppath",
@@ -2627,7 +3326,7 @@
       },
       "norm_label": "temppath",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L76"
+      "source_location": "L77"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_resulttype_error",
@@ -2797,7 +3496,7 @@
       },
       "norm_label": "autodeletearchived",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L98"
+      "source_location": "L99"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_suboptions_twitchunarchivedoutputpath",
@@ -2814,7 +3513,7 @@
       },
       "norm_label": "twitchunarchivedoutputpath",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L101"
+      "source_location": "L102"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_twitcastingonceoptions_channelid",
@@ -2831,7 +3530,7 @@
       },
       "norm_label": "channelid",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L147"
+      "source_location": "L148"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_twitchonceoptions_issavetounarchived",
@@ -2848,7 +3547,7 @@
       },
       "norm_label": "issavetounarchived",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L140"
+      "source_location": "L141"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_twitchonceoptions_twitchunarchivedoutputpath",
@@ -2865,7 +3564,7 @@
       },
       "norm_label": "twitchunarchivedoutputpath",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L137"
+      "source_location": "L138"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_twitchonceoptions_userlogin",
@@ -2882,7 +3581,7 @@
       },
       "norm_label": "userlogin",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L134"
+      "source_location": "L135"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_youtuberequiredoptions_disablelivefromstart",
@@ -2899,7 +3598,7 @@
       },
       "norm_label": "disablelivefromstart",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L91"
+      "source_location": "L92"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_youtuberequiredoptions_memberonlyoutputpath",
@@ -2916,7 +3615,7 @@
       },
       "norm_label": "memberonlyoutputpath",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L88"
+      "source_location": "L89"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_youtuberequiredoptions_youtubeunarchivedoutputpath",
@@ -2933,7 +3632,7 @@
       },
       "norm_label": "youtubeunarchivedoutputpath",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L85"
+      "source_location": "L86"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_ytonceondockeroptions_disablelivefromstart",
@@ -2950,7 +3649,7 @@
       },
       "norm_label": "disablelivefromstart",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L124"
+      "source_location": "L125"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_ytonceondockeroptions_disableredis",
@@ -2967,7 +3666,7 @@
       },
       "norm_label": "disableredis",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L121"
+      "source_location": "L122"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_ytonceondockeroptions_dontsendstartmessage",
@@ -2984,7 +3683,7 @@
       },
       "norm_label": "dontsendstartmessage",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L127"
+      "source_location": "L128"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_ytonceondockeroptions_videolid",
@@ -3001,7 +3700,7 @@
       },
       "norm_label": "videolid",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L118"
+      "source_location": "L119"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_ytonceoptions_dontsendstartmessage",
@@ -3018,7 +3717,7 @@
       },
       "norm_label": "dontsendstartmessage",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L111"
+      "source_location": "L112"
     },
     {
       "id": "streamrecordtools_program_streamrecordtools_ytonceoptions_videolid",
@@ -3035,7 +3734,7 @@
       },
       "norm_label": "videolid",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L108"
+      "source_location": "L109"
     },
     {
       "id": "youtuberequiredoptions",
@@ -3053,7 +3752,7 @@
       "label": "StreamRecordTools",
       "_origin": "ast",
       "community": 5,
-      "community_name": "RedisConnection",
+      "community_name": "StreamRecordTools",
       "file_type": "code",
       "metadata": {
         "kind": "csharp_namespace",
@@ -3069,20 +3768,20 @@
       "label": "DllImport",
       "_origin": "ast",
       "community": 5,
-      "community_name": "RedisConnection",
+      "community_name": "StreamRecordTools",
       "file_type": "code",
       "norm_label": "dllimport",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "lazy",
-      "label": "Lazy",
+      "id": "managementbaseobject",
+      "label": "ManagementBaseObject",
       "_origin": "ast",
       "community": 5,
-      "community_name": "RedisConnection",
+      "community_name": "StreamRecordTools",
       "file_type": "code",
-      "norm_label": "lazy",
+      "norm_label": "managementbaseobject",
       "source_file": "",
       "source_location": ""
     },
@@ -3091,46 +3790,18 @@
       "label": "RedisConnection.cs",
       "_origin": "ast",
       "community": 5,
-      "community_name": "RedisConnection",
+      "community_name": "StreamRecordTools",
       "file_type": "code",
       "norm_label": "redisconnection.cs",
       "source_file": "StreamRecordTools/RedisConnection.cs",
       "source_location": "L1"
     },
     {
-      "id": "streamrecordtools_redisconnection_cs_connectionmultiplexer",
-      "label": "ConnectionMultiplexer",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "RedisConnection",
-      "file_type": "code",
-      "norm_label": "connectionmultiplexer",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "streamrecordtools_redisconnection_streamrecordtools_redisconnection_instance",
-      "label": "Instance",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "RedisConnection",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "StreamRecordTools",
-        "scope_chain": [
-          "s48"
-        ]
-      },
-      "norm_label": "instance",
-      "source_file": "StreamRecordTools/RedisConnection.cs",
-      "source_location": "L18"
-    },
-    {
       "id": "streamrecordtools_toolconfig",
       "label": "ToolConfig.cs",
       "_origin": "ast",
       "community": 5,
-      "community_name": "RedisConnection",
+      "community_name": "StreamRecordTools",
       "file_type": "code",
       "norm_label": "toolconfig.cs",
       "source_file": "StreamRecordTools/ToolConfig.cs",
@@ -3141,11 +3812,22 @@
       "label": "Utility.cs",
       "_origin": "ast",
       "community": 5,
-      "community_name": "RedisConnection",
+      "community_name": "StreamRecordTools",
       "file_type": "code",
       "norm_label": "utility.cs",
       "source_file": "StreamRecordTools/Utility.cs",
       "source_location": "L1"
+    },
+    {
+      "id": "streamrecordtools_utility_cs_process",
+      "label": "Process",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "StreamRecordTools",
+      "file_type": "code",
+      "norm_label": "process",
+      "source_file": "",
+      "source_location": ""
     },
     {
       "id": "consolecolor",
@@ -3236,6 +3918,17 @@
       "source_location": "L8"
     },
     {
+      "id": "streamrecordtools_toolconfig_toolconfig_chzzkrecordpath",
+      "label": "ChzzkRecordPath",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "ToolConfig",
+      "file_type": "code",
+      "norm_label": "chzzkrecordpath",
+      "source_file": "StreamRecordTools/ToolConfig.cs",
+      "source_location": "L13"
+    },
+    {
       "id": "streamrecordtools_toolconfig_toolconfig_cookiesfilepath",
       "label": "CookiesFilePath",
       "_origin": "ast",
@@ -3244,7 +3937,7 @@
       "file_type": "code",
       "norm_label": "cookiesfilepath",
       "source_file": "StreamRecordTools/ToolConfig.cs",
-      "source_location": "L21"
+      "source_location": "L22"
     },
     {
       "id": "streamrecordtools_toolconfig_toolconfig_googleapikey",
@@ -3266,7 +3959,7 @@
       "file_type": "code",
       "norm_label": "memberonlypath",
       "source_file": "StreamRecordTools/ToolConfig.cs",
-      "source_location": "L14"
+      "source_location": "L15"
     },
     {
       "id": "streamrecordtools_toolconfig_toolconfig_recordpath",
@@ -3299,7 +3992,7 @@
       "file_type": "code",
       "norm_label": "temppath",
       "source_file": "StreamRecordTools/ToolConfig.cs",
-      "source_location": "L13"
+      "source_location": "L14"
     },
     {
       "id": "streamrecordtools_toolconfig_toolconfig_twitcastingrecordpath",
@@ -3321,7 +4014,7 @@
       "file_type": "code",
       "norm_label": "twitchclientid",
       "source_file": "StreamRecordTools/ToolConfig.cs",
-      "source_location": "L18"
+      "source_location": "L19"
     },
     {
       "id": "streamrecordtools_toolconfig_toolconfig_twitchclientsecret",
@@ -3332,7 +4025,7 @@
       "file_type": "code",
       "norm_label": "twitchclientsecret",
       "source_file": "StreamRecordTools/ToolConfig.cs",
-      "source_location": "L19"
+      "source_location": "L20"
     },
     {
       "id": "streamrecordtools_toolconfig_toolconfig_twitchcookieauthtoken",
@@ -3343,7 +4036,7 @@
       "file_type": "code",
       "norm_label": "twitchcookieauthtoken",
       "source_file": "StreamRecordTools/ToolConfig.cs",
-      "source_location": "L20"
+      "source_location": "L21"
     },
     {
       "id": "streamrecordtools_toolconfig_toolconfig_twitchunarchivedpath",
@@ -3354,7 +4047,7 @@
       "file_type": "code",
       "norm_label": "twitchunarchivedpath",
       "source_file": "StreamRecordTools/ToolConfig.cs",
-      "source_location": "L16"
+      "source_location": "L17"
     },
     {
       "id": "streamrecordtools_toolconfig_toolconfig_twitchunarchiveduserlogins",
@@ -3365,7 +4058,7 @@
       "file_type": "code",
       "norm_label": "twitchunarchiveduserlogins",
       "source_file": "StreamRecordTools/ToolConfig.cs",
-      "source_location": "L17"
+      "source_location": "L18"
     },
     {
       "id": "streamrecordtools_toolconfig_toolconfig_uptimekumapushurl",
@@ -3387,7 +4080,7 @@
       "file_type": "code",
       "norm_label": "youtubeunarchivedpath",
       "source_file": "StreamRecordTools/ToolConfig.cs",
-      "source_location": "L15"
+      "source_location": "L16"
     },
     {
       "id": "toolconfig",
@@ -3424,40 +4117,52 @@
       "source_location": "L1"
     },
     {
-      "id": "readme_docker_\u74b0\u5883_sub_\u6a21\u5f0f",
-      "label": "Docker \u74b0\u5883\uff0cSub \u6a21\u5f0f",
+      "id": "readme_chzzk",
+      "label": "CHZZK",
       "_origin": "ast",
       "community": 8,
       "community_name": "\u9304\u5f71\u5c0f\u5e6b\u624b",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "docker \u74b0\u5883,sub \u6a21\u5f0f",
+      "norm_label": "chzzk",
       "source_file": "README.md",
-      "source_location": "L23"
+      "source_location": "L110"
     },
     {
-      "id": "readme_docker_\u74b0\u5883_\u55ae\u4e00\u76f4\u64ad\u9304\u5f71\u6a21\u5f0f",
-      "label": "Docker \u74b0\u5883\uff0c\u55ae\u4e00\u76f4\u64ad\u9304\u5f71\u6a21\u5f0f",
+      "id": "readme_docker_compose_\u8a02\u95b1\u6a21\u5f0f",
+      "label": "Docker Compose \u8a02\u95b1\u6a21\u5f0f",
       "_origin": "ast",
       "community": 8,
       "community_name": "\u9304\u5f71\u5c0f\u5e6b\u624b",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "docker \u74b0\u5883,\u55ae\u4e00\u76f4\u64ad\u9304\u5f71\u6a21\u5f0f",
+      "norm_label": "docker compose \u8a02\u95b1\u6a21\u5f0f",
       "source_file": "README.md",
-      "source_location": "L60"
+      "source_location": "L29"
     },
     {
-      "id": "readme_redis_\u983b\u9053",
-      "label": "Redis \u983b\u9053",
+      "id": "readme_docker_\u55ae\u6b21\u9304\u5f71",
+      "label": "Docker \u55ae\u6b21\u9304\u5f71",
       "_origin": "ast",
       "community": 8,
       "community_name": "\u9304\u5f71\u5c0f\u5e6b\u624b",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "redis \u983b\u9053",
+      "norm_label": "docker \u55ae\u6b21\u9304\u5f71",
       "source_file": "README.md",
-      "source_location": "L32"
+      "source_location": "L80"
+    },
+    {
+      "id": "readme_redis_\u9304\u5f71\u983b\u9053",
+      "label": "Redis \u9304\u5f71\u983b\u9053",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "\u9304\u5f71\u5c0f\u5e6b\u624b",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "redis \u9304\u5f71\u983b\u9053",
+      "source_file": "README.md",
+      "source_location": "L54"
     },
     {
       "id": "readme_twitch",
@@ -3469,7 +4174,7 @@
       "node_kind": "heading",
       "norm_label": "twitch",
       "source_file": "README.md",
-      "source_location": "L81"
+      "source_location": "L99"
     },
     {
       "id": "readme_youtube",
@@ -3481,43 +4186,67 @@
       "node_kind": "heading",
       "norm_label": "youtube",
       "source_file": "README.md",
-      "source_location": "L67"
+      "source_location": "L84"
     },
     {
-      "id": "readme_\u74b0\u5883\u8b8a\u6578\u8aaa\u660e",
-      "label": "\u74b0\u5883\u8b8a\u6578\u8aaa\u660e",
+      "id": "readme_\u5efa\u8b70\u4f7f\u7528\u65b9\u5f0f",
+      "label": "\u5efa\u8b70\u4f7f\u7528\u65b9\u5f0f",
       "_origin": "ast",
       "community": 8,
       "community_name": "\u9304\u5f71\u5c0f\u5e6b\u624b",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "\u74b0\u5883\u8b8a\u6578\u8aaa\u660e",
+      "norm_label": "\u5efa\u8b70\u4f7f\u7528\u65b9\u5f0f",
       "source_file": "README.md",
-      "source_location": "L41"
+      "source_location": "L5"
     },
     {
-      "id": "readme_\u76f4\u63a5\u57f7\u884c\u7a0b\u5f0f",
-      "label": "\u76f4\u63a5\u57f7\u884c\u7a0b\u5f0f",
+      "id": "readme_\u6e96\u5099_youtube_cookie",
+      "label": "\u6e96\u5099 YouTube Cookie",
       "_origin": "ast",
       "community": 8,
       "community_name": "\u9304\u5f71\u5c0f\u5e6b\u624b",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "\u76f4\u63a5\u57f7\u884c\u7a0b\u5f0f",
+      "norm_label": "\u6e96\u5099 youtube cookie",
       "source_file": "README.md",
       "source_location": "L19"
     },
     {
-      "id": "readme_\u88fd\u4f5c_cookies_txt",
-      "label": "\u88fd\u4f5c `cookies.txt`",
+      "id": "readme_\u74b0\u5883\u8b8a\u6578",
+      "label": "\u74b0\u5883\u8b8a\u6578",
       "_origin": "ast",
       "community": 8,
       "community_name": "\u9304\u5f71\u5c0f\u5e6b\u624b",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "\u88fd\u4f5c `cookies.txt`",
+      "norm_label": "\u74b0\u5883\u8b8a\u6578",
       "source_file": "README.md",
-      "source_location": "L7"
+      "source_location": "L148"
+    },
+    {
+      "id": "readme_\u76f4\u63a5\u4f7f\u7528_net_\u57f7\u884c",
+      "label": "\u76f4\u63a5\u4f7f\u7528 .NET \u57f7\u884c",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "\u9304\u5f71\u5c0f\u5e6b\u624b",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "\u76f4\u63a5\u4f7f\u7528 .net \u57f7\u884c",
+      "source_file": "README.md",
+      "source_location": "L120"
+    },
+    {
+      "id": "readme_\u7cfb\u7d71\u9700\u6c42",
+      "label": "\u7cfb\u7d71\u9700\u6c42",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "\u9304\u5f71\u5c0f\u5e6b\u624b",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "\u7cfb\u7d71\u9700\u6c42",
+      "source_file": "README.md",
+      "source_location": "L11"
     },
     {
       "id": "readme_\u9304\u5f71\u5c0f\u5e6b\u624b",
@@ -3532,46 +4261,208 @@
       "source_location": "L1"
     },
     {
-      "id": "httpclient",
-      "label": "HttpClient",
+      "id": "chzzkrecordpayload",
+      "label": "ChzzkRecordPayload",
       "_origin": "ast",
       "community": 9,
-      "community_name": ".Init",
+      "community_name": ".StartRecord",
       "file_type": "code",
-      "norm_label": "httpclient",
+      "norm_label": "chzzkrecordpayload",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "streamrecordtools_uptimekumaclient",
-      "label": "UptimeKumaClient.cs",
+      "id": "fact",
+      "label": "Fact",
       "_origin": "ast",
       "community": 9,
-      "community_name": ".Init",
+      "community_name": ".StartRecord",
       "file_type": "code",
-      "norm_label": "uptimekumaclient.cs",
-      "source_file": "StreamRecordTools/UptimeKumaClient.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "streamrecordtools_uptimekumaclient_cs_task",
-      "label": "Task",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": ".Init",
-      "file_type": "code",
-      "norm_label": "task",
+      "norm_label": "fact",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "streamrecordtools_uptimekumaclient_cs_timer",
-      "label": "Timer",
+      "id": "inlinedata",
+      "label": "InlineData",
       "_origin": "ast",
       "community": 9,
-      "community_name": ".Init",
+      "community_name": ".StartRecord",
       "file_type": "code",
-      "norm_label": "timer",
+      "norm_label": "inlinedata",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "lockstate",
+      "label": "LockState",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "norm_label": "lockstate",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "recordoutcome",
+      "label": "RecordOutcome",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "norm_label": "recordoutcome",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "regex",
+      "label": "Regex",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "norm_label": "regex",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "streamrecordtools_command_record_chzzk_cs_chzzkonceoptions",
+      "label": "ChzzkOnceOptions",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "norm_label": "chzzkonceoptions",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "streamrecordtools_command_record_chzzk_cs_process",
+      "label": "Process",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "norm_label": "process",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "streamrecordtools_command_record_chzzk_cs_resulttype",
+      "label": "ResultType",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "norm_label": "resulttype",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzkrecordpayload_channelid",
+      "label": "ChannelId",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s267"
+        ]
+      },
+      "norm_label": "channelid",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L55"
+    },
+    {
+      "id": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzkrecordpayload_streamkey",
+      "label": "StreamKey",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s267"
+        ]
+      },
+      "norm_label": "streamkey",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L58"
+    },
+    {
+      "id": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_recordoutcome_completed",
+      "label": "Completed",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s267"
+        ]
+      },
+      "norm_label": "completed",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L44"
+    },
+    {
+      "id": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_recordoutcome_failed",
+      "label": "Failed",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s267"
+        ]
+      },
+      "norm_label": "failed",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L50"
+    },
+    {
+      "id": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_recordoutcome_partial",
+      "label": "Partial",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "StreamRecordTools.Command.Record",
+        "scope_chain": [
+          "s267"
+        ]
+      },
+      "norm_label": "partial",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L47"
+    },
+    {
+      "id": "theory",
+      "label": "Theory",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "norm_label": "theory",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "timespan",
+      "label": "TimeSpan",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": ".StartRecord",
+      "file_type": "code",
+      "norm_label": "timespan",
       "source_file": "",
       "source_location": ""
     }
@@ -3590,6 +4481,342 @@
       },
       "source_file": "StreamRecordTools/Utility.cs",
       "source_location": "L262",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_buildstreamlinkargumentsusebestandcontrolledoutput",
+      "target": "fact",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "attribute",
+      "metadata": {
+        "ref_token": "Fact"
+      },
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_createuniquefilepathdoesnotoverwriteexistingrecording",
+      "target": "fact",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "attribute",
+      "metadata": {
+        "ref_token": "Fact"
+      },
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_streamkeytimestamphasnocolonforwindowsfilename",
+      "target": "fact",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "attribute",
+      "metadata": {
+        "ref_token": "Fact"
+      },
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_tryparserequestacceptssharedcontractpayload",
+      "target": "fact",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "attribute",
+      "metadata": {
+        "ref_token": "Fact"
+      },
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_decideoutcomedoesnottreateveryexitassuccess",
+      "target": "inlinedata",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "attribute",
+      "metadata": {
+        "ref_token": "InlineData"
+      },
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L74",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_tryparserequestrejectsinvalidpayload",
+      "target": "inlinedata",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "attribute",
+      "metadata": {
+        "ref_token": "InlineData"
+      },
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_decideoutcomedoesnottreateveryexitassuccess",
+      "target": "theory",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "attribute",
+      "metadata": {
+        "ref_token": "Theory"
+      },
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L74",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_tryparserequestrejectsinvalidpayload",
+      "target": "theory",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "attribute",
+      "metadata": {
+        "ref_token": "Theory"
+      },
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_ensuretrailingslash",
+      "target": "streamrecordtools_utility_streamrecordtools_utility_getenvslash",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L331",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_startrecord",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_ensuretrailingslash",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L100",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_startrecord",
+      "target": "streamrecordtools_utility_streamrecordtools_utility_getenvslash",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L104",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_startrecord",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_getstreamkeytimestamp",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L109",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_startrecord",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_createuniquefilepath",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L110",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_startrecord",
+      "target": "streamrecordtools_log_log_info",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L112",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_startrecord",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_lockkey",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L121",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_startrecord",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_lockstate",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L135",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_startrecord",
+      "target": "streamrecordtools_command_record_chzzk_cs_process",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L139",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_startrecord",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_buildstreamlinkarguments",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L148",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_startrecord",
+      "target": "streamrecordtools_log_log_youtubeinfo",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L157",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_startrecord",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_marklocklost",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L184",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_startrecord",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_decideoutcome",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L204",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_startrecord",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_movevideo",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L223",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_startrecord",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_tryvalidate",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L71",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_startrecord",
+      "target": "streamrecordtools_redisconnection_streamrecordtools_redisconnection_init",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L83",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_startrecord",
+      "target": "streamrecordtools_log_log_warn",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L97",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_tryparserequest",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_tryvalidate",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L285",
       "weight": 1.0
     },
     {
@@ -3881,6 +5108,66 @@
       "weight": 1.0
     },
     {
+      "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_startrecordchzzk",
+      "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_startrecordchzzkcontainer",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Subscribe.cs",
+      "source_location": "L799",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_startrecordchzzk",
+      "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_quoteforshell",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Subscribe.cs",
+      "source_location": "L804",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_startrecordchzzk",
+      "target": "streamrecordtools_utility_streamrecordtools_utility_getenvslash",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Subscribe.cs",
+      "source_location": "L827",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_startrecordchzzkcontainer",
+      "target": "streamrecordtools_log_log_info",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Subscribe.cs",
+      "source_location": "L898",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_startrecordchzzkcontainer",
+      "target": "streamrecordtools_log_log_warn",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Subscribe.cs",
+      "source_location": "L901",
+      "weight": 1.0
+    },
+    {
       "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_startrecordtwitcasting",
       "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_startrecordtwitcastingcontainer",
       "relation": "calls",
@@ -3889,7 +5176,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L672",
+      "source_location": "L686",
       "weight": 1.0
     },
     {
@@ -3901,7 +5188,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L692",
+      "source_location": "L706",
       "weight": 1.0
     },
     {
@@ -3913,7 +5200,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L760",
+      "source_location": "L774",
       "weight": 1.0
     },
     {
@@ -3925,7 +5212,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L763",
+      "source_location": "L777",
       "weight": 1.0
     },
     {
@@ -3937,7 +5224,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L548",
+      "source_location": "L562",
       "weight": 1.0
     },
     {
@@ -3949,7 +5236,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L572",
+      "source_location": "L586",
       "weight": 1.0
     },
     {
@@ -3961,7 +5248,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L647",
+      "source_location": "L661",
       "weight": 1.0
     },
     {
@@ -3973,7 +5260,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L650",
+      "source_location": "L664",
       "weight": 1.0
     },
     {
@@ -3985,7 +5272,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L397",
+      "source_location": "L411",
       "weight": 1.0
     },
     {
@@ -3997,7 +5284,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L410",
+      "source_location": "L424",
       "weight": 1.0
     },
     {
@@ -4009,7 +5296,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L415",
+      "source_location": "L429",
       "weight": 1.0
     },
     {
@@ -4021,7 +5308,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L421",
+      "source_location": "L435",
       "weight": 1.0
     },
     {
@@ -4033,7 +5320,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L444",
+      "source_location": "L458",
       "weight": 1.0
     },
     {
@@ -4045,7 +5332,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L523",
+      "source_location": "L537",
       "weight": 1.0
     },
     {
@@ -4057,7 +5344,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L526",
+      "source_location": "L540",
       "weight": 1.0
     },
     {
@@ -4069,7 +5356,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L170",
+      "source_location": "L171",
       "weight": 1.0
     },
     {
@@ -4081,7 +5368,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L203",
+      "source_location": "L204",
       "weight": 1.0
     },
     {
@@ -4093,7 +5380,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L220",
+      "source_location": "L221",
       "weight": 1.0
     },
     {
@@ -4105,7 +5392,31 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L227",
+      "source_location": "L228",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_subrecord",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_tryparserequest",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Subscribe.cs",
+      "source_location": "L235",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_subrecord",
+      "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_startrecordchzzk",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Command/Subscribe.cs",
+      "source_location": "L241",
       "weight": 1.0
     },
     {
@@ -4117,7 +5428,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L251",
+      "source_location": "L265",
       "weight": 1.0
     },
     {
@@ -4129,7 +5440,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L259",
+      "source_location": "L273",
       "weight": 1.0
     },
     {
@@ -4141,7 +5452,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L341",
+      "source_location": "L355",
       "weight": 1.0
     },
     {
@@ -4153,7 +5464,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L51",
+      "source_location": "L52",
       "weight": 1.0
     },
     {
@@ -4165,7 +5476,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L61",
+      "source_location": "L62",
       "weight": 1.0
     },
     {
@@ -4177,7 +5488,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L66",
+      "source_location": "L67",
       "weight": 1.0
     },
     {
@@ -4189,7 +5500,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L92",
+      "source_location": "L93",
       "weight": 1.0
     },
     {
@@ -4290,7 +5601,7 @@
     },
     {
       "source": "streamrecordtools_program_streamrecordtools_program_main",
-      "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_subrecord",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_startrecord",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -4298,6 +5609,18 @@
       "context": "call",
       "source_file": "StreamRecordTools/Program.cs",
       "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_program_streamrecordtools_program_main",
+      "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_subrecord",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "StreamRecordTools/Program.cs",
+      "source_location": "L37",
       "weight": 1.0
     },
     {
@@ -4309,7 +5632,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/ToolConfig.cs",
-      "source_location": "L27",
+      "source_location": "L28",
       "weight": 1.0
     },
     {
@@ -4321,7 +5644,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/ToolConfig.cs",
-      "source_location": "L35",
+      "source_location": "L36",
       "weight": 1.0
     },
     {
@@ -4333,7 +5656,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "StreamRecordTools/ToolConfig.cs",
-      "source_location": "L43",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -4421,6 +5744,78 @@
       "weight": 1.0
     },
     {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_buildstreamlinkargumentsusebestandcontrolledoutput",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_buildstreamlinkarguments",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_createuniquefilepathdoesnotoverwriteexistingrecording",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_createuniquefilepath",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L60",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_decideoutcomedoesnottreateveryexitassuccess",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_decideoutcome",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L83",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_streamkeytimestamphasnocolonforwindowsfilename",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_getstreamkeytimestamp",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L41",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_tryparserequestacceptssharedcontractpayload",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_tryparserequest",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_tryparserequestrejectsinvalidpayload",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_tryparserequest",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
       "source": "streamrecordtools_redisconnection_streamrecordtools_redisconnection",
       "target": "streamrecordtools_redisconnection_cs_connectionmultiplexer",
       "relation": "references",
@@ -4477,7 +5872,7 @@
         "ref_token": "DockerClient"
       },
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L33",
+      "source_location": "L34",
       "weight": 1.0
     },
     {
@@ -4511,6 +5906,36 @@
       "weight": 1.0
     },
     {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk",
+      "target": "regex",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "metadata": {
+        "ref_token": "Regex"
+      },
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk",
+      "target": "timespan",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "metadata": {
+        "ref_token": "TimeSpan"
+      },
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
       "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe",
       "target": "streamrecordtools_command_subscribe_cs_timer",
       "relation": "references",
@@ -4522,7 +5947,7 @@
         "ref_token": "Timer"
       },
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L32",
+      "source_location": "L33",
       "weight": 1.0
     },
     {
@@ -4586,20 +6011,32 @@
       "weight": 1.0
     },
     {
-      "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe",
-      "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_networkid",
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzkrecordpayload",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzkrecordpayload_channelid",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "field",
-      "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L24",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzkrecordpayload",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzkrecordpayload_streamkey",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L58",
       "weight": 1.0
     },
     {
       "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe",
-      "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_outputpath",
+      "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_networkid",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -4611,7 +6048,7 @@
     },
     {
       "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe",
-      "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_temppath",
+      "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_outputpath",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -4623,7 +6060,7 @@
     },
     {
       "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe",
-      "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_youtubeunarchivedoutputpath",
+      "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_temppath",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -4635,7 +6072,7 @@
     },
     {
       "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe",
-      "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_twitchunarchivedoutputpath",
+      "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_youtubeunarchivedoutputpath",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -4647,7 +6084,7 @@
     },
     {
       "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe",
-      "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_memberonlyoutputpath",
+      "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_twitchunarchivedoutputpath",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -4659,7 +6096,7 @@
     },
     {
       "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe",
-      "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_isdisablelivefromstart",
+      "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_memberonlyoutputpath",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -4667,6 +6104,42 @@
       "context": "field",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
       "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe",
+      "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_isdisablelivefromstart",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "StreamRecordTools/Command/Subscribe.cs",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_program_streamrecordtools_chzzkonceoptions",
+      "target": "streamrecordtools_program_streamrecordtools_chzzkonceoptions_channelid",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "StreamRecordTools/Program.cs",
+      "source_location": "L155",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_program_streamrecordtools_chzzkonceoptions",
+      "target": "streamrecordtools_program_streamrecordtools_chzzkonceoptions_streamkey",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "StreamRecordTools/Program.cs",
+      "source_location": "L158",
       "weight": 1.0
     },
     {
@@ -4690,7 +6163,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L73",
+      "source_location": "L74",
       "weight": 1.0
     },
     {
@@ -4702,7 +6175,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L76",
+      "source_location": "L77",
       "weight": 1.0
     },
     {
@@ -4714,7 +6187,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L79",
+      "source_location": "L80",
       "weight": 1.0
     },
     {
@@ -4726,7 +6199,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L101",
+      "source_location": "L102",
       "weight": 1.0
     },
     {
@@ -4738,7 +6211,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L98",
+      "source_location": "L99",
       "weight": 1.0
     },
     {
@@ -4750,7 +6223,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L147",
+      "source_location": "L148",
       "weight": 1.0
     },
     {
@@ -4762,7 +6235,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L134",
+      "source_location": "L135",
       "weight": 1.0
     },
     {
@@ -4774,7 +6247,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L137",
+      "source_location": "L138",
       "weight": 1.0
     },
     {
@@ -4786,7 +6259,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L140",
+      "source_location": "L141",
       "weight": 1.0
     },
     {
@@ -4798,7 +6271,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L85",
+      "source_location": "L86",
       "weight": 1.0
     },
     {
@@ -4810,7 +6283,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L88",
+      "source_location": "L89",
       "weight": 1.0
     },
     {
@@ -4822,7 +6295,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L91",
+      "source_location": "L92",
       "weight": 1.0
     },
     {
@@ -4834,7 +6307,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L118",
+      "source_location": "L119",
       "weight": 1.0
     },
     {
@@ -4846,7 +6319,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L121",
+      "source_location": "L122",
       "weight": 1.0
     },
     {
@@ -4858,7 +6331,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L124",
+      "source_location": "L125",
       "weight": 1.0
     },
     {
@@ -4870,7 +6343,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L127",
+      "source_location": "L128",
       "weight": 1.0
     },
     {
@@ -4882,7 +6355,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L108",
+      "source_location": "L109",
       "weight": 1.0
     },
     {
@@ -4894,7 +6367,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L111",
+      "source_location": "L112",
       "weight": 1.0
     },
     {
@@ -4947,7 +6420,7 @@
     },
     {
       "source": "streamrecordtools_toolconfig_toolconfig",
-      "target": "streamrecordtools_toolconfig_toolconfig_temppath",
+      "target": "streamrecordtools_toolconfig_toolconfig_chzzkrecordpath",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -4959,7 +6432,7 @@
     },
     {
       "source": "streamrecordtools_toolconfig_toolconfig",
-      "target": "streamrecordtools_toolconfig_toolconfig_memberonlypath",
+      "target": "streamrecordtools_toolconfig_toolconfig_temppath",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -4971,7 +6444,7 @@
     },
     {
       "source": "streamrecordtools_toolconfig_toolconfig",
-      "target": "streamrecordtools_toolconfig_toolconfig_youtubeunarchivedpath",
+      "target": "streamrecordtools_toolconfig_toolconfig_memberonlypath",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -4983,7 +6456,7 @@
     },
     {
       "source": "streamrecordtools_toolconfig_toolconfig",
-      "target": "streamrecordtools_toolconfig_toolconfig_twitchunarchivedpath",
+      "target": "streamrecordtools_toolconfig_toolconfig_youtubeunarchivedpath",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -4995,7 +6468,7 @@
     },
     {
       "source": "streamrecordtools_toolconfig_toolconfig",
-      "target": "streamrecordtools_toolconfig_toolconfig_twitchunarchiveduserlogins",
+      "target": "streamrecordtools_toolconfig_toolconfig_twitchunarchivedpath",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5007,7 +6480,7 @@
     },
     {
       "source": "streamrecordtools_toolconfig_toolconfig",
-      "target": "streamrecordtools_toolconfig_toolconfig_twitchclientid",
+      "target": "streamrecordtools_toolconfig_toolconfig_twitchunarchiveduserlogins",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5019,7 +6492,7 @@
     },
     {
       "source": "streamrecordtools_toolconfig_toolconfig",
-      "target": "streamrecordtools_toolconfig_toolconfig_twitchclientsecret",
+      "target": "streamrecordtools_toolconfig_toolconfig_twitchclientid",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5031,7 +6504,7 @@
     },
     {
       "source": "streamrecordtools_toolconfig_toolconfig",
-      "target": "streamrecordtools_toolconfig_toolconfig_twitchcookieauthtoken",
+      "target": "streamrecordtools_toolconfig_toolconfig_twitchclientsecret",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5043,7 +6516,7 @@
     },
     {
       "source": "streamrecordtools_toolconfig_toolconfig",
-      "target": "streamrecordtools_toolconfig_toolconfig_cookiesfilepath",
+      "target": "streamrecordtools_toolconfig_toolconfig_twitchcookieauthtoken",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5051,6 +6524,18 @@
       "context": "field",
       "source_file": "StreamRecordTools/ToolConfig.cs",
       "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_toolconfig_toolconfig",
+      "target": "streamrecordtools_toolconfig_toolconfig_cookiesfilepath",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "field",
+      "source_file": "StreamRecordTools/ToolConfig.cs",
+      "source_location": "L22",
       "weight": 1.0
     },
     {
@@ -5161,7 +6646,7 @@
         "ref_token": "AssemblyInformationalVersionAttribute"
       },
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L57",
+      "source_location": "L58",
       "weight": 1.0
     },
     {
@@ -5177,6 +6662,36 @@
       },
       "source_file": "StreamRecordTools/Utility.cs",
       "source_location": "L212",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_program_streamrecordtools_program_main",
+      "target": "streamrecordtools_program_cs_chzzkonceoptions",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "generic_arg",
+      "metadata": {
+        "ref_token": "ChzzkOnceOptions"
+      },
+      "source_file": "StreamRecordTools/Program.cs",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_tryparserequest",
+      "target": "chzzkrecordpayload",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "generic_arg",
+      "metadata": {
+        "ref_token": "ChzzkRecordPayload"
+      },
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L278",
       "weight": 1.0
     },
     {
@@ -5221,7 +6736,7 @@
         "ref_token": "List"
       },
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L211",
+      "source_location": "L212",
       "weight": 1.0
     },
     {
@@ -5266,7 +6781,7 @@
         "ref_token": "ResultType"
       },
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L35",
+      "source_location": "L36",
       "weight": 1.0
     },
     {
@@ -5296,7 +6811,7 @@
         "ref_token": "ToolConfig"
       },
       "source_file": "StreamRecordTools/ToolConfig.cs",
-      "source_location": "L52",
+      "source_location": "L53",
       "weight": 1.0
     },
     {
@@ -5439,6 +6954,23 @@
       "weight": 1.0
     },
     {
+      "source": "streamrecordtools_command_subscribe",
+      "target": "csharp_namespace:00a16530d832a255",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "metadata": {
+        "using_kind": "namespace",
+        "target_fqn": "StreamRecordTools.Command.Record",
+        "scope_kind": "file"
+      },
+      "source_file": "StreamRecordTools/Command/Subscribe.cs",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
       "source": "streamrecordtools_program",
       "target": "csharp_namespace:00a16530d832a255",
       "relation": "imports",
@@ -5453,6 +6985,40 @@
       },
       "source_file": "StreamRecordTools/Program.cs",
       "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests",
+      "target": "csharp_namespace:00a16530d832a255",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "metadata": {
+        "using_kind": "namespace",
+        "target_fqn": "StreamRecordTools.Command.Record",
+        "scope_kind": "file"
+      },
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk",
+      "target": "streamrecordtools_program",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "metadata": {
+        "using_kind": "static",
+        "target_fqn": "StreamRecordTools.Program",
+        "scope_kind": "file"
+      },
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L8",
       "weight": 1.0
     },
     {
@@ -5503,7 +7069,24 @@
         "scope_kind": "file"
       },
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L17",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_decideoutcomedoesnottreateveryexitassuccess",
+      "target": "recordoutcome",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "metadata": {
+        "ref_token": "RecordOutcome",
+        "qualified": true,
+        "ref_qualifier": "Chzzk"
+      },
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L74",
       "weight": 1.0
     },
     {
@@ -5518,7 +7101,22 @@
         "ref_token": "Assembly"
       },
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L53",
+      "source_location": "L54",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_startrecord",
+      "target": "streamrecordtools_command_record_chzzk_cs_chzzkonceoptions",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "metadata": {
+        "ref_token": "ChzzkOnceOptions"
+      },
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L67",
       "weight": 1.0
     },
     {
@@ -5567,8 +7165,38 @@
       "weight": 1.0
     },
     {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_marklocklost",
+      "target": "lockstate",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "metadata": {
+        "ref_token": "LockState"
+      },
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L250",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_marklocklost",
+      "target": "streamrecordtools_command_record_chzzk_cs_process",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "metadata": {
+        "ref_token": "Process"
+      },
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L250",
+      "weight": 1.0
+    },
+    {
       "source": "streamrecordtools_utility_streamrecordtools_processutils_kill",
-      "target": "process",
+      "target": "streamrecordtools_utility_cs_process",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5583,7 +7211,7 @@
     },
     {
       "source": "streamrecordtools_utility_streamrecordtools_utility_getcommandline",
-      "target": "process",
+      "target": "streamrecordtools_utility_cs_process",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5623,7 +7251,7 @@
         "ref_token": "SubOptions"
       },
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L35",
+      "source_location": "L36",
       "weight": 1.0
     },
     {
@@ -5683,7 +7311,37 @@
         "ref_token": "VideoSnippet"
       },
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L461",
+      "source_location": "L475",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_decideoutcome",
+      "target": "recordoutcome",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "return_type",
+      "metadata": {
+        "ref_token": "RecordOutcome"
+      },
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L320",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_startrecord",
+      "target": "streamrecordtools_command_record_chzzk_cs_resulttype",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "return_type",
+      "metadata": {
+        "ref_token": "ResultType"
+      },
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L67",
       "weight": 1.0
     },
     {
@@ -5732,6 +7390,36 @@
       "weight": 1.0
     },
     {
+      "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_startrecordchzzk",
+      "target": "streamrecordtools_command_subscribe_cs_task",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "return_type",
+      "metadata": {
+        "ref_token": "Task"
+      },
+      "source_file": "StreamRecordTools/Command/Subscribe.cs",
+      "source_location": "L793",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_startrecordchzzkcontainer",
+      "target": "streamrecordtools_command_subscribe_cs_task",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "return_type",
+      "metadata": {
+        "ref_token": "Task"
+      },
+      "source_file": "StreamRecordTools/Command/Subscribe.cs",
+      "source_location": "L841",
+      "weight": 1.0
+    },
+    {
       "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_startrecordtwitcasting",
       "target": "streamrecordtools_command_subscribe_cs_task",
       "relation": "references",
@@ -5743,7 +7431,7 @@
         "ref_token": "Task"
       },
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L666",
+      "source_location": "L680",
       "weight": 1.0
     },
     {
@@ -5758,7 +7446,7 @@
         "ref_token": "Task"
       },
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L705",
+      "source_location": "L719",
       "weight": 1.0
     },
     {
@@ -5773,7 +7461,7 @@
         "ref_token": "Task"
       },
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L542",
+      "source_location": "L556",
       "weight": 1.0
     },
     {
@@ -5788,7 +7476,7 @@
         "ref_token": "Task"
       },
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L586",
+      "source_location": "L600",
       "weight": 1.0
     },
     {
@@ -5803,7 +7491,7 @@
         "ref_token": "Task"
       },
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L390",
+      "source_location": "L404",
       "weight": 1.0
     },
     {
@@ -5818,7 +7506,7 @@
         "ref_token": "Task"
       },
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L461",
+      "source_location": "L475",
       "weight": 1.0
     },
     {
@@ -5833,7 +7521,7 @@
         "ref_token": "Task"
       },
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L35",
+      "source_location": "L36",
       "weight": 1.0
     },
     {
@@ -5897,6 +7585,20 @@
       "weight": 1.0
     },
     {
+      "source": "streamrecordtools_program_streamrecordtools_chzzkonceoptions",
+      "target": "requiredoptions",
+      "relation": "inherits",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "metadata": {
+        "ref_token": "RequiredOptions"
+      },
+      "source_file": "StreamRecordTools/Program.cs",
+      "source_location": "L152",
+      "weight": 1.0
+    },
+    {
       "source": "streamrecordtools_program_streamrecordtools_twitcastingonceoptions",
       "target": "requiredoptions",
       "relation": "inherits",
@@ -5907,7 +7609,7 @@
         "ref_token": "RequiredOptions"
       },
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L144",
+      "source_location": "L145",
       "weight": 1.0
     },
     {
@@ -5921,7 +7623,7 @@
         "ref_token": "RequiredOptions"
       },
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L131",
+      "source_location": "L132",
       "weight": 1.0
     },
     {
@@ -5935,7 +7637,7 @@
         "ref_token": "RequiredOptions"
       },
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L83",
+      "source_location": "L84",
       "weight": 1.0
     },
     {
@@ -5949,7 +7651,7 @@
         "ref_token": "YouTubeRequiredOptions"
       },
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L95",
+      "source_location": "L96",
       "weight": 1.0
     },
     {
@@ -5963,7 +7665,40 @@
         "ref_token": "YouTubeRequiredOptions"
       },
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L105",
+      "source_location": "L106",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_recordoutcome",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_recordoutcome_completed",
+      "relation": "case_of",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_recordoutcome",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_recordoutcome_partial",
+      "relation": "case_of",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_recordoutcome",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_recordoutcome_failed",
+      "relation": "case_of",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L50",
       "weight": 1.0
     },
     {
@@ -6572,52 +8307,85 @@
       "weight": 1.0
     },
     {
-      "source": "readme_docker_\u74b0\u5883_sub_\u6a21\u5f0f",
-      "target": "readme_redis_\u983b\u9053",
+      "source": "readme_docker_compose_\u8a02\u95b1\u6a21\u5f0f",
+      "target": "readme_redis_\u9304\u5f71\u983b\u9053",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L32",
+      "source_location": "L54",
       "weight": 1.0
     },
     {
-      "source": "readme_docker_\u74b0\u5883_sub_\u6a21\u5f0f",
-      "target": "readme_\u74b0\u5883\u8b8a\u6578\u8aaa\u660e",
+      "source": "readme_docker_\u55ae\u6b21\u9304\u5f71",
+      "target": "readme_chzzk",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L41",
+      "source_location": "L110",
       "weight": 1.0
     },
     {
-      "source": "readme_docker_\u74b0\u5883_\u55ae\u4e00\u76f4\u64ad\u9304\u5f71\u6a21\u5f0f",
+      "source": "readme_docker_\u55ae\u6b21\u9304\u5f71",
       "target": "readme_youtube",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L67",
+      "source_location": "L84",
       "weight": 1.0
     },
     {
-      "source": "readme_docker_\u74b0\u5883_\u55ae\u4e00\u76f4\u64ad\u9304\u5f71\u6a21\u5f0f",
+      "source": "readme_docker_\u55ae\u6b21\u9304\u5f71",
       "target": "readme_twitch",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L81",
+      "source_location": "L99",
       "weight": 1.0
     },
     {
       "source": "readme_\u9304\u5f71\u5c0f\u5e6b\u624b",
-      "target": "readme_\u76f4\u63a5\u57f7\u884c\u7a0b\u5f0f",
+      "target": "readme_\u7cfb\u7d71\u9700\u6c42",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_\u9304\u5f71\u5c0f\u5e6b\u624b",
+      "target": "readme_\u76f4\u63a5\u4f7f\u7528_net_\u57f7\u884c",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L120",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_\u9304\u5f71\u5c0f\u5e6b\u624b",
+      "target": "readme_\u74b0\u5883\u8b8a\u6578",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "L148",
+      "weight": 1.0
+    },
+    {
+      "source": "readme_\u9304\u5f71\u5c0f\u5e6b\u624b",
+      "target": "readme_\u6e96\u5099_youtube_cookie",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -6628,35 +8396,35 @@
     },
     {
       "source": "readme_\u9304\u5f71\u5c0f\u5e6b\u624b",
-      "target": "readme_docker_\u74b0\u5883_sub_\u6a21\u5f0f",
+      "target": "readme_docker_compose_\u8a02\u95b1\u6a21\u5f0f",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L23",
+      "source_location": "L29",
       "weight": 1.0
     },
     {
       "source": "readme_\u9304\u5f71\u5c0f\u5e6b\u624b",
-      "target": "readme_docker_\u74b0\u5883_\u55ae\u4e00\u76f4\u64ad\u9304\u5f71\u6a21\u5f0f",
+      "target": "readme_\u5efa\u8b70\u4f7f\u7528\u65b9\u5f0f",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L60",
+      "source_location": "L5",
       "weight": 1.0
     },
     {
       "source": "readme_\u9304\u5f71\u5c0f\u5e6b\u624b",
-      "target": "readme_\u88fd\u4f5c_cookies_txt",
+      "target": "readme_docker_\u55ae\u6b21\u9304\u5f71",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L7",
+      "source_location": "L80",
       "weight": 1.0
     },
     {
@@ -6677,6 +8445,81 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "StreamRecordTools.sln",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools",
+      "target": "tests",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools.sln",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools",
+      "target": "tests_streamrecordtools_tests_streamrecordtools_tests",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools.sln",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk",
+      "target": "csharp_namespace:00a16530d832a255",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_recordoutcome",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L41",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzkrecordpayload",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_lockstate",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L62",
       "weight": 1.0
     },
     {
@@ -6753,7 +8596,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L20",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -6764,7 +8607,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L22",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -6819,7 +8662,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L105",
+      "source_location": "L106",
       "weight": 1.0
     },
     {
@@ -6830,7 +8673,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L115",
+      "source_location": "L116",
       "weight": 1.0
     },
     {
@@ -6863,7 +8706,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L131",
+      "source_location": "L132",
       "weight": 1.0
     },
     {
@@ -6874,7 +8717,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L144",
+      "source_location": "L145",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_program_streamrecordtools_program",
+      "target": "streamrecordtools_program_streamrecordtools_chzzkonceoptions",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Program.cs",
+      "source_location": "L152",
       "weight": 1.0
     },
     {
@@ -6885,7 +8739,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L71",
+      "source_location": "L72",
       "weight": 1.0
     },
     {
@@ -6896,7 +8750,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L83",
+      "source_location": "L84",
       "weight": 1.0
     },
     {
@@ -6907,7 +8761,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L95",
+      "source_location": "L96",
       "weight": 1.0
     },
     {
@@ -7007,6 +8861,28 @@
       "confidence_score": 1.0,
       "source_file": "StreamRecordTools/Utility.cs",
       "source_location": "L203",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests",
+      "target": "csharp_namespace:b6f8c49352ec2122",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests",
+      "target": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -7110,6 +8986,167 @@
       "weight": 1.0
     },
     {
+      "source": "tests_streamrecordtools_tests_streamrecordtools_tests",
+      "target": "nuget_microsoft_net_test_sdk",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/StreamRecordTools.Tests/StreamRecordTools.Tests.csproj",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_streamrecordtools_tests",
+      "target": "nuget_xunit",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/StreamRecordTools.Tests/StreamRecordTools.Tests.csproj",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_streamrecordtools_tests",
+      "target": "nuget_xunit_runner_visualstudio",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/StreamRecordTools.Tests/StreamRecordTools.Tests.csproj",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_streamrecordtools_tests",
+      "target": "streamrecordtools_streamrecordtools",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/StreamRecordTools.Tests/StreamRecordTools.Tests.csproj",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_marklocklost",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L250",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_tryparserequest",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L268",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_tryvalidate",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L294",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_getstreamkeytimestamp",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L300",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_buildstreamlinkarguments",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L307",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_createuniquefilepath",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L311",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_decideoutcome",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L320",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_lockkey",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L327",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_ensuretrailingslash",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L329",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_movevideo",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L336",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk",
+      "target": "streamrecordtools_command_record_chzzk_streamrecordtools_command_record_chzzk_startrecord",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Command/Record/Chzzk.cs",
+      "source_location": "L67",
+      "weight": 1.0
+    },
+    {
       "source": "streamrecordtools_command_record_twitcasting_streamrecordtools_command_record_twitcasting",
       "target": "streamrecordtools_command_record_twitcasting_streamrecordtools_command_record_twitcasting_movevideo",
       "relation": "method",
@@ -7183,7 +9220,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L35",
+      "source_location": "L36",
       "weight": 1.0
     },
     {
@@ -7194,7 +9231,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L390",
+      "source_location": "L404",
       "weight": 1.0
     },
     {
@@ -7205,7 +9242,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L461",
+      "source_location": "L475",
       "weight": 1.0
     },
     {
@@ -7216,7 +9253,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L542",
+      "source_location": "L556",
       "weight": 1.0
     },
     {
@@ -7227,7 +9264,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L586",
+      "source_location": "L600",
       "weight": 1.0
     },
     {
@@ -7238,7 +9275,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L666",
+      "source_location": "L680",
       "weight": 1.0
     },
     {
@@ -7249,7 +9286,40 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L705",
+      "source_location": "L719",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe",
+      "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_startrecordchzzk",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Command/Subscribe.cs",
+      "source_location": "L793",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe",
+      "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_quoteforshell",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Command/Subscribe.cs",
+      "source_location": "L839",
+      "weight": 1.0
+    },
+    {
+      "source": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe",
+      "target": "streamrecordtools_command_subscribe_streamrecordtools_command_subscribe_startrecordchzzkcontainer",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "StreamRecordTools/Command/Subscribe.cs",
+      "source_location": "L841",
       "weight": 1.0
     },
     {
@@ -7337,7 +9407,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "StreamRecordTools/Program.cs",
-      "source_location": "L53",
+      "source_location": "L54",
       "weight": 1.0
     },
     {
@@ -7495,8 +9565,74 @@
       "weight": 1.0
     },
     {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests",
+      "target": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_tryparserequestacceptssharedcontractpayload",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests",
+      "target": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_tryparserequestrejectsinvalidpayload",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests",
+      "target": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_streamkeytimestamphasnocolonforwindowsfilename",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests",
+      "target": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_buildstreamlinkargumentsusebestandcontrolledoutput",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests",
+      "target": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_createuniquefilepathdoesnotoverwriteexistingrecording",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests",
+      "target": "tests_streamrecordtools_tests_chzzkrecordtests_streamrecordtools_tests_chzzkrecordtests_decideoutcomedoesnottreateveryexitassuccess",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/StreamRecordTools.Tests/ChzzkRecordTests.cs",
+      "source_location": "L74",
+      "weight": 1.0
+    },
+    {
       "source": "streamrecordtools_streamrecordtools",
-      "target": "framework_net10_0",
+      "target": "streamrecordtools_streamrecordtools_csproj_framework_net10_0",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -7506,7 +9642,7 @@
     },
     {
       "source": "streamrecordtools_streamrecordtools",
-      "target": "sdk_microsoft_net_sdk",
+      "target": "streamrecordtools_streamrecordtools_csproj_sdk_microsoft_net_sdk",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -7515,39 +9651,23 @@
       "weight": 1.0
     },
     {
-      "source": "streamrecordtools_command_record_twitcasting_streamrecordtools_command_record_twitcasting_startrecord",
-      "target": "process",
-      "relation": "calls",
+      "source": "tests_streamrecordtools_tests_streamrecordtools_tests",
+      "target": "tests_streamrecordtools_tests_streamrecordtools_tests_csproj_framework_net10_0",
+      "relation": "references",
       "_origin": "ast",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "context": "call",
-      "source_file": "StreamRecordTools/Command/Record/Twitcasting.cs",
-      "source_location": "L59",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/StreamRecordTools.Tests/StreamRecordTools.Tests.csproj",
       "weight": 1.0
     },
     {
-      "source": "streamrecordtools_command_record_twitch_streamrecordtools_command_record_twitch_startrecord",
-      "target": "process",
-      "relation": "calls",
+      "source": "tests_streamrecordtools_tests_streamrecordtools_tests",
+      "target": "tests_streamrecordtools_tests_streamrecordtools_tests_csproj_sdk_microsoft_net_sdk",
+      "relation": "references",
       "_origin": "ast",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "context": "call",
-      "source_file": "StreamRecordTools/Command/Record/Twitch.cs",
-      "source_location": "L107",
-      "weight": 1.0
-    },
-    {
-      "source": "streamrecordtools_command_record_youtube_streamrecordtools_command_record_youtube_startrecord",
-      "target": "process",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "context": "call",
-      "source_file": "StreamRecordTools/Command/Record/YouTube.cs",
-      "source_location": "L181",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/StreamRecordTools.Tests/StreamRecordTools.Tests.csproj",
       "weight": 1.0
     },
     {
@@ -7571,7 +9691,7 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "StreamRecordTools/Command/Subscribe.cs",
-      "source_location": "L43",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -7588,5 +9708,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "7764574324315c7f0458fd1b34f4cd65e6f17155"
+  "built_at_commit": "7033df8066c39287eb7e0b627b01580ee6215ffd"
 }
