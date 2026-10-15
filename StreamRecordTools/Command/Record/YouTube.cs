@@ -173,9 +173,9 @@ namespace StreamRecordTools.Command.Record
 
                 // 如果關閉從開頭錄影的話，每六小時需要重新開一次錄影，才能避免掉長時間錄影導致 HTTP 503 錯誤
                 // 但從頭開始錄影好像只能錄兩小時 :thinking:
-                string arguments = "--live-from-start -f bestvideo+bestaudio ";
-                if (isDisableLiveFromStart)
-                    arguments = "-f b ";
+                string arguments = "-f bv";
+                if (!isDisableLiveFromStart)
+                    arguments += " --live-from-start";
 
                 Log.Info($"存檔名稱: {fileName}");
                 var process = new Process();
