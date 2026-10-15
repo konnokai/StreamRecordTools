@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -172,29 +173,22 @@ namespace StreamRecordTools.Command.Record
                 long lastOutputTimestamp = Stopwatch.GetTimestamp();
                 int isRecordingWatchdogArmed = 0;
 
-                // 如果關閉從開頭錄影的話，每六小時需要重新開一次錄影，才能避免掉長時間錄影導致 HTTP 503 錯誤
-                // 但從頭開始錄影好像只能錄兩小時 :thinking:
-                List<string> argumentList =
-                [
-                    "-f", "bv",
-                ];
-                if (!isDisableLiveFromStart)
-                    argumentList.Add("--live-from-start");
-
                 Log.Info($"存檔名稱: {fileName}");
                 var process = new Process();
-#if RELEASE
-                process.StartInfo.FileName = "yt-dlp";
-                string browser = "firefox";
-#else
-                process.StartInfo.FileName = "yt-dlp_min.exe";
-                string browser = "chrome";
-#endif
-
-                if (Utility.InDocker)
-                    argumentList.Add("--cookies /app/cookies.txt");
+                string browser = "";
+                if (OperatingSystem.IsWindows())
+                {
+                    process.StartInfo.FileName = "yt-dlp_min.exe";
+                    browser = "chrome";
+                }
                 else
-                    argumentList.Add($"--cookies-from-browser {browser} --mark-watched");
+                {
+                    process.StartInfo.FileName = "yt-dlp";
+                    browser = "firefox";
+                }
+
+                foreach (string argument in BuildYtDlpArguments(videoId, $"{tempPath}{fileName}.%(ext)s", isDisableLiveFromStart, Utility.InDocker, browser))
+                    process.StartInfo.ArgumentList.Add(argument);
 
                 #region 如果過了一小時還沒開始錄影...
                 var task = Task.Run(async () =>
@@ -236,11 +230,6 @@ namespace StreamRecordTools.Command.Record
                 });
                 #endregion
 
-                // --live-from-start 太吃硬碟隨機讀寫
-                // --embed-metadata --embed-thumbnail 會導致不定時卡住，先移除
-                // --mark-watched 疑似會導致 Cookie 出現問題，暫時移除
-                process.StartInfo.Arguments = $"https://www.youtube.com/watch?v={videoId} -o \"{tempPath}{fileName}.%(ext)s\" --wait-for-video 15 {string.Join(" ", argumentList)}";
-
                 // 印象中之前用 ErrorDataReceived 的時候能正常觸發會限訊息檢測
                 process.StartInfo.RedirectStandardError = true;
                 process.StartInfo.RedirectStandardOutput = true;
@@ -263,9 +252,11 @@ namespace StreamRecordTools.Command.Record
                         if (e.Data.Contains("members-only content") || e.Data.Contains("channel's members"))
                         {
                             Log.Error("檢測到無法讀取的會限");
-                            Utility.Redis.GetSubscriber().Publish(new("youtube.startstream", RedisChannel.PatternMode.Literal), $"{videoId}:1");
-                            process.Kill(Signum.SIGTERM);
+                            // 旗標要先設：Publish 或 Kill 丟出的例外會被下面的 catch 吃掉，後面的程式碼就跑不到
                             isCanNotRecordStream = true;
+                            if (!isDisableRedis)
+                                Utility.Redis.GetSubscriber().Publish(new("youtube.startstream", RedisChannel.PatternMode.Literal), $"{videoId}:1");
+                            process.Kill(Signum.SIGTERM);
                         }
                         else if (e.Data.Contains("video is private") || e.Data.Contains("Private video"))
                         {
@@ -345,7 +336,7 @@ namespace StreamRecordTools.Command.Record
                     catch { }
                 };
 
-                Log.Info(process.StartInfo.Arguments);
+                Log.Info($"{process.StartInfo.FileName} {string.Join(' ', process.StartInfo.ArgumentList)}");
 
                 process.Start();
                 process.BeginErrorReadLine();
@@ -456,9 +447,39 @@ namespace StreamRecordTools.Command.Record
             return ResultType.Once;
         }
 
+        public static string[] BuildYtDlpArguments(string videoId, string outputTemplate, bool isDisableLiveFromStart, bool inDocker, string browser)
+        {
+            // 不指定 -f，用 yt-dlp 預設的 bv*+ba/b；只給 bv 會選到沒有聲音的純影像格式
+            // --embed-metadata --embed-thumbnail 會不定時卡住，先不加
+            // --mark-watched 疑似會讓 Cookie 出問題，先不加
+            List<string> arguments =
+            [
+                $"https://www.youtube.com/watch?v={videoId}",
+                "-o", outputTemplate,
+                "--wait-for-video", "15",
+            ];
+
+            // --live-from-start 很吃硬碟隨機讀寫
+            // 關掉它的話，每六小時要重開一次錄影，不然長時間錄影會遇到 HTTP 503
+            // 但從頭開始錄影好像只能錄兩小時 :thinking:
+            if (!isDisableLiveFromStart)
+                arguments.Add("--live-from-start");
+
+            if (inDocker)
+                arguments.AddRange(["--cookies", "/app/cookies.txt"]);
+            else
+                arguments.AddRange(["--cookies-from-browser", browser]);
+
+            return [.. arguments];
+        }
+
+        // 只認最終檔，跳過 .mp4.part、.f299.mp4 這類 yt-dlp 中間檔
+        public static bool IsRecordedVideoFile(string path, string videoId)
+            => Path.GetFileNameWithoutExtension(path).EndsWith(videoId, StringComparison.Ordinal);
+
         private static void MoveVideo(string outputPath, string redisChannel = "")
         {
-            foreach (var item in Directory.GetFiles(tempPath, $"*{videoId}.???"))
+            foreach (var item in Directory.GetFiles(tempPath, $"*{videoId}.*").Where(x => IsRecordedVideoFile(x, videoId)))
             {
                 try
                 {

@@ -459,8 +459,8 @@ namespace StreamRecordTools.Command
                     $" -t \"{TempPath.TrimEnd(Utility.GetEnvSlash()[0])}\"" +
                     $" -u \"{YouTubeUnarchivedOutputPath.TrimEnd(Utility.GetEnvSlash()[0])}\"" +
                     $" -m \"{MemberOnlyOutputPath.TrimEnd(Utility.GetEnvSlash()[0])}\"" +
-                    (IsDisableLiveFromStart ? " --disable-live-from-start" : "" +
-                    (dontSendStartMessage ? " --dont-send-start-message" : ""));
+                    (IsDisableLiveFromStart ? " --disable-live-from-start" : "") +
+                    (dontSendStartMessage ? " --dont-send-start-message" : "");
 
                 Process.Start(new ProcessStartInfo()
                 {
@@ -470,6 +470,16 @@ namespace StreamRecordTools.Command
                     UseShellExecute = true
                 });
             }
+        }
+
+        public static List<string> BuildYouTubeContainerCommand(string videoId, bool isDisableLiveFromStart, bool dontSendStartMessage)
+        {
+            List<string> command = ["yt_once_on_docker", videoId];
+            if (isDisableLiveFromStart)
+                command.Add("--disable-live-from-start");
+            if (dontSendStartMessage)
+                command.Add("--dont-send-start-message");
+            return command;
         }
 
         private static async Task StartRecordYouTubeContainer(string videoId, VideoSnippet snippetData, bool dontSendStartMessage)
@@ -513,13 +523,7 @@ namespace StreamRecordTools.Command
                     }
                 },
 
-                Cmd =
-                [
-                    "yt_once_on_docker",
-                    videoId,
-                    "--disable-live-from-start",
-                    dontSendStartMessage ? "--dont-send-start-message" : ""
-                ],
+                Cmd = BuildYouTubeContainerCommand(videoId, IsDisableLiveFromStart, dontSendStartMessage),
 
                 // 不要讓程式自己 Attach 以免 Log 混亂
                 AttachStdout = false,
