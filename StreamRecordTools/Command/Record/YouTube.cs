@@ -2,6 +2,7 @@
 using Google.Apis.YouTube.v3;
 using StackExchange.Redis;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
@@ -173,9 +174,12 @@ namespace StreamRecordTools.Command.Record
 
                 // 如果關閉從開頭錄影的話，每六小時需要重新開一次錄影，才能避免掉長時間錄影導致 HTTP 503 錯誤
                 // 但從頭開始錄影好像只能錄兩小時 :thinking:
-                string arguments = "-f bv";
+                List<string> argumentList =
+                [
+                    "-f", "bv",
+                ];
                 if (!isDisableLiveFromStart)
-                    arguments += " --live-from-start";
+                    argumentList.Add("--live-from-start");
 
                 Log.Info($"存檔名稱: {fileName}");
                 var process = new Process();
@@ -188,9 +192,9 @@ namespace StreamRecordTools.Command.Record
 #endif
 
                 if (Utility.InDocker)
-                    arguments += "--cookies /app/cookies.txt";
+                    argumentList.Add("--cookies /app/cookies.txt");
                 else
-                    arguments += $"--cookies-from-browser {browser} --mark-watched";
+                    argumentList.Add($"--cookies-from-browser {browser} --mark-watched");
 
                 #region 如果過了一小時還沒開始錄影...
                 var task = Task.Run(async () =>
@@ -235,7 +239,7 @@ namespace StreamRecordTools.Command.Record
                 // --live-from-start 太吃硬碟隨機讀寫
                 // --embed-metadata --embed-thumbnail 會導致不定時卡住，先移除
                 // --mark-watched 疑似會導致 Cookie 出現問題，暫時移除
-                process.StartInfo.Arguments = $"https://www.youtube.com/watch?v={videoId} -o \"{tempPath}{fileName}.%(ext)s\" --wait-for-video 15 {arguments}";
+                process.StartInfo.Arguments = $"https://www.youtube.com/watch?v={videoId} -o \"{tempPath}{fileName}.%(ext)s\" --wait-for-video 15 {string.Join(" ", argumentList)}";
 
                 // 印象中之前用 ErrorDataReceived 的時候能正常觸發會限訊息檢測
                 process.StartInfo.RedirectStandardError = true;
