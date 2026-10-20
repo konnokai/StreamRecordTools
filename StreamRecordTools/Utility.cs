@@ -72,6 +72,7 @@ namespace StreamRecordTools
             }
         }
 
+        // 任一批重試後仍失敗就直接丟例外，不回傳缺批的清單：呼叫端會把「不在清單裡」當成已私人化
         public static async Task<IList<Video>> GetSnippetDataByVideoIdAsync(IEnumerable<string> videoId)
         {
             var pBreaker = Policy<VideoListResponse>
@@ -86,20 +87,13 @@ namespace StreamRecordTools
             List<Video> videos = new List<Video>();
             for (int i = 0; i < videoId.Count(); i += 50)
             {
-                try
-                {
-                    var video = YouTube.Videos.List("snippet");
-                    video.Id = string.Join(',', videoId.Skip(i).Take(50));
-                    var response = await pBreaker.ExecuteAsync(() => video.ExecuteAsync());
-                    if (!response.Items.Any())
-                        continue;
+                var video = YouTube.Videos.List("snippet");
+                video.Id = string.Join(',', videoId.Skip(i).Take(50));
+                var response = await pBreaker.ExecuteAsync(() => video.ExecuteAsync());
+                if (!response.Items.Any())
+                    continue;
 
-                    videos.AddRange(response.Items);
-                }
-                catch (Exception ex)
-                {
-                    Log.Error(ex, "GetSnippetDataByVideoIdAsync-Multi");
-                }
+                videos.AddRange(response.Items);
             }
 
             return videos;

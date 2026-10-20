@@ -50,5 +50,48 @@ namespace StreamRecordTools.Tests
         {
             Assert.Equal(expected, Subscribe.BuildYouTubeContainerCommand(VideoId, isDisableLiveFromStart, dontSendStartMessage));
         }
+
+        [Fact]
+        public void MoveUnarchivedVideoFilesMovesOnlyFinalOutputIncludingWebm()
+        {
+            string root = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("N"));
+            string source = Path.Combine(root, "20261015");
+            string target = Path.Combine(root, "unarchived") + Path.DirectorySeparatorChar;
+            Directory.CreateDirectory(source);
+            Directory.CreateDirectory(target);
+            try
+            {
+                const string prefix = "youtube_UC_20261015_120000_";
+                File.WriteAllText(Path.Combine(source, $"{prefix}{VideoId}.webm"), "");
+                File.WriteAllText(Path.Combine(source, $"{prefix}{VideoId}.mp4.part"), "");
+                File.WriteAllText(Path.Combine(source, $"{prefix}aaaaaaaaaaa.mp4"), "");
+
+                int moved = Subscribe.MoveUnarchivedVideoFiles(source, VideoId, target);
+
+                Assert.Equal(1, moved);
+                Assert.True(File.Exists(Path.Combine(target, $"{prefix}{VideoId}.webm")));
+                Assert.True(File.Exists(Path.Combine(source, $"{prefix}{VideoId}.mp4.part")));
+                Assert.True(File.Exists(Path.Combine(source, $"{prefix}aaaaaaaaaaa.mp4")));
+            }
+            finally
+            {
+                Directory.Delete(root, true);
+            }
+        }
+
+        [Fact]
+        public void MoveUnarchivedVideoFilesReturnsZeroWhenNothingMatches()
+        {
+            string root = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(root);
+            try
+            {
+                Assert.Equal(0, Subscribe.MoveUnarchivedVideoFiles(root, VideoId, root + Path.DirectorySeparatorChar));
+            }
+            finally
+            {
+                Directory.Delete(root, true);
+            }
+        }
     }
 }

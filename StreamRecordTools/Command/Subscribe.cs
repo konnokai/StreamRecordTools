@@ -352,32 +352,25 @@ namespace StreamRecordTools.Command
                                 videoIdList.Add(regexResult.Groups["VideoId"].Value);
                         }
 
-                        var videoDataFromApi = await Utility.GetSnippetDataByVideoIdAsync(videoIdList);
-                        if (videoDataFromApi == null)
+                        IList<Video> videoDataFromApi;
+                        try
                         {
-                            Log.Error("videoIdFromApi 無資料");
-                            return;
+                            videoDataFromApi = await Utility.GetSnippetDataByVideoIdAsync(videoIdList);
+                        }
+                        catch (Exception ex)
+                        {
+                            // API 失敗時拿不到完整清單，這個資料夾本輪不判斷，避免把正常影片當成私人化
+                            Log.Error(ex, $"{dirName} 取得影片資料失敗，本輪略過");
+                            continue;
                         }
 
                         foreach (var item in videoIdList)
                         {
-                            if (!videoDataFromApi.Any((x) => x.Id == item))
-                            {
+                            if (videoDataFromApi.Any((x) => x.Id == item))
+                                continue;
+
+                            if (MoveUnarchivedVideoFiles(dirName, item, YouTubeUnarchivedOutputPath) > 0)
                                 Utility.Redis.GetSubscriber().Publish(new("youtube.unarchived", RedisChannel.PatternMode.Literal), item);
-                                foreach (var videoFile in Directory.GetFiles(dirName, $"*{item}.???"))
-                                {
-                                    try
-                                    {
-                                        Log.Info($"移動 \"{videoFile}\" 至 \"{YouTubeUnarchivedOutputPath}{Path.GetFileName(videoFile)}\"");
-                                        File.Move($"{videoFile}", $"{YouTubeUnarchivedOutputPath}{Path.GetFileName(videoFile)}");
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        if (Utility.InDocker) Log.Error(ex.ToString());
-                                        else File.AppendAllText($"{videoFile}_err.txt", ex.ToString());
-                                    }
-                                }
-                            }
                         }
                     }
                 }
@@ -470,6 +463,27 @@ namespace StreamRecordTools.Command
                     UseShellExecute = true
                 });
             }
+        }
+
+        public static int MoveUnarchivedVideoFiles(string dirName, string videoId, string outputPath)
+        {
+            int moved = 0;
+            foreach (var videoFile in Directory.GetFiles(dirName, $"*{videoId}.*").Where(x => YouTube.IsRecordedVideoFile(x, videoId)))
+            {
+                try
+                {
+                    Log.Info($"移動 \"{videoFile}\" 至 \"{outputPath}{Path.GetFileName(videoFile)}\"");
+                    File.Move(videoFile, $"{outputPath}{Path.GetFileName(videoFile)}");
+                    moved++;
+                }
+                catch (Exception ex)
+                {
+                    if (Utility.InDocker) Log.Error(ex.ToString());
+                    else File.AppendAllText($"{videoFile}_err.txt", ex.ToString());
+                }
+            }
+
+            return moved;
         }
 
         public static List<string> BuildYouTubeContainerCommand(string videoId, bool isDisableLiveFromStart, bool dontSendStartMessage)
