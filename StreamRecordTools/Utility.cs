@@ -161,6 +161,20 @@ namespace StreamRecordTools
 
         public static bool IsMemberOnly(string videoId)
         {
+            // 私人影片的留言 API 也可能回 403 被當成會限，先看觀看頁；讀不到頁面才退回 API 錯誤判斷
+            switch (YouTubeVideoPage.GetStatusAsync(videoId).GetAwaiter().GetResult())
+            {
+                case YouTubeVideoPageStatus.MembersOnly:
+                    Log.Warn($"此為會限影片: {videoId}");
+                    return true;
+                case YouTubeVideoPageStatus.Private:
+                case YouTubeVideoPageStatus.Unavailable:
+                    IsDelLive = true;
+                    return false;
+                case YouTubeVideoPageStatus.Public:
+                    return false;
+            }
+
             var ct = YouTube.CommentThreads.List("snippet");
             ct.VideoId = videoId;
 

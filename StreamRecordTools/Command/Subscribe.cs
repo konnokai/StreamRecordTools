@@ -369,6 +369,14 @@ namespace StreamRecordTools.Command
                             if (videoDataFromApi.Any((x) => x.Id == item))
                                 continue;
 
+                            // API 沒回傳不一定是私人化，觀看頁明確還看得到就不搬
+                            var pageStatus = await YouTubeVideoPage.GetStatusAsync(item);
+                            if (pageStatus is YouTubeVideoPageStatus.Public or YouTubeVideoPageStatus.MembersOnly)
+                            {
+                                Log.Warn($"{item} API 查不到，但觀看頁仍可存取（{pageStatus}），略過");
+                                continue;
+                            }
+
                             if (MoveUnarchivedVideoFiles(dirName, item, YouTubeUnarchivedOutputPath) > 0)
                                 Utility.Redis.GetSubscriber().Publish(new("youtube.unarchived", RedisChannel.PatternMode.Literal), item);
                         }
