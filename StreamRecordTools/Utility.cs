@@ -136,12 +136,13 @@ namespace StreamRecordTools
 
         public static bool IsLiveEnd(string videoId, bool isFirstCheck, bool isDisableRedis)
         {
-            var video = YouTube.Videos.List("snippet,liveStreamingDetails");
-            video.Id = videoId;
-            var videoResult2 = video.Execute();
-
             try
             {
+                // API 失敗當成還沒關台：重錄時有 is_live 過濾，不會把已結束的直播從頭再抓一次
+                var video = YouTube.Videos.List("snippet,liveStreamingDetails");
+                video.Id = videoId;
+                var videoResult2 = video.Execute();
+
                 if (!videoResult2.Items.Any())
                 {
                     IsDelLive = true;

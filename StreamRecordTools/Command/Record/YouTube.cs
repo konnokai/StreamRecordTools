@@ -158,20 +158,20 @@ namespace StreamRecordTools.Command.Record
                 Log.Info("不自動從頭開始錄影");
             #endregion
 
-            bool isCanNotRecordStream = false, isReceiveDownload = false, isNeedRestart = false;
+            bool isCanNotRecordStream = false, isReceiveDownload = false, isNeedRestart = false, isRerecord = false, isHandedOff = false;
+            int emptyRerecordCount = 0;
             #region 開始錄製直播
             do
             {
                 isNeedRestart = false;
 
-                if (Utility.IsLiveEnd(videoId, true, isDisableRedis)) break;
+                if (Utility.IsLiveEnd(videoId, !isRerecord, isDisableRedis)) break;
 
                 fileName = $"youtube_{channelId}_{DateTime.Now:yyyyMMdd_HHmmss}_{videoId}";
 
                 CancellationTokenSource cancellationToken = new();
                 CancellationToken token = cancellationToken.Token;
-                long lastOutputTimestamp = Stopwatch.GetTimestamp();
-                int isRecordingWatchdogArmed = 0;
+                bool isAttemptRecording = false;
 
                 Log.Info($"存檔名稱: {fileName}");
                 var process = new Process();
@@ -187,7 +187,8 @@ namespace StreamRecordTools.Command.Record
                     browser = "firefox";
                 }
 
-                foreach (string argument in BuildYtDlpArguments(videoId, $"{tempPath}{fileName}.%(ext)s", isDisableLiveFromStart, Utility.InDocker, browser))
+                // 重錄不從頭抓，否則每次都會重複下載整場直播
+                foreach (string argument in BuildYtDlpArguments(videoId, $"{tempPath}{fileName}.%(ext)s", isDisableLiveFromStart || isRerecord, Utility.InDocker, browser, onlyIfLive: isRerecord))
                     process.StartInfo.ArgumentList.Add(argument);
 
                 #region 如果過了一小時還沒開始錄影...
@@ -244,9 +245,6 @@ namespace StreamRecordTools.Command.Record
                         if (e.Data.ToLower().StartsWith("[wait]"))
                             return;
 
-                        if (Volatile.Read(ref isRecordingWatchdogArmed) == 1)
-                            Interlocked.Exchange(ref lastOutputTimestamp, Stopwatch.GetTimestamp());
-
                         Log.Error(e.Data);
 
                         if (e.Data.Contains("members-only content") || e.Data.Contains("channel's members"))
@@ -285,56 +283,46 @@ namespace StreamRecordTools.Command.Record
                         if (e.Data.ToLower().StartsWith("[wait]"))
                             return;
 
-                        // 應該能用這個來判定開始直播
-                        bool isDownloadOutput = e.Data.StartsWith("[download]", StringComparison.OrdinalIgnoreCase);
-                        if (isDownloadOutput)
-                        {
-                            Interlocked.Exchange(ref lastOutputTimestamp, Stopwatch.GetTimestamp());
-                            Volatile.Write(ref isRecordingWatchdogArmed, 1);
-                        }
-                        else if (Volatile.Read(ref isRecordingWatchdogArmed) == 1)
-                        {
-                            Interlocked.Exchange(ref lastOutputTimestamp, Stopwatch.GetTimestamp());
-                        }
-
                         Log.YouTubeInfo(e.Data);
-
-                        if (isDownloadOutput)
-                        {
-                            if (isReceiveDownload)
-                                return;
-
-                            isReceiveDownload = true;
-                            Log.Info("開始直播!");
-
-                            if (!isDisableRedis)
-                            {
-                                if (!dontSendStartMessage) Utility.Redis.GetSubscriber().Publish(new("youtube.startstream", RedisChannel.PatternMode.Literal), $"{videoId}:0");
-                                Utility.Redis.GetDatabase().SetAdd("youtube.nowRecord", videoId);
-
-                                if (isDisableLiveFromStart)
-                                {
-                                    #region 每六小時重新執行錄影
-                                    int waitTime = 5 * 60 * 60 + 59 * 60;
-                                    var task = Task.Run(async () =>
-                                    {
-                                        do
-                                        {
-                                            waitTime--;
-                                            await Task.Delay(1000);
-                                            if (token.IsCancellationRequested)
-                                                return;
-                                        } while (waitTime >= 0);
-
-                                        Utility.Redis.GetSubscriber().Publish(new("youtube.rerecord", RedisChannel.PatternMode.Literal), videoId);
-                                    });
-                                    #endregion
-                                }
-                            }
-                        }
                     }
                     catch { }
                 };
+
+                void OnRecordingStarted()
+                {
+                    if (isReceiveDownload)
+                        return;
+
+                    isReceiveDownload = true;
+                    Log.Info("開始直播!");
+
+                    if (!isDisableRedis)
+                    {
+                        if (!dontSendStartMessage) Utility.Redis.GetSubscriber().Publish(new("youtube.startstream", RedisChannel.PatternMode.Literal), $"{videoId}:0");
+                        Utility.Redis.GetDatabase().SetAdd("youtube.nowRecord", videoId);
+
+                        if (isDisableLiveFromStart)
+                        {
+                            #region 每六小時重新執行錄影
+                            int waitTime = 5 * 60 * 60 + 59 * 60;
+                            var task = Task.Run(async () =>
+                            {
+                                do
+                                {
+                                    waitTime--;
+                                    await Task.Delay(1000);
+                                    if (token.IsCancellationRequested)
+                                        return;
+                                } while (waitTime >= 0);
+
+                                // 已交給新容器接手，這裡結束後就不要再自動重錄，避免兩邊重複錄同一場
+                                isHandedOff = true;
+                                Utility.Redis.GetSubscriber().Publish(new("youtube.rerecord", RedisChannel.PatternMode.Literal), videoId);
+                            });
+                            #endregion
+                        }
+                    }
+                }
 
                 Log.Info($"{process.StartInfo.FileName} {string.Join(' ', process.StartInfo.ArgumentList)}");
 
@@ -342,19 +330,40 @@ namespace StreamRecordTools.Command.Record
                 process.BeginErrorReadLine();
                 process.BeginOutputReadLine();
 
+                // 看錄影檔大小而不是 yt-dlp 的輸出格式，換下載器（例如 SABR）時才不用跟著改
                 var recordingWatchdogTask = Task.Run(async () =>
                 {
+                    long lastBytes = 0;
+                    long lastChangeTimestamp = Stopwatch.GetTimestamp();
                     try
                     {
                         while (true)
                         {
                             await Task.Delay(TimeSpan.FromSeconds(10), token);
 
-                            if (Volatile.Read(ref isRecordingWatchdogArmed) == 0)
+                            long bytes;
+                            try
+                            {
+                                bytes = GetRecordingBytes(tempPath, fileName);
+                            }
+                            catch (IOException) // 檔案剛好被 yt-dlp 改名或刪掉，下一輪再算
+                            {
                                 continue;
+                            }
 
-                            long lastOutput = Interlocked.Read(ref lastOutputTimestamp);
-                            if (Stopwatch.GetElapsedTime(lastOutput) < TimeSpan.FromMinutes(5))
+                            if (bytes != lastBytes)
+                            {
+                                lastBytes = bytes;
+                                lastChangeTimestamp = Stopwatch.GetTimestamp();
+                                if (bytes > 0 && !isAttemptRecording)
+                                {
+                                    isAttemptRecording = true;
+                                    OnRecordingStarted();
+                                }
+                                continue;
+                            }
+
+                            if (!isAttemptRecording || Stopwatch.GetElapsedTime(lastChangeTimestamp) < TimeSpan.FromMinutes(5))
                                 continue;
 
                             try
@@ -374,7 +383,7 @@ namespace StreamRecordTools.Command.Record
                                 return;
                             }
 
-                            Log.Warn("YouTube 錄影超過五分鐘沒有新的 yt-dlp/ffmpeg 訊息，已中斷錄影");
+                            Log.Warn("YouTube 錄影檔超過五分鐘沒有變化，已中斷錄影");
                             return;
                         }
                     }
@@ -389,18 +398,28 @@ namespace StreamRecordTools.Command.Record
                 process.CancelErrorRead();
                 process.CancelOutputRead();
 
-                Utility.IsClose = true;
                 Log.Info($"錄影結束");
 
+                emptyRerecordCount = isAttemptRecording ? 0 : emptyRerecordCount + 1;
                 if (isNeedRestart)
                 {
-                    Utility.IsClose = false;
-
                     do
                     {
                         await Task.Delay(1000);
                         if (Utility.IsClose) break;
                     } while (streamScheduledStartTime.AddMinutes(-1) > DateTime.Now);
+                }
+                else if (!Utility.IsClose && !isCanNotRecordStream && !isHandedOff && isReceiveDownload && emptyRerecordCount < 10)
+                {
+                    // yt-dlp 常在直播還沒結束時就退出；等 API 的關台時間跟上，迴圈開頭沒關台就接著錄
+                    isRerecord = true;
+                    Log.Warn($"yt-dlp 已結束，30 秒後確認是否關台，沒關台就重新錄影 (連續沒錄到資料 {emptyRerecordCount}/10 次)");
+                    for (int i = 0; i < 30 && !Utility.IsClose; i++)
+                        await Task.Delay(1000);
+                }
+                else
+                {
+                    Utility.IsClose = true;
                 }
             } while (!Utility.IsClose);
             #endregion
@@ -447,7 +466,7 @@ namespace StreamRecordTools.Command.Record
             return ResultType.Once;
         }
 
-        public static string[] BuildYtDlpArguments(string videoId, string outputTemplate, bool isDisableLiveFromStart, bool inDocker, string browser)
+        public static string[] BuildYtDlpArguments(string videoId, string outputTemplate, bool isDisableLiveFromStart, bool inDocker, string browser, bool onlyIfLive = false)
         {
             // 不指定 -f，用 yt-dlp 預設的 bv*+ba/b；只給 bv 會選到沒有聲音的純影像格式
             // --embed-metadata --embed-thumbnail 會不定時卡住，先不加
@@ -470,6 +489,10 @@ namespace StreamRecordTools.Command.Record
             else
                 arguments.AddRange(["--cookies-from-browser", browser]);
 
+            // 重錄時 API 可能還沒顯示關台；直播已結束就跳過，不要改抓存檔
+            if (onlyIfLive)
+                arguments.AddRange(["--match-filters", "is_live"]);
+
             return [.. arguments];
         }
 
@@ -477,16 +500,20 @@ namespace StreamRecordTools.Command.Record
         public static bool IsRecordedVideoFile(string path, string videoId)
             => Path.GetFileNameWithoutExtension(path).EndsWith(videoId, StringComparison.Ordinal);
 
+        // 含 .part 等中間檔，只算這次錄影（同一個檔名開頭）的檔案
+        public static long GetRecordingBytes(string directory, string fileName)
+            => new DirectoryInfo(directory).EnumerateFiles($"{fileName}*").Sum(x => x.Length);
+
         private static void MoveVideo(string outputPath, string redisChannel = "")
         {
+            bool isMoved = false;
             foreach (var item in Directory.GetFiles(tempPath, $"*{videoId}.*").Where(x => IsRecordedVideoFile(x, videoId)))
             {
                 try
                 {
                     Log.Info($"移動 \"{item}\" 至 \"{outputPath}{Path.GetFileName(item)}\"");
                     File.Move(item, $"{outputPath}{Path.GetFileName(item)}");
-                    if (!isDisableRedis && !string.IsNullOrEmpty(redisChannel))
-                        Utility.Redis.GetSubscriber().Publish(new(redisChannel, RedisChannel.PatternMode.Literal), videoId);
+                    isMoved = true;
                 }
                 catch (Exception ex)
                 {
@@ -494,6 +521,10 @@ namespace StreamRecordTools.Command.Record
                     else File.AppendAllText($"{tempPath}{fileName}_err.txt", ex.ToString());
                 }
             }
+
+            // 重錄會留下多個檔案，只通知一次，避免 Bot 重複發結束通知
+            if (isMoved && !isDisableRedis && !string.IsNullOrEmpty(redisChannel))
+                Utility.Redis.GetSubscriber().Publish(new(redisChannel, RedisChannel.PatternMode.Literal), videoId);
         }
     }
 }

@@ -28,6 +28,36 @@ namespace StreamRecordTools.Tests
             Assert.DoesNotContain("--mark-watched", arguments);
         }
 
+        [Fact]
+        public void BuildYtDlpArgumentsForRerecordOnlyDownloadsWhileLive()
+        {
+            string[] arguments = YouTube.BuildYtDlpArguments(VideoId, Output, isDisableLiveFromStart: true, inDocker: true, browser: "firefox", onlyIfLive: true);
+
+            Assert.Equal([$"https://www.youtube.com/watch?v={VideoId}", "-o", Output, "--wait-for-video", "15",
+                "--cookies", "/app/cookies.txt", "--match-filters", "is_live"], arguments);
+        }
+
+        [Fact]
+        public void GetRecordingBytesSumsOnlyCurrentAttemptFiles()
+        {
+            string root = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(root);
+            try
+            {
+                const string fileName = $"youtube_UC_20261015_120000_{VideoId}";
+                File.WriteAllText(Path.Combine(root, $"{fileName}.mp4.part"), "12345");
+                File.WriteAllText(Path.Combine(root, $"{fileName}.f299.mp4.part-Frag1"), "123");
+                File.WriteAllText(Path.Combine(root, $"youtube_UC_20261015_110000_{VideoId}.mp4"), "1234567");
+
+                Assert.Equal(8, YouTube.GetRecordingBytes(root, fileName));
+                Assert.Equal(0, YouTube.GetRecordingBytes(root, $"youtube_UC_20261015_130000_{VideoId}"));
+            }
+            finally
+            {
+                Directory.Delete(root, true);
+            }
+        }
+
         [Theory]
         [InlineData("youtube_UC_20261015_120000_dQw4w9WgXcQ.mp4", true)]
         [InlineData("youtube_UC_20261015_120000_dQw4w9WgXcQ.webm", true)]
