@@ -66,6 +66,13 @@ Compose 會掛載 Docker socket，讓主服務建立單次錄影容器。只有�
 redis-cli PUBLISH youtube.record dQw4w9WgXcQ
 ```
 
+### 每日存檔檢查
+
+訂閱模式每天 00:00 會掃描錄影保存路徑內的日期資料夾：
+
+- API 查不到、觀看頁也確認是私人或已刪除的影片，移到 `YouTubeUnarchivedPath`，並送出 `youtube.unarchived`。
+- 錄完後才轉成會限的影片，移到 `MemberOnlyPath`，並送出 `youtube.memberonly.late`。
+
 CHZZK 的訊息格式如下。`streamKey` 為 `channelId:yyyyMMdd_HHmmss`，只作為檔名與日誌追蹤；實際錄影使用頻道直播網址。
 
 ```json

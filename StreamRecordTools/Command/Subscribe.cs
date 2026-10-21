@@ -326,7 +326,7 @@ namespace StreamRecordTools.Command
             #endregion
 
             #region 自動檢測昨天的私人存檔
-            // 檢測昨天的直播是否有被私人但沒被移動到私人存檔保存區
+            // 檢測保存目錄內的直播是否有被私人或轉會限，但沒被移動到對應的保存區
             autoCheckIsLiveUnArchivedTimer = new Timer(async (obj) =>
             {
                 Log.Info("開始檢測私人存檔");
@@ -367,7 +367,13 @@ namespace StreamRecordTools.Command
                         foreach (var item in videoIdList)
                         {
                             if (videoDataFromApi.Any((x) => x.Id == item))
+                            {
+                                // 錄完後才轉會限的影片，錄影結束時判斷不到，這裡補搬；Bot 只補擁有者私訊，不再發結束通知
+                                if (await YouTubeVideoPage.GetStatusAsync(item) == YouTubeVideoPageStatus.MembersOnly &&
+                                    MoveUnarchivedVideoFiles(dirName, item, MemberOnlyOutputPath) > 0)
+                                    Utility.Redis.GetSubscriber().Publish(new("youtube.memberonly.late", RedisChannel.PatternMode.Literal), item);
                                 continue;
+                            }
 
                             // API 沒回傳不一定是私人化，觀看頁明確還看得到就不搬
                             var pageStatus = await YouTubeVideoPage.GetStatusAsync(item);
