@@ -51,6 +51,16 @@ docker compose logs -f stream-record-master
 
 Compose 會掛載 Docker socket，讓主服務建立單次錄影容器。只有信任的程式與使用者可以存取這個服務，因為 Docker socket 等同主機管理權限。
 
+Compose 也會啟動 `bgutil-provider`，提供 YouTube 需要的 PO Token。YouTube 錄影容器透過 `stream-record-tools` 網路，用 `http://bgutil-provider:4416` 連線。`bgutil-provider` 的版本要和 image 內的 plugin 一致，目前都是 `2.0.2`。
+
+### YouTube 錄影方式
+
+Docker image 內的 yt-dlp 是 [bashonly 的 SABR 測試版](https://github.com/bashonly/yt-dlp/releases/tag/sabr)。原因是 YouTube 常在直播還沒結束時，就先結束 HLS 播放清單；SABR 能錄到真正關台。
+
+- 輸出檔是 `.mkv`（VP9 影像 + AAC 聲音）。
+- 拿不到 SABR 格式時，會自動改用 HLS 錄影，輸出可能是 `.mp4`。
+- 直接用 .NET 執行時，用的是你自己安裝的 yt-dlp，不會套用以上設定。
+
 ### Redis 錄影頻道
 
 | 頻道 | 訊息內容 | 用途 |
@@ -102,6 +112,15 @@ docker run --rm --env-file .env \
 ```
 
 `-d` 表示不使用 Redis。`-s` 表示從目前時間開始錄影；移除 `-s` 會嘗試從直播開頭錄製，但平台不保證能取得完整內容。
+
+錄影容器會連 `http://bgutil-provider:4416` 取得 PO Token。單次執行時，要先在同一個 Docker 網路啟動 bgutil，並在上面的指令加上 `--network yt-record`：
+
+```sh
+docker network create yt-record
+docker run -d --name bgutil-provider --network yt-record --init brainicism/bgutil-ytdlp-pot-provider:2.0.2
+```
+
+沒有 bgutil 時，能不能錄影要看帳號狀態，這種情況還沒測過。
 
 錄影開始後，如果 yt-dlp 提前結束，或錄影檔超過五分鐘沒有變化，但 API 顯示直播還沒結束，程式會等 30 秒，再用新的檔名從目前時間接著錄。連續 10 次都沒錄到資料就停止。所以同一場直播可能分成多個檔案，搬到保存路徑後只會送出一次 `youtube.endstream`。
 

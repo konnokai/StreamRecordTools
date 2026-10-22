@@ -7,14 +7,22 @@ namespace StreamRecordTools.Tests
     {
         private const string VideoId = "dQw4w9WgXcQ";
         private const string Output = "/temp_path/youtube_UC_20261015_120000_dQw4w9WgXcQ.%(ext)s";
+        private static readonly string[] DockerSabrArguments =
+        [
+            "--cookies", "/app/cookies.txt",
+            "-f", "bv*[protocol=sabr]+ba[protocol=sabr]/bv*+ba/b",
+            "--extractor-args", "youtube:formats=duplicate,sabr_live",
+            "--extractor-args", "youtubepot-bgutilhttp:base_url=http://bgutil-provider:4416",
+            "--progress-delta", "30",
+        ];
 
         [Fact]
-        public void BuildYtDlpArgumentsInDockerUseCookieFileWithoutFormatSelector()
+        public void BuildYtDlpArgumentsInDockerUseCookieFileAndPreferSabrWithHlsFallback()
         {
             string[] arguments = YouTube.BuildYtDlpArguments(VideoId, Output, isDisableLiveFromStart: true, inDocker: true, browser: "firefox");
 
             Assert.Equal([$"https://www.youtube.com/watch?v={VideoId}", "-o", Output, "--wait-for-video", "15",
-                "--cookies", "/app/cookies.txt"], arguments);
+                .. DockerSabrArguments], arguments);
         }
 
         [Fact]
@@ -34,7 +42,7 @@ namespace StreamRecordTools.Tests
             string[] arguments = YouTube.BuildYtDlpArguments(VideoId, Output, isDisableLiveFromStart: true, inDocker: true, browser: "firefox", onlyIfLive: true);
 
             Assert.Equal([$"https://www.youtube.com/watch?v={VideoId}", "-o", Output, "--wait-for-video", "15",
-                "--cookies", "/app/cookies.txt", "--match-filters", "is_live"], arguments);
+                .. DockerSabrArguments, "--match-filters", "is_live"], arguments);
         }
 
         [Fact]

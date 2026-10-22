@@ -468,7 +468,7 @@ namespace StreamRecordTools.Command.Record
 
         public static string[] BuildYtDlpArguments(string videoId, string outputTemplate, bool isDisableLiveFromStart, bool inDocker, string browser, bool onlyIfLive = false)
         {
-            // 不指定 -f，用 yt-dlp 預設的 bv*+ba/b；只給 bv 會選到沒有聲音的純影像格式
+            // 非 Docker 環境不指定 -f，用 yt-dlp 預設的 bv*+ba/b；只給 bv 會選到沒有聲音的純影像格式
             // --embed-metadata --embed-thumbnail 會不定時卡住，先不加
             // --mark-watched 疑似會讓 Cookie 出問題，先不加
             List<string> arguments =
@@ -485,7 +485,19 @@ namespace StreamRecordTools.Command.Record
                 arguments.Add("--live-from-start");
 
             if (inDocker)
+            {
                 arguments.AddRange(["--cookies", "/app/cookies.txt"]);
+
+                // Docker image 內是 bashonly 的 sabr build：HLS 會被 YouTube 提前結束播放清單，SABR 能錄到真正關台
+                // shortcut: 拿不到 SABR 格式時退回 HLS 照錄，SABR 合併進正式版後再拿掉退路
+                arguments.AddRange([
+                    "-f", "bv*[protocol=sabr]+ba[protocol=sabr]/bv*+ba/b",
+                    "--extractor-args", "youtube:formats=duplicate,sabr_live",
+                    "--extractor-args", "youtubepot-bgutilhttp:base_url=http://bgutil-provider:4416",
+                    // SABR 每個片段都印一行進度，兩個格式加起來每秒約兩行，會灌爆容器 log
+                    "--progress-delta", "30",
+                ]);
+            }
             else
                 arguments.AddRange(["--cookies-from-browser", browser]);
 

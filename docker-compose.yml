@@ -21,6 +21,16 @@ services:
       stream-record-tools:
         ipv4_address: 172.28.0.2
 
+  # YouTube 錄影容器用名稱 bgutil-provider 連過來取 PO Token；版本要跟 image 內的 plugin 一致
+  bgutil-provider:
+    container_name: bgutil-provider
+    image: brainicism/bgutil-ytdlp-pot-provider:2.0.2
+    init: true
+    restart: unless-stopped
+    networks:
+      stream-record-tools:
+        ipv4_address: 172.28.0.3
+
 networks:
   stream-record-tools:
     driver: bridge
