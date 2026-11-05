@@ -303,8 +303,9 @@ namespace StreamRecordTools.Command.Record
 
                         if (isDisableLiveFromStart)
                         {
-                            #region 每六小時重新執行錄影
-                            int waitTime = 5 * 60 * 60 + 59 * 60;
+                            #region 每十小時重新執行錄影
+                            // SABR 單次連線大約撐十小時，提前一分鐘開新容器接手，中間才不會斷檔
+                            int waitTime = 9 * 60 * 60 + 59 * 60;
                             var task = Task.Run(async () =>
                             {
                                 do
@@ -479,7 +480,7 @@ namespace StreamRecordTools.Command.Record
             ];
 
             // --live-from-start 很吃硬碟隨機讀寫
-            // 關掉它的話，每六小時要重開一次錄影，不然長時間錄影會遇到 HTTP 503
+            // 關掉它的話，SABR 單次連線最多撐十小時，要在時間到之前開新容器接手
             // 但從頭開始錄影好像只能錄兩小時 :thinking:
             if (!isDisableLiveFromStart)
                 arguments.Add("--live-from-start");

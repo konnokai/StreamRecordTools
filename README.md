@@ -55,7 +55,7 @@ Compose 也會啟動 `bgutil-provider`，提供 YouTube 需要的 PO Token。You
 
 ### YouTube 錄影方式
 
-Docker image 內的 yt-dlp 是 [bashonly 的 SABR 測試版](https://github.com/bashonly/yt-dlp/releases/tag/sabr)。原因是 YouTube 常在直播還沒結束時，就先結束 HLS 播放清單；SABR 能錄到真正關台。
+Docker image 內的 yt-dlp 是 [bashonly 的 SABR 測試版](https://github.com/bashonly/yt-dlp/tree/feat/youtube/sabr)。原因是 YouTube 常在直播還沒結束時，就先結束 HLS 播放清單；SABR 能錄到真正關台。
 
 - 輸出檔是 `.mkv`（VP9 影像 + AAC 聲音）。
 - 拿不到 SABR 格式時，會自動改用 HLS 錄影，輸出可能是 `.mp4`。

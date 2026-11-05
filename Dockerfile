@@ -11,7 +11,7 @@ RUN dotnet build "StreamRecordTools.csproj" -c Release -o /app/build
 FROM build AS publish
 RUN dotnet publish "StreamRecordTools.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
-FROM jun112561/dotnet_with_yt-dlp:sabr-2026.10.21.231858 AS base
+FROM jun112561/dotnet_with_yt-dlp:sabr-2026.10.26-b7685f0 AS base
 WORKDIR /app
 COPY --from=publish /app/publish .
 
