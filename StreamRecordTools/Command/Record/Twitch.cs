@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using TwitchLib.Api;
 using static StreamRecordTools.Program;
 using ResultType = StreamRecordTools.Program.ResultType;
@@ -62,17 +63,24 @@ namespace StreamRecordTools.Command.Record
                     }
                 };
 
-                var streamsResponse = twitchApi.Helix.Streams.GetStreamsAsync(first: 3, userLogins: [userLogin]).GetAwaiter().GetResult();
-                if (streamsResponse != null)
+                try
                 {
-                    var stream = streamsResponse.Streams[0] ?? null;
-                    if (stream != null)
+                    var streamsResponse = twitchApi.Helix.Streams.GetStreamsAsync(first: 3, userLogins: [userLogin]).GetAwaiter().GetResult();
+                    if (streamsResponse != null)
                     {
-                        Log.Info($"Twitch 分類: {stream.GameName}");
-                        Log.Info($"Twitch 標題: {stream.Title}");
-                        var title = Utility.ToSafeFilename(stream.Title);
-                        fileName = $"[{DateTime.Now:yyyyMMdd-HHmmss}] ({Utility.ToSafeFilename(stream.GameName)}) - {title.Substring(0, Math.Min(title.Length, 150))} - {stream.Id}.ts";
+                        var stream = streamsResponse.Streams?.FirstOrDefault();
+                        if (stream != null)
+                        {
+                            Log.Info($"Twitch 分類: {stream.GameName}");
+                            Log.Info($"Twitch 標題: {stream.Title}");
+                            var title = Utility.ToSafeFilename(stream.Title);
+                            fileName = $"[{DateTime.Now:yyyyMMdd-HHmmss}] ({Utility.ToSafeFilename(stream.GameName)}) - {title.Substring(0, Math.Min(title.Length, 150))} - {stream.Id}.ts";
+                        }
                     }
+                }
+                catch (Exception ex)
+                {
+                    Log.Warn($"無法取得 Twitch 直播資料，使用預設檔名繼續錄影：{ex.Message}");
                 }
             }
 
