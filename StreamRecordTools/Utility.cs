@@ -163,6 +163,7 @@ namespace StreamRecordTools
         public static bool IsMemberOnly(string videoId)
         {
             // 私人影片的留言 API 也可能回 403 被當成會限，先看觀看頁；讀不到頁面才退回 API 錯誤判斷
+            // 年齡限制影片的留言 API 照常可用，AgeRestricted 落到下面的留言判斷
             switch (YouTubeVideoPage.GetStatusAsync(videoId).GetAwaiter().GetResult())
             {
                 case YouTubeVideoPageStatus.MembersOnly:

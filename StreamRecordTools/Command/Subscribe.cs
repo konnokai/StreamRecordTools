@@ -377,7 +377,7 @@ namespace StreamRecordTools.Command
 
                             // API 沒回傳不一定是私人化，觀看頁明確還看得到就不搬
                             var pageStatus = await YouTubeVideoPage.GetStatusAsync(item);
-                            if (pageStatus is YouTubeVideoPageStatus.Public or YouTubeVideoPageStatus.MembersOnly)
+                            if (pageStatus is YouTubeVideoPageStatus.Public or YouTubeVideoPageStatus.MembersOnly or YouTubeVideoPageStatus.AgeRestricted)
                             {
                                 Log.Warn($"{item} API 查不到，但觀看頁仍可存取（{pageStatus}），略過");
                                 continue;
