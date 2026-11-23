@@ -369,6 +369,3 @@ FodyWeavers.xsd
 
 # graphify（產物不進版控）
 /graphify-out/
-
-# codebase-memory 索引（產物不進版控）
-/.codebase-memory/
