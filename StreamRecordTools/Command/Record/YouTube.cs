@@ -160,6 +160,126 @@ namespace StreamRecordTools.Command.Record
 
             bool isCanNotRecordStream = false, isReceiveDownload = false, isNeedRestart = false, isRerecord = false, isHandedOff = false;
             int emptyRerecordCount = 0;
+            bool isStartStreamMessageSent = false;
+
+            // stderr 回呼跟 API 檢查會同時呼叫，用鎖避免通知送兩次
+            object startStreamMessageLock = new();
+
+            void SendStartStreamMessage(string reason)
+            {
+                lock (startStreamMessageLock)
+                {
+                    if (isStartStreamMessageSent)
+                        return;
+
+                    if (!isDisableRedis && !dontSendStartMessage)
+                    {
+                        try
+                        {
+                            Log.Info($"發送開台通知：{reason}");
+                            Utility.Redis.GetSubscriber().Publish(new("youtube.startstream", RedisChannel.PatternMode.Literal), $"{videoId}:0");
+                        }
+                        catch (Exception ex)
+                        {
+                            // 沒送出去就不要記成已送，下一次警告再試
+                            Log.Error(ex, "發送開台通知失敗");
+                            return;
+                        }
+                    }
+
+                    isStartStreamMessageSent = true;
+                }
+            }
+
+            SemaphoreSlim startStreamCheckLock = new(1, 1);
+            long lastStartStreamCheckTimestamp = 0;
+            bool isYtDlpErrorNotified = false;
+            bool sawNoFormatOutput = false;
+            object ytDlpErrorLock = new();
+
+            void NotifyYtDlpError(string message)
+            {
+                lock (ytDlpErrorLock)
+                {
+                    if (isYtDlpErrorNotified || isDisableRedis)
+                        return;
+
+                    try
+                    {
+                        string line = message.Length > 500 ? message[..500] : message;
+                        long subscribers = Utility.Redis.GetSubscriber().Publish(new("youtube.ytdlp.error", RedisChannel.PatternMode.Literal), $"{videoId}:{line}");
+                        if (subscribers > 0)
+                        {
+                            isYtDlpErrorNotified = true;
+                            Log.Warn("已發送 yt-dlp 格式錯誤通知");
+                        }
+                        else
+                        {
+                            Log.Warn("沒有訂閱者，yt-dlp 格式錯誤通知未送出");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex, "發送 yt-dlp 格式錯誤通知失敗");
+                    }
+                }
+            }
+
+            // yt-dlp 說「時間到了卻沒有格式」不代表真的開台，主播可能只是晚開；以 API 的實際開台時間為準
+            async Task CheckStreamStartedAsync(bool force = false)
+            {
+                if (Utility.IsClose)
+                    return;
+
+                // 強制檢查要等前一次查詢結束，避免程式結束前的最後一次被卡掉
+                if (force)
+                    await startStreamCheckLock.WaitAsync();
+                else if (!startStreamCheckLock.Wait(0))
+                    return;
+
+                try
+                {
+                    if (Utility.IsClose)
+                        return;
+
+                    // 警告每 15 秒重複一次，API 最多五分鐘查一次；格式錯誤與收尾檢查不受限
+                    if (!force)
+                    {
+                        long lastCheck = Interlocked.Read(ref lastStartStreamCheckTimestamp);
+                        if (lastCheck != 0 && Stopwatch.GetElapsedTime(lastCheck) < TimeSpan.FromMinutes(5))
+                            return;
+                    }
+
+                    Interlocked.Exchange(ref lastStartStreamCheckTimestamp, Stopwatch.GetTimestamp());
+
+                    var result = await Utility.GetSnippetDataAndLiveStreamingDetailsByVideoIdAsync(videoId);
+                    var liveDetails = result.VideoLiveStreamingDetails;
+                    if (liveDetails?.ActualStartTimeDateTimeOffset == null || liveDetails.ActualEndTimeDateTimeOffset != null)
+                        return;
+
+                    if (isCanNotRecordStream)
+                        return;
+
+                    if (!isStartStreamMessageSent)
+                        SendStartStreamMessage("直播已開始但 yt-dlp 沒有可用格式");
+
+                    // 開台後幾十秒 player response 還沒格式是正常的，等 3 分鐘還沒錄到才告警
+                    if (!isYtDlpErrorNotified
+                        && DateTimeOffset.Now - liveDetails.ActualStartTimeDateTimeOffset.Value >= TimeSpan.FromMinutes(3))
+                    {
+                        NotifyYtDlpError("直播已開始超過 3 分鐘，但 yt-dlp 沒有取得可錄格式");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex, "確認直播是否已開始失敗");
+                }
+                finally
+                {
+                    startStreamCheckLock.Release();
+                }
+            }
+
             #region 開始錄製直播
             do
             {
@@ -259,14 +379,28 @@ namespace StreamRecordTools.Command.Record
                         else if (e.Data.Contains("video is private") || e.Data.Contains("Private video"))
                         {
                             Log.Error("已私人化，取消錄影");
-                            process.Kill(Signum.SIGTERM);
                             isCanNotRecordStream = true;
+                            process.Kill(Signum.SIGTERM);
                         }
                         else if (e.Data.Contains("video has been removed") || e.Data.Contains("removed by the uploader"))
                         {
                             Log.Error("已移除，取消錄影");
-                            process.Kill(Signum.SIGTERM);
                             isCanNotRecordStream = true;
+                            process.Kill(Signum.SIGTERM);
+                        }
+                        else if (!isCanNotRecordStream && NeedsStreamStartedCheck(e.Data))
+                        {
+                            // 格式失效的營運告警直接送；開台通知另外等 API 確認
+                            if (IsFormatUnavailableOutput(e.Data))
+                            {
+                                sawNoFormatOutput = true;
+                                NotifyYtDlpError(e.Data);
+                                _ = Task.Run(() => CheckStreamStartedAsync(force: true));
+                            }
+                            else
+                            {
+                                _ = Task.Run(() => CheckStreamStartedAsync());
+                            }
                         }
                     }
                     catch { }
@@ -296,9 +430,10 @@ namespace StreamRecordTools.Command.Record
                     isReceiveDownload = true;
                     Log.Info("開始直播!");
 
+                    SendStartStreamMessage("錄影開始");
+
                     if (!isDisableRedis)
                     {
-                        if (!dontSendStartMessage) Utility.Redis.GetSubscriber().Publish(new("youtube.startstream", RedisChannel.PatternMode.Literal), $"{videoId}:0");
                         Utility.Redis.GetDatabase().SetAdd("youtube.nowRecord", videoId);
 
                         if (isDisableLiveFromStart)
@@ -341,6 +476,10 @@ namespace StreamRecordTools.Command.Record
                         while (true)
                         {
                             await Task.Delay(TimeSpan.FromSeconds(10), token);
+
+                            // 正常路徑 publish 失敗時，每 10 秒補送一次
+                            if (isReceiveDownload && !isStartStreamMessageSent)
+                                SendStartStreamMessage("錄影開始");
 
                             long bytes;
                             try
@@ -399,6 +538,10 @@ namespace StreamRecordTools.Command.Record
                 process.CancelErrorRead();
                 process.CancelOutputRead();
 
+                // 等待警告被節流時，程式結束前補一次確認；不然晚開台後直接報錯會漏掉開台通知
+                if (sawNoFormatOutput && !isStartStreamMessageSent && !isCanNotRecordStream)
+                    await CheckStreamStartedAsync(force: true);
+
                 Log.Info($"錄影結束");
 
                 emptyRerecordCount = isAttemptRecording ? 0 : emptyRerecordCount + 1;
@@ -455,17 +598,26 @@ namespace StreamRecordTools.Command.Record
                     }
                 }
             }
-            else
-            {
-                return ResultType.Error;
-            }
             #endregion
 
-            if (!isDisableRedis)
+            // 交接給新容器後不要移除，否則會刪掉新容器的錄影標記
+            if (!isDisableRedis && !isHandedOff)
                 await Utility.Redis.GetDatabase().SetRemoveAsync("youtube.nowRecord", videoId);
 
-            return ResultType.Once;
+            return isCanNotRecordStream ? ResultType.Error : ResultType.Once;
         }
+
+        // yt-dlp 判定沒有可下載的影音格式；錄影工具只會處理直播，出現這些就代表這場錄不了
+        public static bool IsFormatUnavailableOutput(string output)
+            => output.Contains("only images are available for download", StringComparison.OrdinalIgnoreCase)
+                || output.Contains("Requested format is not available", StringComparison.OrdinalIgnoreCase)
+                || output.Contains("No video formats found", StringComparison.OrdinalIgnoreCase);
+
+        // 先查 API 確認真的開台再發通知，避免主播晚開時誤報
+        // 不含 n challenge 警告：那只代表部分格式缺失，SABR 可能還能錄
+        public static bool NeedsStreamStartedCheck(string output)
+            => output.Contains("Video should already be available according to extracted info", StringComparison.OrdinalIgnoreCase)
+                || IsFormatUnavailableOutput(output);
 
         public static string[] BuildYtDlpArguments(string videoId, string outputTemplate, bool isDisableLiveFromStart, bool inDocker, string browser, bool onlyIfLive = false)
         {

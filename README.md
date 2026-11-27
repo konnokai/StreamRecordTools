@@ -60,6 +60,7 @@ Docker image 內的 yt-dlp 是 [bashonly 的 SABR 測試版](https://github.com/
 - 輸出檔是 `.mkv`（VP9 影像 + AAC 聲音）。
 - 拿不到 SABR 格式時，會自動改用 HLS 錄影，輸出可能是 `.mp4`。
 - 直接用 .NET 執行時，用的是你自己安裝的 yt-dlp，不會套用以上設定。
+- yt-dlp 回報沒有可錄的影音格式時，會 publish `youtube.ytdlp.error`，由 Bot 私訊擁有者；全域 24 小時最多一則（publish 時就占用額度）。
 
 ### Redis 錄影頻道
 
