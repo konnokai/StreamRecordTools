@@ -45,6 +45,33 @@ namespace StreamRecordTools.Tests
                 .. DockerSabrArguments, "--match-filters", "is_live"], arguments);
         }
 
+        [Theory]
+        [InlineData("WARNING: Video should already be available according to extracted info", true)]
+        [InlineData("WARNING: Only images are available for download. use --list-formats to see them", true)]
+        [InlineData("ERROR: [youtube] OkVbBwgxynU: Requested format is not available. Use --list-formats for a list of available formats", true)]
+        [InlineData("ERROR: [youtube] OkVbBwgxynU: No video formats found!", true)]
+        [InlineData("WARNING: [youtube] OkVbBwgxynU: n challenge solving failed: Some formats may be missing.", false)]
+        [InlineData("WARNING: [youtube] OkVbBwgxynU: Signature solving failed: Some formats may be missing.", false)]
+        [InlineData("ERROR: [youtube] OkVbBwgxynU: This live event will begin in 3 hours", false)]
+        [InlineData("ERROR: [youtube] OkVbBwgxynU: This live event has ended", false)]
+        [InlineData("[wait] Waiting for 00:00:15", false)]
+        public void NeedsStreamStartedCheckOnlyMatchesNoFormatOutputs(string output, bool expected)
+        {
+            Assert.Equal(expected, YouTube.NeedsStreamStartedCheck(output));
+        }
+
+        [Theory]
+        [InlineData("WARNING: Only images are available for download. use --list-formats to see them", true)]
+        [InlineData("ERROR: [youtube] OkVbBwgxynU: Requested format is not available. Use --list-formats for a list of available formats", true)]
+        [InlineData("ERROR: [youtube] OkVbBwgxynU: No video formats found!", true)]
+        [InlineData("WARNING: Video should already be available according to extracted info", false)]
+        [InlineData("WARNING: [youtube] OkVbBwgxynU: n challenge solving failed: Some formats may be missing.", false)]
+        [InlineData("ERROR: [youtube] OkVbBwgxynU: This live event has ended", false)]
+        public void IsFormatUnavailableOutputOnlyMatchesMissingFormats(string output, bool expected)
+        {
+            Assert.Equal(expected, YouTube.IsFormatUnavailableOutput(output));
+        }
+
         [Fact]
         public void GetRecordingBytesSumsOnlyCurrentAttemptFiles()
         {
